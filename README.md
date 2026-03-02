@@ -52,8 +52,33 @@ Install the download file using the following link: https://www.megasoftware.net
 
 ### ETE4 4.4.0
 ##### Description:
-Tool for outputting and styling a phylogenetic tree with a newick file as input
+ETE4 in our case is used for outputting and styling a phylogenetic tree with a newick file as an input.
+##### Requirements:
+A linux system is required to run ETE4.
 ##### Installation steps:
 
+As of right now conda and miniconda are version: 25.3.1
+But you download the latest. If those do not work download the versions above.
+- Either use an IDE like pycharm or run this in the commandline.
+- If it is not installed, first install miniconda. Check by using either: conda list or conda --version. 
+- Put in these commands after one another. Follow the steps correctly. If these do not work rework your steps or seek help online.
+- Put these after one another in the command line: 
+- Make a directory: mkdir -p ~/miniconda3
+- Get latest version: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+- bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+- rm ~/miniconda3/miniconda.sh
+- Check installation with steps above.
+- Create a python 3+ environment. The easy way is to do this through a conda environment. 
+- Put these in the commandline: conda create -n PLACENAME and then conda activate PLACENAME
+- Install ETE4's dependencies like cython and the python dependencies. Do this through conda-forge
+- To install cython: conda-forge cython. Install the python dependencies: pip install flask flask-cors flask-httpauth flask-restful flask-compress sqlalchemy numpy PyQt5 
+- Clone ETE4 branch: git clone -b ete4 https://github.com/etetoolkit/ete ete4
+- Build ETE4: cd ete4 && pip install -e .
+- In some cases in linux the gcc library must be installed do this by running: conda install -c conda-forge gcc_linux-64
 
 
+## Citation for use of tools
+#### For ETE4 
+Jaime Huerta-Cepas, François Serra and Peer Bork. "ETE 3: Reconstruction,
+analysis and visualization of phylogenomic data."  Mol Biol Evol (2016) doi:
+10.1093/molbev/msw046
