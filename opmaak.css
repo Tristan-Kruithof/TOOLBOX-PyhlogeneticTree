@@ -1,1 +1,13 @@
-
+body {
+  background-color: beige;
+  background-image: url("img.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 800px 560px;
+}
+h1 {
+  color: brown;
+  position: static;
+  text-align: center;
+}
