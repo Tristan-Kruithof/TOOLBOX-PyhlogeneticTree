@@ -1,0 +1,68 @@
+body {
+    background-color: #e5f4e3;
+}
+
+.header {
+    text-align: center;
+    background-color:#3da45e;
+    color:#f1e1b7;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-weight:bold;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size:40px;
+    border:10px #e9a400;
+    border-radius:20px;
+}
+
+.sub_header {
+    color:white;
+    text-align:left;
+    font-size:25px;
+    margin-left:10px;
+    font-weight:bold;
+    margin-top: 10px;
+    padding-top: 0;
+
+}
+
+.nav_button {
+    background-color:#e5f4e3;
+    border: 2px solid #e9a400;
+    border-radius:40px;
+    color:black;
+    font-weight:bold;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-size:18px;
+    padding-left:10px;
+    padding-right:10px;
+    margin-left:10px;
+    margin-right:10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav-btn:hover {
+    background-color: white;
+    color: #e9a400;
+}
+.navbar {
+    background-color:#3c5a28;
+    padding:5px;
+    align-items: center;
+    border: 3px solid #e9a400;
+}
+
+.banner {
+    display:flex;
+    background-color:#78b56e;
+    max-width:620px;
+    align-items: center;
+    gap: 20px;
+    max-height:95px;
+
+
+}
+
+/*
+Voor goud gebruik #e9a400 of #f4c300
+ */
