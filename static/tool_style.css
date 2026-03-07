@@ -66,3 +66,13 @@ body {
 /*
 Voor goud gebruik #e9a400 of #f4c300
  */
+
+.iframe{
+    min-width: 800px;
+    max-width: 1000px;
+    min-height: 5000px;
+}
+
+.bold{
+    sty
+}
