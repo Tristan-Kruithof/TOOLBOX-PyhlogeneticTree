@@ -1,0 +1,21 @@
+body {
+  background-color: #e5f4e3;
+
+}
+h1 {
+   text-align: center;
+   background-color:#3da45e;
+   color:#f1e1b7;
+   font-family:"Times New Roman", "Courier New", monospace;
+   font-weight:bold;
+   padding-top: 50px;
+   padding-bottom: 50px;
+   font-size:40px;
+   border:10px #e9a400;
+   border-radius:20px;
+}
+h2 {
+    text-align: left top;
+    font-family:"Times New Roman", "Courier New", monospace;
+    color:#f4c300;
+}
