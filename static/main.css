@@ -1,6 +1,10 @@
 /*
 CSS FOR OVERALL LOOK OF WEBSITE
  */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #e5f4e3;
     display: flex;
@@ -10,6 +14,7 @@ body {
     width:118px;
     height:95px;
 }
+
 .header {
     text-align: center;
     background-color:#3da45e;
@@ -61,7 +66,7 @@ CSS FOR THE NAVIGATION MENU
     text-decoration: none;
     cursor: pointer;
 }
-.nav-btn:hover {
+.nav_button:hover {
     background-color: white;
     color: #e9a400;
 }
@@ -92,12 +97,19 @@ CSS FOR THE FOOTER
     color:#f1e1b7;
     font-family:"Times New Roman", "Courier New", monospace;
     font-weight:bold;
-    padding-top: 40px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     padding-left:20px;
     font-size:30px;
     border:5px solid #e9a400;
     border-radius:20px;
+}
+.footer .sub_footer {
+    color:white;
+    text-align:left;
+    font-size:20px;
+    max-width: 500px;
+    font-weight:bold;
+    padding:10px;
 }
 
 .sub_footer {
@@ -109,18 +121,26 @@ CSS FOR THE FOOTER
     padding:20px;
 }
 
+
+.sub_footer a {
+    color: #3a6198;
+    text-decoration: none;
+    margin: 0;
+    padding: 5px;
+}
+
+
 /*
 CSS FOR THE IFRAME
 */
 
 
-section {
+.iframe_container {
     flex-grow: 1;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-
 }
 
 iframe[name="main-display"] {
@@ -129,19 +149,10 @@ iframe[name="main-display"] {
     border: none;
     overflow: hidden;
     display: block;
-
-
 }
 
 iframe::-webkit-scrollbar {
     display: none;
-}
-
-.iframe_section {
-    border: 3px #78d56e solid;
-    background-color:#78b56e;
-    padding-left:10px;
-    padding-right:10px;
 }
 
 /*
@@ -164,9 +175,6 @@ CSS FOR THE DROP BUTTON
 
 }
 
-/*
-Voor goud gebruik #e9a400 of #f4c300
- */
 
 .iframe{
     min-width: 800px;
@@ -174,9 +182,7 @@ Voor goud gebruik #e9a400 of #f4c300
     min-height: 2000px;
 }
 
-.bold{
-    sty
-}
+
 .dropdown {
   display: inline-block;
 }
@@ -228,27 +234,30 @@ Voor goud gebruik #e9a400 of #f4c300
     color:#3c5a28;
     font-family:"Times New Roman", "Courier New", monospace;
     font-weight:bold;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding: 40px 25px;
     font-size:24px;
     border:5px solid #e9a400;
     border-radius:20px;
+    margin:10px;
+
 }
 
-.welcome{
+.welcome {
     min-width: 150px;
     max-width: 1500px;
     flex-shrink: 2;
+    width:100%;
 }
 
-.sidetoside{
+.tool_image {
+    max-width: 800px;
+    max-height: 450px
+
+}
+
+.side_to_side {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    padding-top: 20px;
-
 }
 
 .extra_q{
