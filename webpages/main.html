@@ -5,12 +5,18 @@
     <title>Phylogenetic tree</title>
     <link rel="stylesheet" href="/static/tool_style.css" type='text/css'>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-</head>
+    <script>
+      function autoResize(iframe) {
+          iframe.style.height = '0px';
 
+          iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+      }
+    </script>
+</head>
 <body>
     <div class="header">
         <div class="banner">
-            <img src="/images/tree_logo.png" width="118" height="95" alt="logo">
+            <img src="/images/tree_logo.png" id="header_image" alt="logo">
             <h2>
             Phylogenetic tree
             </h2>
@@ -20,19 +26,39 @@
             Analyze and stylize phylogenetic trees
         </h5>
     </div>
-    <br>
+
     <div class="navbar">
       <nav>
           <a href="home.html" target="main-display" class="nav_button">Home</a>
           <a href="tools.html" target="main-display" class="nav_button">Tools</a>
-          <a href="contact.html" target="main-display" class="nav_button">Contact</a>
+          <a href="create.html" target="main-display" class="nav_button">Create</a>
+          <a href="compare.html" target="main-display" class="nav_button">Compare</a>
+          <div class="dropdown">
+              <button class="nav_button">Help ▼</button>
+              <div class="dropdown-content">
+                  <a href="installation.html" target="main-display" class="drop_button">Installation</a>
+                <a href="contact.html" target="main-display" class="drop_button">Contact</a>
+                <a href="about.html" target="main-display" class="drop_button">About</a>
+              </div>
+          </div>
+
       </nav>
     </div>
 
     <section class="">
-
-        <iframe src="home.html" style="border:none;" name="main-display"></iframe>
+        <iframe src="home.html" name="main-display" onload="autoResize(this)"></iframe>
     </section>
+
+<footer class="footer">
+    About us |
+
+    <div class="sub_footer">
+    We are a group studying bio informatics at the Hanze university of technology in Groningen, NL.
+    This is one of our projects that we made during our time at this school.
+
+    </div>
+
+</footer>
 </body>
 </html>
 
