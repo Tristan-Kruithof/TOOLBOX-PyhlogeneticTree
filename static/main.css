@@ -77,6 +77,15 @@ CSS FOR THE NAVIGATION MENU
 /*
 CSS FOR THE FOOTER
  */
+.banner {
+    display:flex;
+    background-color:#78b56e;
+    max-width:620px;
+    align-items: center;
+    gap: 20px;
+    max-height:95px;
+}
+
 .footer {
     text-align: left;
     background-color:#3da45e;
@@ -111,6 +120,7 @@ section {
     height: 100%;
     display: flex;
     flex-direction: column;
+
 }
 
 iframe[name="main-display"] {
@@ -119,6 +129,8 @@ iframe[name="main-display"] {
     border: none;
     overflow: hidden;
     display: block;
+
+
 }
 
 iframe::-webkit-scrollbar {
