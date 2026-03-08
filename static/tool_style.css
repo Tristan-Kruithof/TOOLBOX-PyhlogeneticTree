@@ -135,8 +135,8 @@ Voor goud gebruik #e9a400 of #f4c300
 
 .iframe{
     min-width: 800px;
-    max-width: 1000px;
-    min-height: 5000px;
+    max-width: 2560px;
+    min-height: 2000px;
 }
 
 .bold{
@@ -172,4 +172,56 @@ Voor goud gebruik #e9a400 of #f4c300
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.contact {
+    text-align: center;
+    background-color:#3da45e;
+    color:#f1e1b7;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-weight:bold;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size:40px;
+    border:5px solid #e9a400;
+    border-radius:20px;
+}
+
+.home-boxes {
+    text-align: left;
+    background-color: #bce5b5;
+    color:#3c5a28;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-weight:bold;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size:24px;
+    border:5px solid #e9a400;
+    border-radius:20px;
+}
+
+.welcome{
+    min-width: 150px;
+    max-width: 1500px;
+    flex-shrink: 2;
+}
+
+.sidetoside{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 20px;
+
+}
+
+.extra_q{
+    max-width: 2520px;
+}
+
+.phylotree{
+    max-width: 100%;
+    min-width: 10%;
+    height: auto;
 }
