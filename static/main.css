@@ -1,3 +1,6 @@
+/*
+CSS FOR OVERALL LOOK OF WEBSITE
+ */
 body {
     background-color: #e5f4e3;
     display: flex;
@@ -31,6 +34,18 @@ body {
 
 }
 
+.banner {
+    display:flex;
+    background-color:#78b56e;
+    max-width:620px;
+    align-items: center;
+    gap: 20px;
+    max-height:95px;
+}
+
+/*
+CSS FOR THE NAVIGATION MENU
+ */
 .nav_button {
     background-color:#e5f4e3;
     border: 2px solid #e9a400;
@@ -50,6 +65,7 @@ body {
     background-color: white;
     color: #e9a400;
 }
+
 .navbar {
     background-color:#3c5a28;
     padding:5px;
@@ -58,6 +74,9 @@ body {
     margin-top: 10px;
 }
 
+/*
+CSS FOR THE FOOTER
+ */
 .banner {
     display:flex;
     background-color:#78b56e;
@@ -90,6 +109,11 @@ body {
     padding:20px;
 }
 
+/*
+CSS FOR THE IFRAME
+*/
+
+
 section {
     flex-grow: 1;
     width: 100%;
@@ -112,6 +136,17 @@ iframe[name="main-display"] {
 iframe::-webkit-scrollbar {
     display: none;
 }
+
+.iframe_section {
+    border: 3px #78d56e solid;
+    background-color:#78b56e;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+/*
+CSS FOR THE DROP BUTTON
+ */
 
 .drop_button {
     background-color:#e5f4e3;

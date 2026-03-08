@@ -2,28 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Phylogenetic Tree</title>
-    <link rel="stylesheet" href="/static/tool_style.css" type='text/css'>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <script>
-      function autoResize(iframe) {
-          iframe.style.height = '0px';
-
-          iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
-      }
-    </script>
+    <title>Phylogenetic tree</title>
+    <link rel="stylesheet" href="../static/main.css" type='text/css'>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <script src="../scripts/javascript/iframe_height_resize.js"></script>
 </head>
 <body>
     <div class="header">
         <div class="banner">
-            <img src="/images/tree_logo.png" id="header_image" alt="logo">
+            <img src="../images/tree_logo.png" id="header_image" alt="logo">
             <h2>
-            Phylogenetic Tree
+            Phylogenetic tree
             </h2>
-
         </div>
         <h5 class="sub_header">
-            Build, Analyze and Style your own Phylogenetic Tree
+            Analyze and stylize phylogenetic trees
         </h5>
     </div>
 
@@ -46,8 +39,7 @@
     </div>
 
     <section class="">
-
-        <iframe src="home.html" class="iframe" style="border:none;" name="main-display"></iframe>
+        <iframe src="home.html" name="main-display" onload="autoResize(this)"></iframe>
     </section>
 
 <footer class="footer">
