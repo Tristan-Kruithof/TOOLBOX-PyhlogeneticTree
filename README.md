@@ -22,15 +22,15 @@ Tool for getting species information like the taxonomy and fasta files through N
  virtual_environment_name.
 - Go to the location where you want to install the environment. Then use the following syntax in your terminal:
 
-**python3 -m <virtual_environment_name>**
+  ``python3 -m <virtual_environment_name>``
 
 - Next, activate the virtual environment with the following syntax:
 
-**source <virtual_environment_name>/bin/activate**
+  ``source <virtual_environment_name>/bin/activate``
 
 - Finally, install biopython with the following command:
 
-**pip install biopython==1.86**
+  ``pip install biopython==1.86``
 
 ### MEGA cc 12.1.2
 
