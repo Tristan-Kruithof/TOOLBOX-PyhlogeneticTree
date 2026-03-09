@@ -17,18 +17,20 @@ In order to run the website the following tools are needed: Biopython version 1.
 ##### Description:
 Tool for getting species information like the taxonomy and fasta files through NCBI's database
 ##### Installation steps:
-Install python3 if necessary
-Before you can install biopython in Linux, you must first create a virtual environment. First, choose a name for the virtual environment. In the example below, the name is virtual_environment_name.
-Go to the location where you want to install the environment. Then use the following syntax in your terminal:
-python3 -m <virtual_environment_name>
+- Install python3 if necessary
+- Before you can install biopython in Linux, you must first create a virtual environment. First, choose a name for the virtual environment. In the example below, the name is
+ virtual_environment_name.
+- Go to the location where you want to install the environment. Then use the following syntax in your terminal:
 
-Next, activate the virtual environment with the following syntax:
+  ``python3 -m <virtual_environment_name>``
 
-source <virtual_environment_name>/bin/activate
+- Next, activate the virtual environment with the following syntax:
 
-Finally, install biopython with the following command:
+  ``source <virtual_environment_name>/bin/activate``
 
-pip install biopython==1.86
+- Finally, install biopython with the following command:
+
+  ``pip install biopython==1.86``
 
 ### MEGA cc 12.1.2
 
