@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/main.css" type='text/css'>
-    <title>Title</title>
-</head>
-<body>
-    <div class="side_to_side">
+{% extends "main.html" %}
+
+{% block content%}
+<div class="side_to_side">
         <div class="home-boxes welcome">
             <h1>
                 Tools
@@ -29,7 +24,7 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/images/Digital_tools.jpg"  class="tool_image" alt="toolkit_image">
+            <img src="/static/images/Digital_tools.jpg" class="tool_image" alt="toolkit_image">
         </div>
     </div>
 
@@ -50,7 +45,7 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/images/Biopython_logo.png"  class="tool_image" alt="toolkit_image">
+            <img src="/static/images/Biopython_logo.png" class="tool_image" alt="toolkit_image">
         </div>
     </div>
      <div class="side_to_side">
@@ -68,7 +63,7 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/images/01_mega_logo.svg.png"  class="tool_image" alt="toolkit_image">
+            <img src="/static/images/01_mega_logo.svg.png" class="tool_image" alt="toolkit_image">
         </div>
     </div>
      <div class="side_to_side">
@@ -89,9 +84,7 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/images/ETE4_logo.png"  class="tool_image" alt="toolkit_image">
+            <img src="/static/images/ETE4_logo.png" class="tool_image" alt="toolkit_image">
         </div>
     </div>
-
-</body>
-</html>
+{% endblock %}
