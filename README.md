@@ -17,18 +17,20 @@ In order to run the website the following tools are needed: Biopython version 1.
 ##### Description:
 Tool for getting species information like the taxonomy and fasta files through NCBI's database
 ##### Installation steps:
-Install python3 if necessary
-Before you can install biopython in Linux, you must first create a virtual environment. First, choose a name for the virtual environment. In the example below, the name is virtual_environment_name.
-Go to the location where you want to install the environment. Then use the following syntax in your terminal:
-python3 -m <virtual_environment_name>
+- Install python3 if necessary
+- Before you can install biopython in Linux, you must first create a virtual environment. First, choose a name for the virtual environment. In the example below, the name is
+ virtual_environment_name.
+- Go to the location where you want to install the environment. Then use the following syntax in your terminal:
 
-Next, activate the virtual environment with the following syntax:
+  ``python3 -m <virtual_environment_name>``
 
-source <virtual_environment_name>/bin/activate
+- Next, activate the virtual environment with the following syntax:
 
-Finally, install biopython with the following command:
+  ``source <virtual_environment_name>/bin/activate``
 
-pip install biopython==1.86
+- Finally, install biopython with the following command:
+
+  ``pip install biopython==1.86``
 
 ### MEGA cc 12.1.2
 
@@ -41,12 +43,12 @@ Install the download file using the following link: https://www.megasoftware.net
 - Here u select Ubuntu/Debian, Command Line (CC), Mega 12.1 (64-bit) and press the download button
 - This brings you to a page where you need to fill in a bit of information, fill this in and press download once more.
 - This should start a download of a tar.gz file, if not make sure you are actually on a Ubuntu/Debian system and try the previous steps again.
-- Once downloaded move the file to the directory where you want your tool to live.
-- Once placed there, run the following command in the terminal: **tar -xvzf megacc-12.1.2-linux.tar.gz** or replace the last bit with the name of ur file.
-- Once this is done successfully you want to make sure the file is executable. To do so go to the directory your tool is placed and run the follwoing command in the terminal: ls -l
-- This should give something like **-rw-r--r--r 1 rjans students Feb 27 10:00 megacc**
-- Make sure it at least says -rw**x**r--r--. If this is not the case yet use the following command chmod u+x megacc
-- Now the tool should be functional. To make sure this is actually the case run the following command: megacc -h
+- Once downloaded move the file to the directory where the website is also stored.
+- Once placed there, run the following command in the terminal: `tar -xvzf megacc-12.1.2-linux.tar.gz` or replace the last bit with the name of ur file.
+- Once this is done successfully you want to make sure the file is executable. To do so go to the directory your tool is placed and run the follwoing command in the terminal: `ls -l`
+- This should give something like `-rw-r--r--r 1 rjans students Feb 27 10:00 megacc`
+- Make sure it at least says -rw**x**r--r--. If this is not the case yet use the following command `chmod u+x megacc`
+- Now the tool should be functional. To make sure this is actually the case run the following command: `megacc -h`
 - If the download was successful it should show a list of possible applications of mega cc and its commands
 
 
