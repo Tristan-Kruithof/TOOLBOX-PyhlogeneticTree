@@ -61,7 +61,7 @@
             <p>
                 Mega cc is used to align DNA sequences, compare them with each other, and create a phylogenetic tree based on this.
                 In our case, it creates a file in newick format that contains data for a phylogenetic tree, which can then be read by ETE4.<br><br>
-                It is very important to align the DNA sequences before comparing them, because this ensures that you are comparing homologous positions.
+                It is very important to align the DNA sequences before comparing them, because this ensures that you are comparing homologous positions. If you dont align them properly, your tree will mjust be wrong.
                 A homologous position means that, from an evolutionary perspective, they come from the same area, so I am comparing the same genetic data from different sequences.
                 If you do not align them, or do not align them properly, you may not be comparing the same genetic data, which can lead to errors in the phylogenetic tree.
             </p>
@@ -91,6 +91,47 @@
         <div class="home-boxes">
             <img src="/images/ETE4_logo.png"  class="tool_image" alt="toolkit_image">
         </div>
+    </div>
+    <div class="side_to_side">
+        <div class="home-boxes">
+            <h2>
+            Input and Output
+            </h2>
+            <p>
+            Each tool requires its own specific input. For the user, they will only have to provide the start input for Biopython and receive the output of ETE4, which is the phylogenetic.
+            The rest of the inputs and outputs will be tuned to each other and not be seen by the user, but for completness they will also be explained here.
+            In order to start the whole process biopython requires the input of the user in order to process it for mega. To make sure that people off all levels of biology knowledge can use this site, there will be a lot of options for input, which include:
+            the common name of species, the scientific names of species, fasta files of the correct gene or even multi fasta files of the correct gene. The chosen gene per kingdom is already set, but can be changed by the user if they want to.
+            Biopython than takes this data and puts all the dna sequences into a multifasta tool, if it isnt already and passes it on to Mega.
+            Mega needs two inputs: an input file with the dna sequences and a settings file, so it knows which methods to use when analyzing. The input file is provided by biopython and the settings file is already defined by the website, with as for now know plans to let users edit it.
+            When Mega has processed this it will spit out an newick file, which can be used by ETE4 to create a phylogenetic tree.
+
+            </p>
+        </div>
+    </div>
+
+
+
+
+    <div class="side_to_side">
+        <div class="home-boxes welcome">
+            <h2 id="Refrences">
+                Refrences
+            </h2>
+            <p>
+                <br>
+                For Biopython:<br>
+                Cock PA, Antao T, Chang JT, Chapman BA, Cox CJ, Dalke A, Friedberg I, Hamelryck T, Kauff F, Wilczynski B and de Hoon MJL (2009) Biopython: freely available Python tools for computational molecular biology and bioinformatics. Bioinformatics, 25, 1422-1423
+                <br><br>
+                For Mega CC:<br>
+                Stecher G, Suleski M, Tao Q, Tamura K, and Kumar S (2025) Journal of Molecular Evolution https://doi.org/10.1007/s00239-025-10287-z
+                <br><br>
+                For ETE4:<br>
+                Jaime Huerta-Cepas, François Serra and Peer Bork. "ETE 3: Reconstruction, analysis and visualization of phylogenomic data." Mol Biol Evol (2016) doi: 10.1093/molbev/msw046
+            </p>
+        </div>
+
+
     </div>
 
 </body>
