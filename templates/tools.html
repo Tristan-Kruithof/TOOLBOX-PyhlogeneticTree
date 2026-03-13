@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/main.css" type='text/css'>
-    <title>Title</title>
-</head>
+{% extends "main.html" %}
+
+{% block content%}
 <body>
     <div class="side_to_side">
         <div class="home-boxes welcome">
@@ -29,7 +25,7 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/images/Digital_tools.jpg"  class="tool_image" alt="toolkit_image">
+            <img src="/static/images/Digital_tools.jpg"  class="tool_image" alt="toolkit_image">
         </div>
     </div>
 
@@ -50,7 +46,7 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/images/Biopython_logo.png"  class="tool_image" alt="toolkit_image">
+            <img src="/static/images/Biopython_logo.png"  class="tool_image" alt="toolkit_image">
         </div>
     </div>
      <div class="side_to_side">
@@ -61,14 +57,16 @@
             <p>
                 Mega cc is used to align DNA sequences, compare them with each other, and create a phylogenetic tree based on this.
                 In our case, it creates a file in newick format that contains data for a phylogenetic tree, which can then be read by ETE4.<br><br>
+
                 It is very important to align the DNA sequences before comparing them, because this ensures that you are comparing homologous positions. If you dont align them properly, your tree will be made based of incorrect data and just be completely off.
+
                 A homologous position means that, from an evolutionary perspective, they come from the same area, so I am comparing the same genetic data from different sequences.
                 If you do not align them, or do not align them properly, you may not be comparing the same genetic data, which can lead to errors in the phylogenetic tree.
             </p>
 
         </div>
         <div class="home-boxes">
-            <img src="/images/01_mega_logo.svg.png"  class="tool_image" alt="toolkit_image">
+            <img src="/static/images/01_mega_logo.svg.png"  class="tool_image" alt="toolkit_image">
         </div>
     </div>
      <div class="side_to_side">
@@ -89,7 +87,7 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/images/ETE4_logo.png"  class="tool_image" alt="toolkit_image">
+            <img src="/static/images/ETE4_logo.png"  class="tool_image" alt="toolkit_image">
         </div>
     </div>
     <div class="side_to_side">
@@ -127,8 +125,8 @@
 
     <div class="side_to_side">
         <div class="home-boxes welcome">
-            <h2 id="Refrences">
-                Refrences
+            <h2 id="References">
+                References
             </h2>
             <p>
                 <br>
@@ -142,9 +140,7 @@
                 Jaime Huerta-Cepas, François Serra and Peer Bork. "ETE 3: Reconstruction, analysis and visualization of phylogenomic data." Mol Biol Evol (2016) doi: 10.1093/molbev/msw046
             </p>
         </div>
-
-
     </div>
 
 </body>
-</html>
+{% endblock %}

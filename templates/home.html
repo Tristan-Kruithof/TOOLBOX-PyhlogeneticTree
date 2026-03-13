@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../static/main.css" type='text/css'>
-</head>
-<body>
-    <div class="side_to_side">
+{% extends "main.html" %}
+
+{% block content %}
+<div class="side_to_side">
         <div class="home-boxes welcome">
             <h1>
                 Welcome
@@ -20,7 +15,7 @@
         </div>
         <div class="home-boxes">
             <a href="https://www.researchgate.net/figure/Phylogenetic-tree-of-microorganisms-Sources-23_fig2_372253584" target="_blank">
-                <img src="/images/Phylogenetic-tree-of-microorganisms.jpg" id="example_tree" alt="A Phylogenetic Tree" class="phylotree">
+                <img src="/static/images/Phylogenetic-tree-of-microorganisms.jpg" id="example_tree" alt="A Phylogenetic Tree" class="phylotree">
             </a>
 
         </div>
@@ -52,5 +47,4 @@
             </p>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
