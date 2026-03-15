@@ -2,8 +2,38 @@
 
 {% block content %}
 <div class="home-boxes">
-        <h1>
-            Create your tree here.
-        </h1>
-    </div>
+    <h1 class="title">
+        Create
+    </h1>
+    <p>
+        Create your tree here.
+    </p>
+
+    <img src="{{ url_for('static', filename='images/create/' + math) }}" class="create_image" alt="math photo" id="imgbox">
+
+    <form method="POST" action="">
+        <label for="calculator">Choose what to calculate!</label><br>
+        <select id="calculator" name="calculator">
+            <option value="square" {% if selection == "square" %}selected{% endif %}>Square</option>
+            <option value="addition" {% if selection == "addition" %}selected{% endif %}>Addition</option>
+            <option value="substraction" {% if selection == "substraction" %}selected{% endif %}>Subtraction</option>
+            <option value="multiplication" {% if selection == "multiplication" %}selected{% endif %}>Multiplication</option>
+            <option value="division" {% if selection == "division" %}selected{% endif %}>Division</option>
+        </select>
+
+        <br><br><label for="input_field">Put in your numbers!</label><br>
+        <input type="number" id="input_field" name="input_field" value="{{ input_1 }}" required>
+        <input type="number" id="input_field" name="input_field_2" value="{{ input_2 }}" required>
+
+
+        <button type="submit" name="submit">Calculate!</button><br>
+    </form>
+
+    <br>{{ result }}
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='javascript/change_create.js') }}"></script>
 {% endblock %}
