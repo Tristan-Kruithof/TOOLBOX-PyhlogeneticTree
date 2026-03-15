@@ -1,6 +1,6 @@
 {% extends "main.html" %}
 
-{% block content%}
+{% block content %}
 <body>
     <div class="side_to_side">
         <div class="home-boxes text_box">
@@ -154,10 +154,10 @@
             Input and Output
             </h2>
             <p>
-            Each tool requires its own specific input. For the user, they will only have to provide the start input for Biopython and receive the output of ETE4, which is the phylogenetic.
-            The rest of the inputs and outputs will be tuned to each other and not be seen by the user, but for completeness they will also be explained here.
+            Each tool requires its own specific input. For the user, they will only have to provide the start input for Biopython and receive the output of ETE4, which is the phylogenetic tree.<br><br>
+            The rest of the inputs and outputs will be tuned to each other and not be seen by the user, but for completeness they will also be explained here.<br><br>
             In order to start the whole process biopython requires the input of the user in order to process it for mega. To make sure that people off all levels of biology knowledge can use this site, there will be a lot of options for input, which include:
-            the common name of species, the scientific names of species, fasta files of the correct gene or even multi fasta files of the correct gene. The chosen gene per kingdom is already set, but can be changed by the user if they want to.
+            the common name of species, the scientific names of species, fasta files of the correct gene or even multi fasta files of the correct gene. The chosen gene per kingdom is already set, but can be changed by the user if they want to.<br><br>
             Biopython than takes this data and puts all the dna sequences into a multi-fasta tool, if it isn't already and passes it on to Mega.
             Mega needs two inputs: an input file with the dna sequences and a settings file, so it knows which methods to use when analyzing. The input file is provided by biopython and the settings file is already defined by the website, with as for now know plans to let users edit it.
             When Mega has processed this it will spit out a newick file, which can be used by ETE4 to create a phylogenetic tree.

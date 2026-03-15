@@ -56,6 +56,10 @@ body {
 /*
 CSS FOR THE NAVIGATION MENU
  */
+nav {
+    display:flex;
+    align-items: center;
+}
 .nav_button {
     display: inline-block;
     background-color:#e5f4e3;
@@ -78,30 +82,39 @@ CSS FOR THE NAVIGATION MENU
     background-color: white;
     color: #e9a400;
     transform: scale(1.1);
+
 }
 
 .sign_up_button {
-      display: inline-block;
-    background-color:#e5f4e3;
-    border: 2px solid #e9a400;
-    border-radius:40px;
-    color:black;
+    margin-left: auto;
+}
+
+.sign_up_button a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #bce5b5;
+    border: 3px solid #e9a400;
+    cursor: pointer;
+    color:#3c5a28;
     font-weight:bold;
-    font-family:"Times New Roman", "Courier New", monospace;
     font-size:20px;
-    padding-left:10px;
-    padding-right:10px;
+    padding: 2px 11px;
     margin-left:10px;
     margin-right:10px;
-    text-decoration: none;
-    cursor: pointer;
+    font-family:"Arial", sans-serif;
     transition: transform 0.2s ease;
-    align-content: flex-end;
 }
+
+.sign_up_button a:hover {
+    background-color: white;
+    color: #e9a400;
+    transform: scale(1.1);
+}
+
+
 .navbar {
     background-color:#3c5a28;
     padding:8px;
-    align-items: center;
     border: 3px solid #e9a400;
     margin-top: 10px;
 }
@@ -267,6 +280,12 @@ CSS FOR THE DROP BUTTON
     max-width: 100%;
     height: auto;
     width: 900px;
+}
+
+.create_image {
+    max-width: 100%;
+    height: auto;
+    width: 400px;
 }
 
 .side_to_side {

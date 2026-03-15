@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Phylogenetic tree</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="/static/stylesheets/main.css" type='text/css'>
     <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
 </head>
@@ -18,7 +18,6 @@
             Analyze and stylize phylogenetic trees
         </p>
     </div>
-
     <div class="navbar">
       <nav>
           <a href="{{ url_for('home') }}" class="nav_button">Home</a>
@@ -28,11 +27,13 @@
           <div class="dropdown">
               <button class="nav_button">Help ▼</button>
               <div class="dropdown-content">
-
-                  <a href="{{ url_for('installation') }}" >Installation</a>
-                <a href="{{ url_for('contact') }}" >Contact</a>
-                <a href="{{ url_for('about') }}" >About</a>
+                  <a href="{{ url_for('installation') }}">Installation</a>
+                  <a href="{{ url_for('contact') }}">Contact</a>
+                  <a href="{{ url_for('about') }}">About</a>
               </div>
+          </div>
+          <div class="sign_up_button">
+              <a href="">Sign Up</a>
           </div>
       </nav>
     </div>
@@ -40,6 +41,8 @@
     {% block content %}
     {% endblock %}
 
+    {% block scripts %}
+    {% endblock %}
 <footer class="footer">
         <div class="sub_footer">
             <p>Version 1.0.0</p>
@@ -53,4 +56,3 @@
 </footer>
 </body>
 </html>
-
