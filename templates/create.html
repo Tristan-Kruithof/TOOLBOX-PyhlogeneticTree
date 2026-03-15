@@ -2,8 +2,16 @@
 
 {% block content %}
 <div class="home-boxes">
-        <h1>
-            Create your tree here.
-        </h1>
-    </div>
+    <h1 class="title">
+        Create
+    </h1>
+    <p>
+        Create your tree here.
+    </p>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='javascript/change_page.js') }}"></script>
 {% endblock %}

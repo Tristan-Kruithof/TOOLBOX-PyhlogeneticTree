@@ -3,8 +3,8 @@
 {% block content%}
 <body>
     <div class="side_to_side">
-        <div class="home-boxes welcome">
-            <h1>
+        <div class="home-boxes text_box">
+            <h1 class="title">
                 Tools
             </h1>
 
@@ -13,25 +13,38 @@
                 These include:
             </p>
                 <ul>
-                    <li><a href="https://biopython.org/" target="_blank">Biopython</a></li>
-                    <li><a href="https://www.megasoftware.net/" target="_blank">MEGA cc</a></li>
-                    <li><a href="https://etetoolkit.github.io/ete/" target="_blank">ETE4</a></li>
+                    <li><a href="#biopython">Biopython</a></li>
+                    <li><a href="#megacc">MEGA cc</a></li>
+                    <li><a href="#ete4">ETE4</a></li>
                 </ul>
             <p>
                 Biopython is used to handle our user input and request taxonomy data from the NCBI database.
                 MEGA cc is used to align DNA sequences, compare them with each other, and create a phylogenetic tree based on this comparison.
-                ETE4 is used to make and compare trees with a newick file as input.
+                ETE4 is used to make and compare trees with a newick file as input.<br><br> And for more info about the tools.
             </p>
+                <ul>
+                    <li><a href="#input-output">Input and Output</a></li>
+                    <li><a href="#citations">Citations for tools</a></li>
+                </ul>
 
         </div>
         <div class="home-boxes">
-            <img src="/static/images/Digital_tools.jpg"  class="tool_image" alt="toolkit_image">
+            <div class="image_box">
+               <a href="https://www.techfunnel.com/martech/diy-tools/">
+                <img src="/static/images/Digital_tools.jpg"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   Several tools pointing at a computer.  |  Click for the reference
+               </p>
+            </div>
+
+
         </div>
     </div>
 
     <div class="side_to_side">
-        <div class="home-boxes welcome">
-            <h2 id="biopython">
+        <div class="home-boxes text_box">
+            <h2 id="biopython" class="title">
                 Biopython
             </h2>
 
@@ -46,12 +59,20 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/static/images/Biopython_logo.png"  class="tool_image" alt="toolkit_image">
+            <div class="image_box">
+               <a href="https://commons.wikimedia.org/wiki/File:Biopython_logo.svg">
+                   <img src="/static/images/Biopython_logo.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   The biopython logo  |  Click for the reference
+               </p>
+            </div>
         </div>
+
     </div>
      <div class="side_to_side">
-        <div class="home-boxes welcome">
-            <h2 id="megacc">
+        <div class="home-boxes text_box">
+            <h2 id="megacc" class="title">
                 Mega CC
             </h2>
             <p>
@@ -64,12 +85,19 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/static/images/01_mega_logo.svg.png"  class="tool_image" alt="toolkit_image">
+            <div class="image_box">
+               <a href="https://commons.wikimedia.org/wiki/File:MEGA_logo.png">
+                   <img src="/static/images/01_mega_logo.svg.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   The Mega CC logo  |  Click for the reference
+               </p>
+            </div>
         </div>
     </div>
      <div class="side_to_side">
-        <div class="home-boxes welcome">
-            <h2 id="ete4">
+        <div class="home-boxes text_box">
+            <h2 id="ete4" class="title">
                 ETE4
             </h2>
 
@@ -85,12 +113,19 @@
 
         </div>
         <div class="home-boxes">
-            <img src="/static/images/ETE4_logo.png"  class="tool_image" alt="toolkit_image">
+            <div class="image_box">
+               <a href="https://quintagroup.com/cms/python/ete-toolkit">
+                   <img src="/static/images/ETE4_logo.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   The ETE4 logo  |  Click for the reference
+               </p>
+            </div>
         </div>
     </div>
     <div class="side_to_side">
         <div class="home-boxes">
-            <h2>
+            <h2 id='input-output' class="title">
             Input and Output
             </h2>
             <p>
@@ -107,26 +142,23 @@
     </div>
 
 
-
-
-    <div class="side_to_side">
-        <div class="home-boxes welcome">
-            <h2 id="References">
-                References
-            </h2>
-            <p>
-                <br>
-                For Biopython:<br>
-                Cock PA, Antao T, Chang JT, Chapman BA, Cox CJ, Dalke A, Friedberg I, Hamelryck T, Kauff F, Wilczynski B and de Hoon MJL (2009) Biopython: freely available Python tools for computational molecular biology and bioinformatics. Bioinformatics, 25, 1422-1423
-                <br><br>
-                For Mega CC:<br>
-                Stecher G, Suleski M, Tao Q, Tamura K, and Kumar S (2025) Journal of Molecular Evolution https://doi.org/10.1007/s00239-025-10287-z
-                <br><br>
-                For ETE4:<br>
-                Jaime Huerta-Cepas, François Serra and Peer Bork. "ETE 3: Reconstruction, analysis and visualization of phylogenomic data." Mol Biol Evol (2016) doi: 10.1093/molbev/msw046
-            </p>
-        </div>
+    <div class="home-boxes">
+        <h2 id="citations" class="title">
+            Citations for tools
+        </h2>
+        <p>
+            <br>
+            <a href="https://biopython.org/" target="_blank"><span class="title">For Biopython:</span></a><br>
+            Cock PA, Antao T, Chang JT, Chapman BA, Cox CJ, Dalke A, Friedberg I, Hamelryck T, Kauff F, Wilczynski B and de Hoon MJL (2009) Biopython: freely available Python tools for computational molecular biology and bioinformatics. Bioinformatics, 25, 1422-1423
+            <br><br>
+            <a href="https://www.megasoftware.net/" target="_blank"><span class="title">For Mega CC:</span></a><br>
+            Stecher G, Suleski M, Tao Q, Tamura K, and Kumar S (2025) Journal of Molecular Evolution https://doi.org/10.1007/s00239-025-10287-z
+            <br><br>
+            <a href="https://etetoolkit.github.io/ete/" target="_blank"><span class="title">For ETE4:</span></a><br>
+            Jaime Huerta-Cepas, François Serra and Peer Bork. "ETE 3: Reconstruction, analysis and visualization of phylogenomic data." Mol Biol Evol (2016) doi: 10.1093/molbev/msw046
+        </p>
     </div>
+
 
 </body>
 {% endblock %}

@@ -15,6 +15,11 @@ body {
     height:95px;
 }
 
+.title {
+    color: black;
+    font-weight: bold;
+}
+
 .header {
     text-align: center;
     background-color:#3da45e;
@@ -52,6 +57,7 @@ body {
 CSS FOR THE NAVIGATION MENU
  */
 .nav_button {
+    display: inline-block;
     background-color:#e5f4e3;
     border: 2px solid #e9a400;
     border-radius:40px;
@@ -65,13 +71,33 @@ CSS FOR THE NAVIGATION MENU
     margin-right:10px;
     text-decoration: none;
     cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .nav_button:hover {
     background-color: white;
     color: #e9a400;
+    transform: scale(1.1);
 }
 
+.sign_up_button {
+      display: inline-block;
+    background-color:#e5f4e3;
+    border: 2px solid #e9a400;
+    border-radius:40px;
+    color:black;
+    font-weight:bold;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-size:20px;
+    padding-left:10px;
+    padding-right:10px;
+    margin-left:10px;
+    margin-right:10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    align-content: flex-end;
+}
 .navbar {
     background-color:#3c5a28;
     padding:8px;
@@ -137,27 +163,30 @@ CSS FOR THE FOOTER
     padding: 5px;
 }
 
+.small_text {
+    text-align:left;
+    max-width: 500px;
+    padding:20px;
+    margin: 0;
+}
 
 /*
-CSS FOR THE IFRAME
-*/
+CSS FOR IMAGE LINKS
+ */
 
-
-.iframe_container {
-    flex-grow: 1;
-    width: 100%;
-    display: flex;
+.image_box {
+    transition: transform 0.2s ease;
 }
 
-iframe[name="main-display"] {
-    width: 100%;
-    border: none;
-    overflow: hidden;
-    display: block;
+.image_box:hover {
+    transform: scale(1.03);
 }
 
-iframe::-webkit-scrollbar {
-    display: none;
+.image_box p {
+    color: dimgray;
+    margin:auto;
+    font-size:14px;
+    font-weight:bold;
 }
 
 /*
@@ -174,14 +203,16 @@ CSS FOR THE DROP BUTTON
   display: none;
   position: absolute;
     margin-left: 10px;
+    padding: 7px;
   background-color: transparent;
-  max-width: 140px;
+  max-width: 120px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   z-index: 1;
 }
 
 
 .dropdown-content a {
+    display: inline-block;
     background-color:#e5f4e3;
     border: 2px solid #e9a400;
     border-radius:40px;
@@ -194,8 +225,7 @@ CSS FOR THE DROP BUTTON
     padding-right:10px;
     text-decoration: none;
     cursor: pointer;
-    display: block;
-
+    transition: transform 0.2s ease;
 }
 
 
@@ -203,6 +233,8 @@ CSS FOR THE DROP BUTTON
 .dropdown-content a:hover {
     background-color: white;
     color: #e9a400;
+    transform: scale(1.1);
+
 }
 
 
@@ -210,34 +242,20 @@ CSS FOR THE DROP BUTTON
   display: block;
 }
 
-.contact {
-    text-align: center;
-    background-color:#3da45e;
-    color:#f1e1b7;
-    font-family:"Times New Roman", "Courier New", monospace;
-    font-weight:bold;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    font-size:40px;
-    border:5px solid #e9a400;
-    border-radius:20px;
-}
 
 .home-boxes {
     text-align: left;
     background-color: #bce5b5;
     color:#3c5a28;
     font-family:"Times New Roman", "Courier New", monospace;
-    font-weight:bold;
     padding: 40px 25px;
     font-size:24px;
     border:5px solid #e9a400;
     border-radius:20px;
     margin:10px;
-
 }
 
-.welcome {
+.text_box {
     min-width: 150px;
     max-width: 1500px;
     flex-shrink: 2;
@@ -245,19 +263,17 @@ CSS FOR THE DROP BUTTON
 }
 
 .tool_image {
-    max-width: 800px;
-    max-height: 450px
-
+    max-width: 100%;
+    height: auto;
+    width: 700px;
 }
 
 .side_to_side {
     display: flex;
+    flex-grow: 1;
     justify-content: center;
 }
 
-.extra_q{
-    max-width: 2520px;
-}
 
 .phylotree{
     max-width: 100%;
