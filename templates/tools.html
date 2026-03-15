@@ -87,7 +87,9 @@
             <p>
                 Mega cc is used to align DNA sequences, compare them with each other, and create a phylogenetic tree based on this.
                 In our case, it creates a file in newick format that contains data for a phylogenetic tree, which can then be read by ETE4.<br><br>
-                It is very important to align the DNA sequences before comparing them, because this ensures that you are comparing homologous positions. If you don't align them properly, your tree will mjust be wrong.
+
+                It is very important to align the DNA sequences before comparing them, because this ensures that you are comparing homologous positions. If you dont align them properly, your tree will be made based of incorrect data and just be completely off.
+
                 A homologous position means that, from an evolutionary perspective, they come from the same area, so I am comparing the same genetic data from different sequences.
                 If you do not align them, or do not align them properly, you may not be comparing the same genetic data, which can lead to errors in the phylogenetic tree.
             </p>
@@ -160,9 +162,21 @@
             the common name of species, the scientific names of species, fasta files of the correct gene or even multi fasta files of the correct gene. The chosen gene per kingdom is already set, but can be changed by the user if they want to.<br><br>
             Biopython than takes this data and puts all the dna sequences into a multi-fasta tool, if it isn't already and passes it on to Mega.
             Mega needs two inputs: an input file with the dna sequences and a settings file, so it knows which methods to use when analyzing. The input file is provided by biopython and the settings file is already defined by the website, with as for now know plans to let users edit it.
-            When Mega has processed this it will spit out a newick file, which can be used by ETE4 to create a phylogenetic tree.
-
+            When Mega has processed this it will spit out an newick file, which can be used by ETE4 to create a phylogenetic tree.<br><br>
+            ETE4 has plenty of design options, of which a few such as changing colours, sizes, and even adding pictures for each organism will be added to the site.
             </p>
+        </div>
+        <div class="home-boxes">
+            <h2>
+                Example Input
+            </h2>
+            <p>
+                Cow, Horse, Lion, Elephant, Tiger, Eagle
+            </p>
+            <h2>
+                Example Output
+            </h2>
+            <img src="/images/ncbiquery_tree.png"  class="tool_image" alt="output_image">
         </div>
     </div>
 
