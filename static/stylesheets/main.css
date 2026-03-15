@@ -176,6 +176,7 @@ CSS FOR IMAGE LINKS
 
 .image_box {
     transition: transform 0.2s ease;
+    margin: 20px 0;
 }
 
 .image_box:hover {
@@ -257,7 +258,7 @@ CSS FOR THE DROP BUTTON
 
 .text_box {
     min-width: 150px;
-    max-width: 1500px;
+    max-width: 1300px;
     flex-shrink: 2;
     width:100%;
 }
@@ -265,7 +266,7 @@ CSS FOR THE DROP BUTTON
 .tool_image {
     max-width: 100%;
     height: auto;
-    width: 700px;
+    width: 900px;
 }
 
 .side_to_side {
