@@ -1,0 +1,14 @@
+Name                                                                                                                                         Index    Anc   Des1   Des2       Blen
+PQ898395.1 Panthera leo persica isolate AIWC AAZP 22 656 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                    1     12      -      - 0.06233060
+OR539506.1 Equus caballus voucher MGL-608 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                   2     13      -      - 0.14178058
+OM638834.1 Giraffa camelopardalis camelopardalis isolate Alipore zoo cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial        3      9      -      - 0.08802194
+PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                         4      9      -      - 0.07680691
+PZ072333.1 Sus scrofa isolate P7 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                            5     11      -      - 0.09487786
+PV639086.1 Felis catus isolate PCatH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                     6     12      -      - 0.10633580
+OL310913.1 Loxodonta cyclotis isolate 112CO1 seq cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                            7      8      -      - 0.13746749
+-                                                                                                                                                8     11     12      7 0.03915914
+-                                                                                                                                                9     10      3      4 0.04710989
+-                                                                                                                                               10     13     11      9 0.00000000
+-                                                                                                                                               11     10      8      5 0.04866530
+-                                                                                                                                               12      8      1      6 0.06773117
+-                                                                                                                                               13      -     10      2 0.00000000
