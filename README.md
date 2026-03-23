@@ -7,7 +7,7 @@ Dennis Kuiper
 
 ## Description of product
 The website will be able to accept DNA data in the following forms: fasta file, common name, scientific name.
-It will use this to build a phyloghenetic tree, which can be modified to show things, like the taxonomie, description and pictures of the different organisms inside the phylogenetic tree.
+It will use this to build a phylogenetic tree, which can be modified to show things, like the taxonomie, description and pictures of the different organisms inside the phylogenetic tree.
 
 ## How to run the website:
 In order to run the website the following tools are needed: Biopython version 1.86, Mega cc version 12.1.2 and ETE4 version 4.4.0
