@@ -3,6 +3,8 @@ import subprocess
 import time
 import os.path as path
 from ete4 import Tree
+import python.login
+
 
 
 Entrez.email = "fabserdabser8@gmail.com"
@@ -84,9 +86,6 @@ class Organisms():
 
 
 
-
-
-
 class CC_Tools():
     def __init__(self, location, input, output, settings=False):
         self.location =location
@@ -106,6 +105,8 @@ class CC_Tools():
 
 
 
+def boom():
+    return Tree(open(path.abspath("Tools/newick.nwk")).read())
 
 def main():
     time1 = time.time()
@@ -130,7 +131,8 @@ def main():
     Boom.show()
 
 
-main()
+if __name__ == "__main__":
+    main()
 
 
 # mafft_in = "./Tools/sequences.fasta"
