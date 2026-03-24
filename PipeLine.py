@@ -2,7 +2,7 @@ from Bio import Entrez
 import subprocess
 import time
 import os.path as path
-from ete3 import Tree
+from ete4 import Tree
 
 
 
@@ -118,28 +118,30 @@ class CC_Tools():
 
         else:
             with open(self.output, "w") as f:
-                subprocess.run([path.abspath("Tools/MAFFT/mafft.bat"), "--auto", self.input], stdout=f, check=True)
+                subprocess.run(["mafft", "--auto", self.input], stdout=f, check=True)
 
 
 
 
 def main():
-    type = input("If common names, enter 1! If scientific names, enter 2! If multiple fasta files, enter 3! If one multi-fasta, enter 4!: "
-                 "")
-    what = int(type)
-    ins = input("Enter input: ")
-
-
-    Route = Organisms(what, ins)
-    Route.find_scientific_names()
-    Route.find_fastas()
-    Route.make_multi_fasta()
+    # type = 1
+    # what = int(type)
+    # ins = f"{["cow", "armadillo", "rhinoceros", "HORSE", "CAT", "Lion", "Warthog","pig", "raven", "dolphin", "elephant", "tiger", "siberian tiger", "asian elephant", "african elephant", "borneo dwarf elephant", "plains zebra", "salmon", "cod", "eagle", "ostrich", "ant", "tarantula"]}"
+    #
+    #
+    # Route = Organisms(what, ins)
+    # Route.find_scientific_names()
+    # Route.find_fastas()
+    # Route.make_multi_fasta()
 
     Maffie = CC_Tools(path.abspath("Tools"),path.abspath("Tools/sequences.fasta"),path.abspath("Tools/aligned_sequences.fasta"))
     Maffie.run()
 
     Megurt = CC_Tools(path.abspath("Tools"),path.abspath("Tools/aligned_sequences.fasta"), path.abspath("Tools/newick.nwk"),path.abspath("Tools/infer_ML_nucleotide.mao"))
     Megurt.run()
+
+    Boom = Tree(open(path.abspath("Tools/newick.nwk")).read())
+    Boom.show()
 
 
 main()
