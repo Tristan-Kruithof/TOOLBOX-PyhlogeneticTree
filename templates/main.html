@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Phylogenetic tree</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="/static/stylesheets/main.css" type='text/css'>
     <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
 </head>
@@ -18,21 +18,22 @@
             Analyze and stylize phylogenetic trees
         </p>
     </div>
-
     <div class="navbar">
       <nav>
-          <a href="{{ url_for('home') }}" class="nav_button">Home</a>
-          <a href="{{ url_for('tools') }}" class="nav_button">Tools</a>
-          <a href="{{ url_for('create') }}" class="nav_button">Create</a>
-          <a href="{{ url_for('compare') }}" class="nav_button">Compare</a>
+          <a href="{{ url_for('home_route') }}" class="nav_button">Home</a>
+          <a href="{{ url_for('tools_route') }}" class="nav_button">Tools</a>
+          <a href="{{ url_for('create_route') }}" class="nav_button">Create</a>
+          <a href="{{ url_for('compare_route') }}" class="nav_button">Compare</a>
           <div class="dropdown">
               <button class="nav_button">Help ▼</button>
               <div class="dropdown-content">
-
-                  <a href="{{ url_for('installation') }}" >Installation</a>
-                <a href="{{ url_for('contact') }}" >Contact</a>
-                <a href="{{ url_for('about') }}" >About</a>
+                  <a href="{{ url_for('installation_route') }}">Installation</a>
+                  <a href="{{ url_for('contact_route') }}">Contact</a>
+                  <a href="{{ url_for('about_route') }}">About</a>
               </div>
+          </div>
+          <div class="sign_up_button">
+              <a href="{{ url_for('signup_route') }}">Sign {% if not login_status %}In{% else %}Out{% endif %}</a>
           </div>
       </nav>
     </div>
@@ -40,6 +41,8 @@
     {% block content %}
     {% endblock %}
 
+    {% block scripts %}
+    {% endblock %}
 <footer class="footer">
         <div class="sub_footer">
             <p>Version 1.0.0</p>
@@ -48,9 +51,8 @@
         </div>
         <div class="sub_footer">
             <a href="https://github.com/Tristan-Kruithof/TOOLBOX-PyhlogeneticTree" target="_blank" class="nav_button">View on GitHub</a>
-            <a href="{{ url_for('contact') }}" class="nav_button">Contact</a>
+            <a href="{{ url_for('contact_route') }}" class="nav_button">Contact</a>
         </div>
 </footer>
 </body>
 </html>
-
