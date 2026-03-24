@@ -2,8 +2,8 @@ from Bio import Entrez
 import subprocess
 import time
 import os.path as path
-from ete3 import Tree
-
+from ete4 import Tree
+import python.login
 
 
 
@@ -72,6 +72,7 @@ class Organisms():
             else:
                 self.not_found_names.append(name)
 
+
     def find_fastas(self):
         self.fastas = []
         self.not_found_fastas = []
@@ -98,9 +99,6 @@ class Organisms():
         with open("./Tools/sequences.fasta", "w") as f:
             for fasta in self.fastas:
                 f.write(fasta)
-
-
-
 
 
 

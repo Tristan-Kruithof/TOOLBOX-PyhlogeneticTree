@@ -22,7 +22,7 @@ class Account:
 
     def save_accounts(self, account_list):
         with open(self.filepath, "w") as account_file:
-            json.dump(account_list, account_file, indent=1)
+            json.dump(account_list, account_file, indent=2)
 
 
     def signin(self):
@@ -38,13 +38,13 @@ class Account:
             accounts.append({"email": self.email, "newsletter": self.newsletter, "warnings" : self.warnings})
             self.save_accounts(accounts)
 
-            self.status = [True, "Successfully registered and logged in!"]
+            self.status = [True, "Successfully registered and logged in! |"]
 
         else:
             self.warnings = account['warnings']
 
             if self.warnings < 3:
-                self.status = [True, "Account already exists, but logged in anyways."]
+                self.status = [True, "Account already exists, but logged in anyways. |"]
             else:
                 self.status = [False, "Account has had too many warnings and cannot be used!"]
 
