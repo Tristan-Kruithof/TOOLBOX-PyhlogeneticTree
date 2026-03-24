@@ -49,10 +49,10 @@ def create_route():
         Megurt.run()
 
         tree = PipeLine.boom()
-        tree.render("Tools/image.png")
+        tree.render("static/pipeline_output/image.png")
 
 
-        return render_template('create.html', title="Create", result="Number too big to calculate!", selection=selection, login_status=login_status)
+        return render_template('create.html', title="Create", result="Number too big to calculate!", selection=selection, login_status=login_status, image="image.png")
 
 
 
@@ -63,7 +63,7 @@ def create_route():
 
             return f'/static/images/create/{image_source}'
 
-        return render_template('create.html', title="Create", math="squared.png", login_status=login_status)
+        return render_template('create.html', title="Create", login_status=login_status)
 
 
 @app.route('/home/compare')

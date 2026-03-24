@@ -9,8 +9,9 @@
     <p>
         Create your tree here.
     </p>
-
-    <img src="{{ url_for('static', filename='images/create/' + math) }}" class="create_image" alt="math photo" id="imgbox">
+    {% if image %}
+    <img src="{{ url_for('static', filename="pipeline_output/" + image) }}" class="create_image" alt="math photo" id="imgbox">
+    {% endif %}
 
     <form method="POST" action="">
         <label for="calculator">Choose what to calculate!</label><br>
@@ -43,5 +44,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ url_for('static', filename='javascript/change_create.js') }}"></script>
+
 {% endblock %}
