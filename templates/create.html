@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 
 {% block content %}
+    {% if login_status %}
 <div class="home-boxes">
     <h1 class="title">
         Create
@@ -32,6 +33,13 @@
     <br>{{ result }}
 
 </div>
+        {% else %}
+        <div class="home-boxes">
+            <p>
+            Can only be used when logged in!
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
