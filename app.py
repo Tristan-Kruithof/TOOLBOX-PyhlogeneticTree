@@ -1,6 +1,4 @@
 from flask import Flask, render_template, request, session
-
-
 from python.login import Account
 app = Flask(__name__)
 app.secret_key = "Jl%&*ad93248908fs&*(*liA*JK:)(@*#$(*(#%"
@@ -92,7 +90,7 @@ def signup_route():
         email = request.form.get('email')
         newsletter = request.form.get('newsletter')
         acc = Account(email, newsletter)
-        acc.signup()
+        acc.signin()
         status = acc.status
 
         validation = status[0]
