@@ -5,6 +5,8 @@ import subprocess
 import time
 import os.path as path
 from ete4 import Tree
+import python.login
+
 
 
 Entrez.email = "fabserdabser8@gmail.com"
@@ -83,9 +85,6 @@ class Organisms():
         with open("./Tools/sequences.fasta", "w") as f:
             for fasta in self.fastas:
                 f.write(fasta)
-
-
-
 
 
 

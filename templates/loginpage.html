@@ -1,25 +1,26 @@
 {% extends "main.html" %}
 
 {% block content %}
-    {% if status == True %}
+    {% if login_status == True %}
     <div class="home-boxes">
+        <div class="side_to_side">
+            <div>
+                {{ login_message }}
+            </div>
+            <a href="{{ url_for('signup_route') }}" class="nav_button">Sign Out</a>
+        </div>
+    </div>
 
-        <a href="{{ url_for('signup_route') }}" class="nav_button">Log out!</a>
+
+    {% elif login_status == False %}
+    <div class="home-boxes">
         <div>
             {{ login_message }}
         </div>
     </div>
-    {% endif %}
 
-    {% if status == False %}
-    <div class="home-boxes">
-        <div>
-            {{ login_message }}
-        </div>
-    </div>
-    {% endif %}
 
-    {% if status == None %}
+    {% else %}
         <div class="home-boxes">
         <form action="" method="POST">
             <label for="email">Fill in your email!</label>

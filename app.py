@@ -3,20 +3,24 @@ from python.login import Account
 app = Flask(__name__)
 app.secret_key = "Jl%&*ad93248908fs&*(*liA*JK:)(@*#$(*(#%"
 
+
 @app.route('/')
 def root_route():
     login_status = session.get('login_status')
     return render_template('home.html', title="Phylogenetic Tree", login_status=login_status)
+
 
 @app.route('/home')
 def home_route():
     login_status = session.get('login_status')
     return render_template('home.html', title="Home", login_status=login_status)
 
+
 @app.route('/home/tools')
 def tools_route():
     login_status = session.get('login_status')
     return render_template('tools.html', title="Tools", login_status=login_status)
+
 
 @app.route('/home/create', methods=['POST', 'GET'])
 def create_route():
@@ -67,25 +71,27 @@ def compare_route():
     login_status = session.get('login_status')
     return render_template('compare.html', title="Compare", login_status=login_status)
 
+
 @app.route('/home/help/contact')
 def contact_route():
     login_status = session.get('login_status')
     return render_template('contact.html', title="Contact", login_status=login_status)
+
 
 @app.route('/home/help/installation')
 def installation_route():
     login_status = session.get('login_status')
     return render_template('installation.html', title="Installation", login_status=login_status)
 
+
 @app.route('/home/help/about')
 def about_route():
     login_status = session.get('login_status')
     return render_template('about.html', title="About", login_status=login_status)
 
+
 @app.route('/home/signup', methods=['POST', 'GET'])
 def signup_route():
-    login_status = session.get('login_status')
-
     if request.method == 'POST':
         email = request.form.get('email')
         newsletter = request.form.get('newsletter')
@@ -102,7 +108,6 @@ def signup_route():
 
         return render_template('loginpage.html', title="Login", status=login_status, login_status=login_status, login_message=message)
 
-
     session['login_status'] = None
     login_status = session.get('login_status')
     return render_template('loginpage.html', title="Login", status=login_status, login_status=login_status)
@@ -111,4 +116,3 @@ def signup_route():
 
 if __name__ == '__main__':
     app.run()
-
