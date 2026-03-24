@@ -1,3 +1,5 @@
+from os.path import abspath
+
 from Bio import Entrez
 import subprocess
 import time
@@ -5,29 +7,8 @@ import os.path as path
 from ete4 import Tree
 
 
-
-
 Entrez.email = "fabserdabser8@gmail.com"
 
-#type = 1
-#input = ["cow", "armadillo", "rhinoceros", "HORSE", "CAT", "Lion", "Warthog","pig", "raven", "dolphin", "elephant", "tiger", "siberian tiger", "asian elephant", "african elephant", "borneo dwarf elephant", "plains zebra", "salmon", "cod", "eagle", "ostrich", "ant", "tarantula"]
-#["cow", "armadillo", "rhinoceros", "HORSE", "CAT", "Lion", "Warthog","pig", "raven", "dolphin", "elephant", "tiger", "siberian tiger", "asian elephant", "african elephant", "borneo dwarf elephant", "plains zebra", "salmon", "cod", "eagle", "ostrich", "ant", "tarantula"]
-
-# correct_names = []
-#scientific_names = []
-#multiple_names = []
-#not_found_names = []
-#fastas = []
-#not_found_fastas = []
-# for name in names_list:
-#     stream = Entrez.espell(term=name)
-#     record = Entrez.read(stream)
-#     correct_spelled_name = record["CorrectedQuery"]
-#
-#     if correct_spelled_name == "":
-#         correct_spelled_name = name
-#
-#     correct_names.append(correct_spelled_name)
 
 
 class Organisms():
@@ -35,6 +16,7 @@ class Organisms():
         if type == 1:
             input2 = input.split(",")
             self.common_name = input2
+            print(self.common_name)
         elif type == 2:
             self.scientific_name = input
         elif type == 3:
@@ -72,6 +54,8 @@ class Organisms():
             else:
                 self.not_found_names.append(name)
 
+        print(self.scientific_names)
+
     def find_fastas(self):
         self.fastas = []
         self.not_found_fastas = []
@@ -93,6 +77,7 @@ class Organisms():
             else:
                 self.not_found_fastas.append(name)
 
+        print(self.fastas)
 
     def make_multi_fasta(self):
         with open("./Tools/sequences.fasta", "w") as f:
@@ -114,7 +99,7 @@ class CC_Tools():
 
     def run(self):
         if self.settings:
-            subprocess.run(["megacc", "-a", self.settings, "-d", self.input, "-o", self.output], cwd=self.location, check=False, text=True, capture_output=True)
+            subprocess.run([path.abspath("Tools/MEGACC/megacc"), "-a", self.settings, "-d", self.input, "-o", self.output], cwd=self.location, check=False, text=True, capture_output=True)
 
         else:
             with open(self.output, "w") as f:
@@ -124,15 +109,14 @@ class CC_Tools():
 
 
 def main():
-    # type = 1
-    # what = int(type)
-    # ins = f"{["cow", "armadillo", "rhinoceros", "HORSE", "CAT", "Lion", "Warthog","pig", "raven", "dolphin", "elephant", "tiger", "siberian tiger", "asian elephant", "african elephant", "borneo dwarf elephant", "plains zebra", "salmon", "cod", "eagle", "ostrich", "ant", "tarantula"]}"
-    #
-    #
-    # Route = Organisms(what, ins)
-    # Route.find_scientific_names()
-    # Route.find_fastas()
-    # Route.make_multi_fasta()
+    type = 1
+    what = int(type)
+    ins = "Elephant, Pig, Cow, horse, Lion, Tiger"
+
+    Route = Organisms(what, ins)
+    Route.find_scientific_names()
+    Route.find_fastas()
+    Route.make_multi_fasta()
 
     Maffie = CC_Tools(path.abspath("Tools"),path.abspath("Tools/sequences.fasta"),path.abspath("Tools/aligned_sequences.fasta"))
     Maffie.run()
@@ -141,7 +125,7 @@ def main():
     Megurt.run()
 
     Boom = Tree(open(path.abspath("Tools/newick.nwk")).read())
-    Boom.show()
+    Boom.explore()
 
 
 main()
