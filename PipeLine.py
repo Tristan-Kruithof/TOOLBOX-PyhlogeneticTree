@@ -106,6 +106,8 @@ class CC_Tools():
 
 
 
+def boom():
+    return Tree(open(path.abspath("Tools/newick.nwk")).read())
 
 def main():
     type = 1
@@ -123,11 +125,12 @@ def main():
     Megurt = CC_Tools(path.abspath("Tools"),path.abspath("Tools/aligned_sequences.fasta"), path.abspath("Tools/newick.nwk"),path.abspath("Tools/infer_ML_nucleotide.mao"))
     Megurt.run()
 
-    Boom = Tree(open(path.abspath("Tools/newick.nwk")).read())
+    Boom = boom()
     Boom.explore()
 
 
-main()
+if __name__ == "__main__":
+    main()
 
 
 # mafft_in = "./Tools/sequences.fasta"
