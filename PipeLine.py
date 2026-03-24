@@ -1,5 +1,3 @@
-from os.path import abspath
-
 from Bio import Entrez
 import subprocess
 import time
@@ -98,7 +96,8 @@ class CC_Tools():
 
     def run(self):
         if self.settings:
-            subprocess.run([path.abspath("Tools/MEGACC/megacc"), "-a", self.settings, "-d", self.input, "-o", self.output], cwd=self.location, check=False, text=True, capture_output=True)
+            subprocess.run(["rm", self.output])
+            subprocess.run([path.abspath("Tools/MEGACC/megacc"), "-a", self.settings, "-d", self.input, "-o", self.output], cwd=self.location, check=True, text=True, capture_output=True)
 
         else:
             with open(self.output, "w") as f:
@@ -110,6 +109,7 @@ def boom():
     return Tree(open(path.abspath("Tools/newick.nwk")).read())
 
 def main():
+    time1 = time.time()
     type = 1
     what = int(type)
     ins = "Elephant, Pig, Cow, horse, Lion, Tiger"
@@ -125,8 +125,10 @@ def main():
     Megurt = CC_Tools(path.abspath("Tools"),path.abspath("Tools/aligned_sequences.fasta"), path.abspath("Tools/newick.nwk"),path.abspath("Tools/infer_ML_nucleotide.mao"))
     Megurt.run()
 
-    Boom = boom()
-    Boom.explore()
+    Boom = Tree(open(path.abspath("Tools/newick.nwk")).read())
+    time2 = time.time()
+    print(time2 - time1)
+    Boom.show()
 
 
 if __name__ == "__main__":
