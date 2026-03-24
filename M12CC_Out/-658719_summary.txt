@@ -1,0 +1,44 @@
+;   MEGA-CC (Molecular Evolutionary Genetics Analysis Compute Core)
+;
+;   Suggested Citation for MEGA-CC 12:
+;
+;   Stecher G, Suleski M, Tao Q, Tamura K, and Kumar S.
+;   MEGA 12.1: Cross-platform Release for macOS and Linux Operating Systems.
+;   Journal of Molecular Evolution (2025) https://doi.org/10.1007/s00239-025-10287-z
+;
+;   Kumar S, Stecher G, Peterson D, and Tamura K
+;   MEGA-CC: Computing Core of Molecular Evolutionary Genetics Analysis Program for Automated and Iterative Data Analysis
+;   Bioinformatics (2012) 28:2685-2686 (Epub 2012 Aug 24)
+
+
+; ****************************************************************************
+;        Please see the important message(s) at the bottom of this file 
+; ****************************************************************************
+
+[Application Info]
+
+	Version                                 = 12.1.2
+	Build                                   = 12251216-x86_64
+	User Interface                          = CommandLine
+	Operating System                        = linux
+
+[General Info]
+
+	Data Type                               = unknown
+	No. of Taxa                             =        0
+	Data File                               = 
+	Settings File                           = 
+	Command Line                            = 
+
+[Analysis Statistics]
+
+	Start Time                              = 24-03-26 13:08:27
+	End Time                                = 24-03-26 13:08:27
+	Execution Time                          =    0.001 (seconds)
+	Max Heap Memory Used                    = 0.000 (MB)
+
+
+; ****************************************************************************
+;                 Please note the following important messages:
+; ****************************************************************************
+;	Error: The analysis (MAO) file you specified does not exist.  Please check your spelling and try again.
