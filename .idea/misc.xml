@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="toolbox" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="TOOLBOX-PyhlogeneticTree" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote toolbox (sftp://tjdkruithof@assemblix:22null)" project-jdk-type="Python SDK" />
 </project>
