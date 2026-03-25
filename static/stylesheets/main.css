@@ -300,3 +300,4 @@ CSS FOR THE DROP BUTTON
     min-width: 10%;
     height: auto;
 }
+.form-control {width: 40%; padding: 20px;}

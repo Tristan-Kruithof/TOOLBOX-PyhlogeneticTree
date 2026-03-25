@@ -1,59 +1,52 @@
-from flask import Flask, render_template, request, session
-from python.login import Account
-import PipeLine
-import os.path as path
-app = Flask(__name__)
-app.secret_key = "Jl%&*ad93248908fs&*(*liA*JK:)(@*#$(*(#%"
+from flask import Flask, render_template, request, redirect, url_for
 
+
+app = Flask(__name__)
 
 @app.route('/')
-def root_route():
-    login_status = session.get('login_status')
-    return render_template('home.html', title="Phylogenetic Tree", login_status=login_status)
-
+def root():
+    return render_template('home.html', title="Phylogenetic Tree")
 
 @app.route('/home')
-def home_route():
-    login_status = session.get('login_status')
-    return render_template('home.html', title="Home", login_status=login_status)
-
+def home():
+    return render_template('home.html', title="Home")
 
 @app.route('/home/tools')
-def tools_route():
-    login_status = session.get('login_status')
-    return render_template('tools.html', title="Tools", login_status=login_status)
+def tools():
 
+    return render_template('tools.html', title="Tools")
 
 @app.route('/home/create', methods=['POST', 'GET'])
-def create_route():
-    login_status = session.get('login_status')
+def create():
     calc_dict = {"square": "squared.png", "division": "division.png", "multiplication": "Simple_multiplication.png",
                  "addition": "addition.png", "substraction": "substraction.jpg"}
 
     if request.method == 'POST':
         selection = request.form['calculator']
-        value = 1
-        ins = "Elephant, Pig, Cow, horse, Lion, Tiger"
+        input_1 = int(request.form['input_field'])
+        input_2 = int(request.form['input_field_2'])
 
-        tree_pipeline = PipeLine.Organisms(value, ins)
-        tree_pipeline.find_scientific_names()
-        tree_pipeline.find_fastas()
-        tree_pipeline.make_multi_fasta()
-
-        Maffie = PipeLine.CC_Tools(path.abspath("Tools"), path.abspath("Tools/sequences.fasta"),
-                                   path.abspath("Tools/aligned_sequences.fasta"))
-        Maffie.run()
-
-        Megurt = PipeLine.CC_Tools(path.abspath("Tools"), path.abspath("Tools/aligned_sequences.fasta"),
-                                   path.abspath("Tools/newick.nwk"), path.abspath("Tools/infer_ML_nucleotide.mao"))
-        Megurt.run()
-
-        tree = PipeLine.boom()
-        tree.render("static/pipeline_output/image.png")
+        math = calc_dict[selection]
 
 
-        return render_template('create.html', title="Create", result="Number too big to calculate!", selection=selection, login_status=login_status, image="image.png")
+        try:
+            if selection == "division":
+                if input_2 == 0:
+                    return render_template('create.html', title="Create", math=math, result="Cannot divide by 0!", input_1=input_1, input_2=input_2, selection=selection)
+                result = input_1 / input_2
+            elif selection == "multiplication":
+                result = input_1 * input_2
+            elif selection == "addition":
+                result = input_1 + input_2
+            elif selection == "substraction":
+                result = input_1 - input_2
+            else:
+                result = int(float(input_1) ** float(input_2))
 
+            return render_template('create.html', title="Create", math=math, result=result, input_1=input_1, input_2=input_2, selection=selection)
+
+        except (OverflowError, ValueError):
+            return render_template('create.html', title="Create", math=math, result="Number too big to calculate!", input_1=input_1, input_2=input_2, selection=selection)
 
 
     else:
@@ -63,56 +56,75 @@ def create_route():
 
             return f'/static/images/create/{image_source}'
 
-        return render_template('create.html', title="Create", login_status=login_status)
+        return render_template('create.html', title="Create", math="squared.png")
 
 
 @app.route('/home/compare')
-def compare_route():
-    login_status = session.get('login_status')
-    return render_template('compare.html', title="Compare", login_status=login_status)
-
+def compare():
+    return render_template('compare.html', title="Compare")
 
 @app.route('/home/help/contact')
-def contact_route():
-    login_status = session.get('login_status')
-    return render_template('contact.html', title="Contact", login_status=login_status)
-
+def contact():
+    return render_template('contact.html', title="Contact")
 
 @app.route('/home/help/installation')
-def installation_route():
-    login_status = session.get('login_status')
-    return render_template('installation.html', title="Installation", login_status=login_status)
-
+def installation():
+    return render_template('installation.html', title="Installation")
 
 @app.route('/home/help/about')
-def about_route():
-    login_status = session.get('login_status')
-    return render_template('about.html', title="About", login_status=login_status)
+def about():
+    return render_template('about.html', title="About")
 
 
-@app.route('/home/signup', methods=['POST', 'GET'])
-def signup_route():
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+saved_organisms = []
+@app.route('/home/front_end', methods=['POST', 'GET'])
+def front_end():
     if request.method == 'POST':
-        email = request.form.get('email')
-        newsletter = request.form.get('newsletter')
-        acc = Account(email, newsletter)
-        acc.signin()
-        status = acc.status
-
-        validation = status[0]
-        message = status[1]
-
-        session['login_status'] = validation
-        login_status = validation
-
-
-        return render_template('loginpage.html', title="Login", status=login_status, login_status=login_status, login_message=message)
-
-    session['login_status'] = None
-    login_status = session.get('login_status')
-    return render_template('loginpage.html', title="Login", status=login_status, login_status=login_status)
-
-
+        kwargs = {
+            'species': request.form['species']
+        }
+        input_species = request.form.get('species')
+        if input_species:
+            saved_organisms.append(input_species)
+            print(saved_organisms)
+        return redirect(url_for('front_end'))
+    return render_template('get.html')
 
 if __name__ == '__main__':
     app.run()
