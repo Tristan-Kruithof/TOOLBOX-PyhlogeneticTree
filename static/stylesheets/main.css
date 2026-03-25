@@ -1,0 +1,302 @@
+/*
+CSS FOR OVERALL LOOK OF WEBSITE
+ */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #e5f4e3;
+    display: flex;
+    flex-direction: column;
+}
+#header_image {
+    width:118px;
+    height:95px;
+}
+
+.title {
+    color: black;
+    font-weight: bold;
+}
+
+.header {
+    text-align: center;
+    background-color:#3da45e;
+    color:#f1e1b7;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-weight:bold;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size:40px;
+    border:5px solid #e9a400;
+    border-radius:20px;
+}
+
+.sub_header {
+    color:white;
+    text-align:left;
+    font-size:25px;
+    margin-left:10px;
+    font-weight:bold;
+    margin-top: 10px;
+    padding-top: 0;
+
+}
+
+.banner {
+    display:flex;
+    background-color:#78b56e;
+    max-width:620px;
+    align-items: center;
+    gap: 20px;
+    max-height:95px;
+}
+
+/*
+CSS FOR THE NAVIGATION MENU
+ */
+nav {
+    display:flex;
+    align-items: center;
+}
+.nav_button {
+    display: inline-block;
+    background-color:#e5f4e3;
+    border: 2px solid #e9a400;
+    border-radius:40px;
+    color:black;
+    font-weight:bold;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-size:20px;
+    padding-left:10px;
+    padding-right:10px;
+    margin-left:10px;
+    margin-right:10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.nav_button:hover {
+    background-color: white;
+    color: #e9a400;
+    transform: scale(1.1);
+
+}
+
+.sign_up_button {
+    margin-left: auto;
+}
+
+.sign_up_button a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #bce5b5;
+    border: 3px solid #e9a400;
+    cursor: pointer;
+    color:#3c5a28;
+    font-weight:bold;
+    font-size:20px;
+    padding: 2px 11px;
+    margin-left:10px;
+    margin-right:10px;
+    font-family:"Arial", sans-serif;
+    transition: transform 0.2s ease;
+}
+
+.sign_up_button a:hover {
+    background-color: white;
+    color: #e9a400;
+    transform: scale(1.1);
+}
+
+
+.navbar {
+    background-color:#3c5a28;
+    padding:8px;
+    border: 3px solid #e9a400;
+    margin-top: 10px;
+}
+
+/*
+CSS FOR THE FOOTER
+ */
+.banner {
+    display:flex;
+    background-color:#78b56e;
+    max-width:620px;
+    align-items: center;
+    gap: 20px;
+    max-height:95px;
+}
+
+.footer {
+    text-align: left;
+    background-color:#3da45e;
+    color:#f1e1b7;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-weight:bold;
+    padding-bottom: 40px;
+    padding-left:20px;
+    font-size:30px;
+    border:5px solid #e9a400;
+    border-radius:20px;
+}
+.footer .sub_footer {
+    color:white;
+    text-align:left;
+    font-size:20px;
+    max-width: 500px;
+    font-weight:bold;
+    padding:10px;
+}
+
+.sub_footer {
+    color:white;
+    text-align:left;
+    font-size:20px;
+    max-width: 500px;
+    font-weight:bold;
+    padding:20px;
+}
+
+
+.sub_footer a {
+    color: #3a6198;
+    text-decoration: none;
+    margin: 0;
+    padding: 5px;
+}
+
+.sub_footer button {
+    color: #3a6198;
+    text-decoration: none;
+    margin: 0;
+    padding: 5px;
+}
+
+.small_text {
+    text-align:left;
+    max-width: 500px;
+    padding:20px;
+    margin: 0;
+}
+
+/*
+CSS FOR IMAGE LINKS
+ */
+
+.image_box {
+    transition: transform 0.2s ease;
+    margin: 20px 0;
+}
+
+.image_box:hover {
+    transform: scale(1.03);
+}
+
+.image_box p {
+    color: dimgray;
+    margin:auto;
+    font-size:14px;
+    font-weight:bold;
+}
+
+/*
+CSS FOR THE DROP BUTTON
+ */
+
+
+.dropdown {
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+    margin-left: 10px;
+    padding: 7px;
+  background-color: transparent;
+  max-width: 120px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+    display: inline-block;
+    background-color:#e5f4e3;
+    border: 2px solid #e9a400;
+    border-radius:40px;
+    color:black;
+    font-weight:bold;
+    font-family:"Times New Roman", "Courier New", monospace;
+    font-size:18px;
+    padding-left:10px;
+    margin-top: 5px;
+    padding-right:10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+
+
+.dropdown-content a:hover {
+    background-color: white;
+    color: #e9a400;
+    transform: scale(1.1);
+
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+.home-boxes {
+    text-align: left;
+    background-color: #bce5b5;
+    color:#3c5a28;
+    font-family:"Times New Roman", "Courier New", monospace;
+    padding: 40px 25px;
+    font-size:24px;
+    border:5px solid #e9a400;
+    border-radius:20px;
+    margin:10px;
+}
+
+.text_box {
+    min-width: 150px;
+    max-width: 1300px;
+    flex-shrink: 2;
+    width:100%;
+}
+
+.tool_image {
+    max-width: 100%;
+    height: auto;
+    width: 900px;
+}
+
+.create_image {
+    max-width: 100%;
+    height: auto;
+    width: 400px;
+}
+
+.side_to_side {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+
+.phylotree{
+    max-width: 100%;
+    min-width: 10%;
+    height: auto;
+}

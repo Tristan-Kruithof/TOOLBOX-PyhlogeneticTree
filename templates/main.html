@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/static/stylesheets/main.css" type='text/css'>
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+</head>
+<body>
+    <div class="header">
+        <div class="banner">
+            <img src="/static/images/tree_logo.png" id="header_image" alt="logo">
+            <h2>
+            Phylogenetic tree
+            </h2>
+        </div>
+        <p class="sub_header">
+            Analyze and stylize phylogenetic trees
+        </p>
+    </div>
+    <div class="navbar">
+      <nav>
+          <a href="{{ url_for('home_route') }}" class="nav_button">Home</a>
+          <a href="{{ url_for('tools_route') }}" class="nav_button">Tools</a>
+          <a href="{{ url_for('create_route') }}" class="nav_button">Create</a>
+          <a href="{{ url_for('compare_route') }}" class="nav_button">Compare</a>
+          <div class="dropdown">
+              <button class="nav_button">Help ▼</button>
+              <div class="dropdown-content">
+                  <a href="{{ url_for('installation_route') }}">Installation</a>
+                  <a href="{{ url_for('contact_route') }}">Contact</a>
+                  <a href="{{ url_for('about_route') }}">About</a>
+              </div>
+          </div>
+          <div class="sign_up_button">
+              <a href="{{ url_for('signup_route') }}">Sign {% if not login_status %}In{% else %}Out{% endif %}</a>
+          </div>
+      </nav>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}
+<footer class="footer">
+        <div class="sub_footer">
+            <p>Version 1.0.0</p>
+            <p>&copy; 2025 - 2026 Bioinformatics Group, Hanze UAS</p>
+            <p>HTML and CSS validated</p>
+        </div>
+        <div class="sub_footer">
+            <a href="https://github.com/Tristan-Kruithof/TOOLBOX-PyhlogeneticTree" target="_blank" class="nav_button">View on GitHub</a>
+            <a href="{{ url_for('contact_route') }}" class="nav_button">Contact</a>
+        </div>
+</footer>
+</body>
+</html>

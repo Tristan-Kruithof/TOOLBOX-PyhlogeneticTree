@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <div class="home-boxes">
+    {% if login_status%}
+            <h1 class="title">
+                Compare
+            </h1>
+            <p>
+                Compare your trees here.
+            </p>
+    {% else %}
+        <p>
+            Can only be used when logged in!
+        </p>
+    {% endif %}
+    </div>
+{% endblock %}

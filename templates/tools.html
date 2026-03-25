@@ -1,0 +1,208 @@
+{% extends "main.html" %}
+
+{% block content %}
+<body>
+    <div class="side_to_side">
+        <div class="home-boxes text_box">
+            <h1 class="title">
+                Tools
+            </h1>
+
+            <p>
+                Here is some brief information about the tools used for our website.
+                These include:
+            </p>
+                <ul>
+                    <li><a href="#biopython">Biopython</a></li>
+                    <li><a href="#megacc">MEGA cc</a></li>
+                    <li><a href="#ete4">ETE4</a></li>
+                </ul>
+            <p>
+                Biopython is used to handle our user input and request taxonomy data from the NCBI database.
+                MEGA cc is used to align DNA sequences, compare them with each other, and create a phylogenetic tree based on this comparison.
+                ETE4 is used to make and compare trees with a newick file as input.<br><br> And for more info about the tools.
+            </p>
+                <ul>
+                    <li><a href="#input-output">Input and Output</a></li>
+                    <li><a href="#citations">Citations for tools</a></li>
+                </ul>
+
+        </div>
+        <div class="home-boxes">
+            <div class="image_box">
+               <a href="https://www.techfunnel.com/martech/diy-tools/" target="_blank">
+                <img src="/static/images/Digital_tools.jpg"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   Several tools pointing at a computer.  |  Click for the reference
+               </p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="side_to_side">
+        <div class="home-boxes text_box">
+            <h2 id="biopython" class="title">
+                Biopython
+            </h2>
+
+            <p>
+                Biopython is a tool designed for the language python. It can be used to retrieve information from NCBI. The user can specify the database, then add a search term. Biopython will then
+                return all the results from the search term in the chosen database.<br><br>
+
+                We use biopython to retrieve a specific gene in the mitochondrial DNA of species. When you fill in the name of an
+                organism on this website, biopython will search NCBI for the gene sequence of that organism. All the organisms that you want to include in your phylogenetic tree will have this
+                particular gene sequence and this sequence is used to compare the organisms.
+            </p>
+
+        </div>
+        <div class="home-boxes">
+
+            <div class="image_box">
+               <a href="https://commons.wikimedia.org/wiki/File:Biopython_logo.svg" target="_blank">
+                   <img src="/static/images/Biopython_logo.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   The biopython logo.  |  Click for the reference
+               </p>
+            </div>
+            <div class="image_box">
+               <a href="https://compgenomr.github.io/book/fasta-and-fastq-formats.html" target="_blank">
+                   <img src="/static/images/fastaPic.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   Example of output.  |  Click for the reference
+               </p>
+            </div>
+        </div>
+
+    </div>
+     <div class="side_to_side">
+        <div class="home-boxes text_box">
+            <h2 id="megacc" class="title">
+                Mega CC
+            </h2>
+            <p>
+                Mega cc is used to align DNA sequences, compare them with each other, and create a phylogenetic tree based on this.
+                In our case, it creates a file in newick format that contains data for a phylogenetic tree, which can then be read by ETE4.<br><br>
+
+                It is very important to align the DNA sequences before comparing them, because this ensures that you are comparing homologous positions. If you dont align them properly, your tree will be made based of incorrect data and just be completely off.
+
+                A homologous position means that, from an evolutionary perspective, they come from the same area, so I am comparing the same genetic data from different sequences.
+                If you do not align them, or do not align them properly, you may not be comparing the same genetic data, which can lead to errors in the phylogenetic tree.
+            </p>
+
+        </div>
+        <div class="home-boxes">
+            <div class="image_box">
+               <a href="https://commons.wikimedia.org/wiki/File:MEGA_logo.png" target="_blank">
+                   <img src="/static/images/01_mega_logo.svg.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   The Mega CC logo.  |  Click for the reference
+               </p>
+            </div>
+            <div class="image_box">
+               <a href="https://www.researchgate.net/figure/Example-Newick-string-representations-Newick-representations-for-the-phylogenetic-trees_fig6_221718847" target="_blank">
+                   <img src="/static/images/Example-Newick-string-representations-Newick-representations-for-the-phylogenetic-trees.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   Example of output.  |  Click for the reference
+               </p>
+            </div>
+        </div>
+    </div>
+     <div class="side_to_side">
+        <div class="home-boxes text_box">
+            <h2 id="ete4" class="title">
+                ETE4
+            </h2>
+
+            <p>
+                ETE4 is used to create and visualize phylogenetic trees. We use visualization because MEGA cc already creates the newick file that we import into ETE4.
+                ETE4 can retrieve taxonomy data from organisms, such as their kingdom, domain, class, order, etc.
+                You can then visualize this data in ETE4 by rendering an image of the tree or by creating an interactive visualization on a web page using the built-in functions, smart-view, and explorer.<br><br>
+
+                You can view the different nodes (junctions) of the tree and retrieve mutations with them.
+                A phylogenetic tree shows the evolutionary relationships between species.
+                If the branch lengths are based on genetic distance, you can also derive information about relative mutation rates.
+            </p>
+
+        </div>
+        <div class="home-boxes">
+            <div class="image_box">
+               <a href="https://quintagroup.com/cms/python/ete-toolkit" target="_blank">
+                   <img src="/static/images/ETE4_logo.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   The ETE4 logo.  |  Click for the reference
+               </p>
+            </div>
+            <div class="image_box">
+               <a href="https://stromtutorial.github.io/win/steps/step-05/01-create-newick-description.html" target="_blank">
+                   <img src="/static/images/newick-unrooted.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   Example of output.  |  Click for the reference
+               </p>
+            </div>
+        </div>
+    </div>
+    <div class="side_to_side">
+        <div class="home-boxes text_box">
+            <h2 id='input-output' class="title">
+            Input and Output
+            </h2>
+            <p>
+            Each tool requires its own specific input. For the user, they will only have to provide the start input for Biopython and receive the output of ETE4, which is the phylogenetic tree.<br><br>
+            The rest of the inputs and outputs will be tuned to each other and not be seen by the user, but for completeness they will also be explained here.<br><br>
+            In order to start the whole process biopython requires the input of the user in order to process it for mega. To make sure that people off all levels of biology knowledge can use this site, there will be a lot of options for input, which include:
+            the common name of species, the scientific names of species, fasta files of the correct gene or even multi fasta files of the correct gene. The chosen gene per kingdom is already set, but can be changed by the user if they want to.<br><br>
+            Biopython than takes this data and puts all the dna sequences into a multi-fasta tool, if it isn't already and passes it on to Mega.
+            Mega needs two inputs: an input file with the dna sequences and a settings file, so it knows which methods to use when analyzing. The input file is provided by biopython and the settings file is already defined by the website, with as for now know plans to let users edit it.
+            When Mega has processed this it will spit out a newick file, which can be used by ETE4 to create a phylogenetic tree.<br><br>
+            ETE4 has plenty of design options, of which a few such as changing colours, sizes, and even adding pictures for each organism will be added to the site.
+            </p>
+        </div>
+        <div class="home-boxes">
+            <h2>
+                Example Input
+            </h2>
+            <p>
+                Cow, Horse, Lion, Elephant, Tiger, Eagle
+            </p>
+            <h2>
+                Example Output
+            </h2>
+            <div class="image_box">
+               <a href="https://etetoolkit.org/documentation/ete-ncbiquery/" target="_blank">
+                <img src="/static/images/ncbiquery_tree.png"  class="tool_image" alt="output_image">
+               </a>
+                <p>
+                   Example of output.  |  Click for the reference
+               </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="home-boxes">
+        <h2 id="citations" class="title">
+            Citations for tools
+        </h2>
+        <p>
+            <br>
+            <a href="https://biopython.org/" target="_blank"><span class="title">For Biopython:</span></a><br>
+            Cock PA, Antao T, Chang JT, Chapman BA, Cox CJ, Dalke A, Friedberg I, Hamelryck T, Kauff F, Wilczynski B and de Hoon MJL (2009) Biopython: freely available Python tools for computational molecular biology and bioinformatics. Bioinformatics, 25, 1422-1423
+            <br><br>
+            <a href="https://www.megasoftware.net/" target="_blank"><span class="title">For Mega CC:</span></a><br>
+            Stecher G, Suleski M, Tao Q, Tamura K, and Kumar S (2025) Journal of Molecular Evolution https://doi.org/10.1007/s00239-025-10287-z
+            <br><br>
+            <a href="https://etetoolkit.github.io/ete/" target="_blank"><span class="title">For ETE4:</span></a><br>
+            Jaime Huerta-Cepas, François Serra and Peer Bork. "ETE 3: Reconstruction, analysis and visualization of phylogenomic data." Mol Biol Evol (2016) doi: 10.1093/molbev/msw046
+        </p>
+    </div>
+</body>
+{% endblock %}
