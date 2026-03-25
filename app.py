@@ -75,6 +75,43 @@ def installation():
 def about():
     return render_template('about.html', title="About")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 saved_organisms = []
 @app.route('/home/front_end', methods=['POST', 'GET'])
 def front_end():
@@ -87,31 +124,7 @@ def front_end():
             saved_organisms.append(input_species)
             print(saved_organisms)
         return redirect(url_for('front_end'))
-        #return render_template('post.html', **kwargs, input_species=input_species, saved_organisms=saved_organisms)
     return render_template('get.html')
 
-
-        # response when the submit button is clicked in the 'form/form_GET.html'
-        # pack the variables in a dictionary
-
-        # render the 'form_POST.html' with the variables collected from the form in 'form_GET.html'
-
-    #courses = ['Theme1', 'Theme2', 'Theme3', 'Theme4', 'Theme5']
-    #list_ordinary_names = []
-    #list_latin_names = []
-
-    #if request.method == 'POST':
-        #selection = request.form['options']
-        #kwargs = {'organism' : request.form['organism'], 'species' : request.form['species']}
-        #input1 = request.form.get('input1')
-        #if selection == 'ordinary names':
-            #input_ordinary_names = request.form['input_field']
-            #list_ordinary_names.append(input_ordinary_names)
-
-
-
-        #return render_template('front_end.html', title='hello world', courses=courses, **kwargs, input1=input1)
-    #return render_template('front_end.html', title='hello world', courses=courses)
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

@@ -1,6 +1,7 @@
 {% extends "main.html" %}
 
 {% block content %}
+    {% if login_status %}
 <div class="home-boxes">
     <h1 class="title">
         Create
@@ -8,8 +9,9 @@
     <p>
         Create your tree here.
     </p>
-
-    <img src="{{ url_for('static', filename='images/create/' + math) }}" class="create_image" alt="math photo" id="imgbox">
+    {% if image %}
+    <img src="{{ url_for('static', filename="pipeline_output/" + image) }}" class="create_image" alt="math photo" id="imgbox">
+    {% endif %}
 
     <form method="POST" action="">
         <label for="calculator">Choose what to calculate!</label><br>
@@ -31,8 +33,15 @@
     <br>{{ result }}
 
 </div>
+        {% else %}
+        <div class="home-boxes">
+            <p>
+            Can only be used when logged in!
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ url_for('static', filename='javascript/change_create.js') }}"></script>
+
 {% endblock %}

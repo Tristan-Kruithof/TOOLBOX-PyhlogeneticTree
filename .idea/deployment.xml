@@ -16,6 +16,20 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="tjdkruithof@assemblix:22 key (3)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_901" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="tjdkruithof@assemblix:22 key (4)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_274" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
     <option name="myAutoUpload" value="ALWAYS" />
   </component>
