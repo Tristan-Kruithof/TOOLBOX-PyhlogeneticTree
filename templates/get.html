@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="container">
+            <!-- action="", makes that when the submit button is pushed, the program returns to itself. i.e. the
+            place/script where this function('form_GET.html') is called. Namely 'form_handling.py' -->
+    <h1>Fill in the names of the organisms you want to include in your phylogenetic tree</h1>
+    <form action="" method="POST">
+        <input id="species"class="form-control" name="species" placeholder="Organism" required><br />
+
+        <button type="submit" name='submit'>Submit</button>
+    </form>
+
+
+    <ul>
+        {% for species in saved_organisms %}
+            <li>{{ species }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+
+{% block content %}
+<ul>
+          <!-- display the values provided in the form ('form_GET.html') -->
+    <li><strong>Species:</strong> {{ species }}</li>
+    {% for species_name in saved_organisms %}
+        <li>{{ species_name }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
