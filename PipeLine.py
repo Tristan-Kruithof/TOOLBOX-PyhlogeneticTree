@@ -12,18 +12,32 @@ import python.login
 
 class Organisms:
     def __init__(self, type, input, email):
+        self.common_name = ""
+        self.scientific_name = []
+        self.fastas = []
+        self.multi_fasta = []
+
         if type == 1:
             input2 = input.split(",")
             self.common_name = input2
             print(self.common_name)
         elif type == 2:
-            self.scientific_name = input
+            input2 = input.split(",")
+            self.scientific_name = input2
         elif type == 3:
             self.fastas = input
         elif type == 4:
             self.multi_fasta = input
 
         Entrez.email = email
+        self.email = email
+
+    def __str__(self):
+        if self.common_name:
+            return 'Your Animals: {}, Your email: {}'.format(self.common_name, self.email)
+        else:
+            return "{}".format(self.email)
+
 
     def find_scientific_names(self):
         self.scientific_names = []
@@ -94,6 +108,12 @@ class CC_Tools():
         self.output = output
         self.settings = settings
 
+    def __str__(self):
+        if self.settings:
+            return "You're running Mega CC"
+        else:
+            return "You're running MAFFT"
+
 
     def run(self):
         if self.settings:
@@ -106,7 +126,9 @@ class CC_Tools():
 
 
 def boom():
-    return Tree(open(path.abspath("Tools/newick.nwk")).read())
+    t = Tree(open(path.abspath("Tools/newick.nwk")).read())
+
+    return t
 
 
 def compare_trees(tree1, tree2):
@@ -123,15 +145,20 @@ def main():
     what = int(type)
     ins = "Elephant, Pig, Cow, horse, Lion, Tiger"
 
-    Route = Organisms(what, ins)
+    Route = Organisms(what, ins, "fabserdabser@gmail.com")
+    print(Route)
+    print(Organisms(2, ins, "fabserdabser@gmail.com"))
+
     Route.find_scientific_names()
     Route.find_fastas()
     Route.make_multi_fasta()
 
     Maffie = CC_Tools(path.abspath("Tools"),path.abspath("Tools/sequences.fasta"),path.abspath("Tools/aligned_sequences.fasta"))
+    print(Maffie)
     Maffie.run()
 
     Megurt = CC_Tools(path.abspath("Tools"),path.abspath("Tools/aligned_sequences.fasta"), path.abspath("Tools/newick.nwk"),path.abspath("Tools/infer_ML_nucleotide.mao"))
+    print(Megurt)
     Megurt.run()
 
     Boom = Tree(open(path.abspath("Tools/newick.nwk")).read())
@@ -142,6 +169,7 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
 
 
