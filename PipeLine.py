@@ -7,12 +7,11 @@ import python.login
 
 
 
-Entrez.email = "fabserdabser8@gmail.com"
 
 
 
-class Organisms():
-    def __init__(self, type, input):
+class Organisms:
+    def __init__(self, type, input, email):
         if type == 1:
             input2 = input.split(",")
             self.common_name = input2
@@ -23,6 +22,8 @@ class Organisms():
             self.fastas = input
         elif type == 4:
             self.multi_fasta = input
+
+        Entrez.email = email
 
     def find_scientific_names(self):
         self.scientific_names = []
@@ -104,9 +105,16 @@ class CC_Tools():
                 subprocess.run(["mafft", "--auto", self.input], stdout=f, check=True)
 
 
-
 def boom():
     return Tree(open(path.abspath("Tools/newick.nwk")).read())
+
+
+def compare_trees(tree1, tree2):
+    t1 = Tree(f"{tree1}")
+    t2 = Tree(f"{tree2}")
+    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
+
+    return f"Normalized RF:, {rf / max_rf}"
 
 
 def main():
@@ -130,6 +138,7 @@ def main():
     time2 = time.time()
     print(time2 - time1)
     Boom.show()
+
 
 
 if __name__ == "__main__":
