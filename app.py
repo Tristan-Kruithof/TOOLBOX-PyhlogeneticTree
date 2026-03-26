@@ -1,20 +1,27 @@
-from flask import Flask, render_template, request, redirect, url_for
-
+from flask import Flask, render_template, request, redirect, url_for, session
+from python.login import Account
+import PipeLine
+import os.path as path
 
 app = Flask(__name__)
+app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
+
+
 
 @app.route('/')
 def root():
-    return render_template('home.html', title="Phylogenetic Tree")
+    login_status = session.get('login_status')
+    return render_template('home.html', title="Phylogenetic Tree", login_status=login_status)
 
 @app.route('/home')
-def home():
-    return render_template('home.html', title="Home")
+def home_route():
+    login_status = session.get('login_status')
+    return render_template('home.html', title="Home", login_status=login_status)
 
 @app.route('/home/tools')
-def tools():
-
-    return render_template('tools.html', title="Tools")
+def tools_route():
+    login_status = session.get('login_status')
+    return render_template('tools.html', title="Tools", login_status=login_status)
 
 @app.route('/home/create', methods=['POST', 'GET'])
 def create_route():
@@ -40,14 +47,12 @@ def create_route():
             Megurt.run()
 
             tree = PipeLine.boom()
-            tree.render("Tools/image.png")
+            tree.render("static/pipeline_output/image.png")
 
-            return render_template('create.html', title="Create", math=math, result=result, input_1=input_1, input_2=input_2, selection=selection)
-
-        return render_template('create.html', title="Create", result="Number too big to calculate!", login_status=login_status)
+        return render_template('create.html', title="Create", login_status=login_status, image="image.png")
 
 
-    return render_template('create.html', title="Create", math="squared.png", login_status=login_status)
+    return render_template('create.html', title="Create", login_status=login_status)
 
 
 @app.route('/home/compare', methods=['POST', 'GET'])
@@ -64,18 +69,21 @@ def compare_route():
 
 
 @app.route('/home/help/contact')
-def contact():
-    return render_template('contact.html', title="Contact")
+def contact_route():
+    login_status = session.get('login_status')
+    return render_template('contact.html', title="Contact", login_status=login_status)
 
   
 @app.route('/home/help/installation')
-def installation():
-    return render_template('installation.html', title="Installation")
+def installation_route():
+    login_status = session.get('login_status')
+    return render_template('installation.html', title="Installation", login_status=login_status)
 
   
 @app.route('/home/help/about')
-def about():
-    return render_template('about.html', title="About")
+def about_route():
+    login_status = session.get('login_status')
+    return render_template('about.html', title="About", login_status=login_status)
 
 @app.route('/home/signup', methods=['POST', 'GET'])
 def signup_route():
@@ -103,7 +111,8 @@ def signup_route():
 
   
 @app.route('/home/front_end', methods=['POST', 'GET'])
-def front_end():
+def front_end_route():
+    login_status = session.get('login_status')
     if request.method == 'POST':
         kwargs = {
             'species': request.form['species']
@@ -113,8 +122,8 @@ def front_end():
         if input_species:
             saved_organisms.append(input_species)
             print(saved_organisms)
-        return redirect(url_for('front_end'))
-    return render_template('get.html')
+        return redirect(url_for('front_end_route'))
+    return render_template('get.html', login_status=login_status)
 
   
 if __name__ == '__main__':
