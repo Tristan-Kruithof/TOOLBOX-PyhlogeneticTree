@@ -87,7 +87,7 @@ def about_route():
 
 @app.route('/home/signup', methods=['POST', 'GET'])
 def signup_route():
-    if request.method == 'POST':
+    if request.method == 'POST' :
         email = request.form.get('email')
         newsletter = request.form.get('newsletter')
         acc = Account(email, newsletter)
