@@ -116,25 +116,23 @@ class CC_Tools:
 
 
     def run(self):
-        mafft_path = path.abspath("Tools/mafft-win/mafft.bat")
-
         if self.settings:
             if path.exists(self.output):
                 os.remove(self.output)
 
-            subprocess.run([path.abspath("Tools/MEGACC/megacc.exe"), "-a", self.settings, "-d", self.data, "-o", self.output], cwd=self.location, check=True, text=True, capture_output=True)
+            subprocess.run([path.abspath("Tools/MEGACC/megacc"), "-a", self.settings, "-d", self.data, "-o", self.output], cwd=self.location, check=True, text=True, capture_output=True)
 
         else:
             with open(self.output, "w") as f:
-                subprocess.run([mafft_path, "--auto", self.data], stdout=f, check=True)
+                subprocess.run(["mafft", "--auto", self.data], stdout=f, check=True)
 
 
-class Tree(ETETree):
-    def __init__(self, newick_file=path.abspath("Tools/newick.nwk")):
+
+def __init__(self, newick_file=path.abspath("Tools/newick.nwk")):
         super().__init__(open(newick_file).read())
 
-    def get_tree(self):
-        return self
+def get_tree(newick_file):
+    return self
 
 
 class Run:
@@ -197,7 +195,7 @@ class Run:
 def main():
     time1 = time.time()
 
-    tree = Run("fabserdabser@gmail.com")
+    tree = Run("tristankruithof19@gmail.com")
     tree.standard()
 
     #what = 1

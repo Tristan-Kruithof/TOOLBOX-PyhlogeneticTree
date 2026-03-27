@@ -7,6 +7,10 @@
         Create
     </h1>
 
+
+
+
+
         {% if tree_image %}
             {% if new_image %}
                 <p class="black_text">
@@ -24,17 +28,28 @@
         {% endif %}
 
             <form id="organism" method="POST" action="#species">
+                <div class="black_text">
+                    <label for="input_method">Method of input</label>
+                    <select id="input_method">
+                        <option value="common">Common names</option>
+                        <option value="fasta">Multi-fasta</option>
+                    </select>
+                </div>
+                {% if input_method %}
                 <label for="species" class="black_text">Fill in your organisms!</label><br>
                 <input type="text" id="species" class="form-control" name="species" placeholder="Organism" required>
+                {% endif %}
             </form>
             <form method="POST" action="#add" id="empty_form">
             </form>
 
+            {% if input_method %}
                 <div class="side_to_side">
                 <button type="submit" name="add" class="nav_button page_button" form="organism" id="add">Add</button>
                     <button type="submit" name="delete_org" class="nav_button page_button" form="empty_form">Del org</button>
                 <button type="submit" name="delete_all" class="nav_button page_button" form="empty_form">Del all</button>
                 </div>
+            {% endif %}
 
 
             {% if organism_list %}
