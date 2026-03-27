@@ -3,13 +3,15 @@ import subprocess
 import time
 import os.path as path
 import os
-from ete4 import Tree as ETETree
+from ete4 import Tree
 
+Entrez.email = "superherofabs08@gmail.com"
+Entrez.api_key = "94b49b77b56c715b8dab043b667c611d8408"
 
 class Organisms:
     def __init__(self, method, organisms, email):
         self.common_name = ""
-        self.scientific_name = []
+        self.scientific_names = []
         self.fastas = []
         self.multi_fasta = []
 
@@ -21,7 +23,7 @@ class Organisms:
             print(self.common_name)
 
         elif method == 2:
-            self.scientific_name = organisms
+            self.scientific_names = organisms
         elif method == 3:
             self.fastas = organisms
         elif method == 4:
@@ -45,7 +47,7 @@ class Organisms:
         self.not_found_names = []
 
         for name in self.common_name:
-            time.sleep(0.4)
+            time.sleep(1)
             stream = Entrez.esearch(
                 db="taxonomy",
                 term=name
@@ -75,10 +77,11 @@ class Organisms:
         self.not_found_fastas = []
 
         for name in self.scientific_names:
+            print(name)
             name = name.strip()
-            time.sleep(0.3)
-            term = f"{name}[ORGN] AND (COI[GENE] OR COX1[GENE] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[SLEN]"
-            stream = Entrez.esearch(db="nucleotide", term=term)
+            time.sleep(1)
+            term = f"{name}[Organism] AND (COI[GENE] OR COX1[GENE] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[SLEN]"
+            stream = Entrez.esearch(db="nucleotide", term=term, retmax=1)
             record = Entrez.read(stream)
             stream.close()
 
@@ -116,6 +119,7 @@ class CC_Tools:
 
 
     def run(self):
+
         if self.settings:
             if path.exists(self.output):
                 os.remove(self.output)
@@ -128,11 +132,14 @@ class CC_Tools:
 
 
 
-def __init__(self, newick_file=path.abspath("Tools/newick.nwk")):
-        super().__init__(open(newick_file).read())
+def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
+    with open(newick_file) as f:
+        newick = f.read()
+        return Tree(newick)
 
-def get_tree(newick_file):
-    return self
+
+
+
 
 
 class Run:
@@ -142,7 +149,7 @@ class Run:
                  output_mega=path.abspath("Tools/newick.nwk"), settings=path.abspath("Tools/infer_ML_nucleotide.mao")):
 
         if organisms is None:
-            organisms = ["Elephant", "Pig", "Cow", "horse", "Lion", "Tiger"]
+            organisms = ["Elephant", "Pig", "horse", "Lion", "Tiger"]
         # Location
         self.location = location
         # Input and output for mafft
@@ -173,7 +180,7 @@ class Run:
         megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
         megurt.run()
 
-        tree = Tree()
+        tree = make_tree()
         tree.render("static/pipeline_output/tree.png")
 
 
@@ -194,8 +201,7 @@ class Run:
 
 def main():
     time1 = time.time()
-
-    tree = Run("tristankruithof19@gmail.com")
+    tree = Run("superherofabs08@gmail.com")
     tree.standard()
 
     #what = 1
