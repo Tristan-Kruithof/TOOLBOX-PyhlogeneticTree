@@ -20,7 +20,7 @@
                 Previous tree
                 </p>
             {% endif %}
-                <img src="{{ url_for('static', filename="pipeline_output/" + tree_image) }}" class="tool_image" alt="phylogenetic tree" id="imgbox"><br>
+                <img src="{{ url_for('static', filename="pipeline_output/" + tree_image) }}" class="tool_image bigger" alt="phylogenetic tree" id="imgbox"><br>
         {% endif %}
 
             <form id="organism" method="POST" action="#species">

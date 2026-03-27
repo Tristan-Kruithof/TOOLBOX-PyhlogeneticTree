@@ -1,12 +1,20 @@
-Name                                                                                                                                     Index    Anc   Des1   Des2       Blen
-PQ898395.1 Panthera leo persica isolate AIWC AAZP 22 656 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                1      7      -      - 0.10330618
-PZ092955.1 Ziphius cavirostris voucher AIWC RES 24 447 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                  2      9      -      - 0.10712598
-PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                     3      9      -      - 0.09673615
-PX998434.1 Mus musculus domesticus voucher 2025-May-Nzerekore-18 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial        4      8      -      - 0.10095212
-PV639086.1 Felis catus isolate PCatH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                 5      7      -      - 0.05879384
-PV639633.1 Canis lupus familiaris isolate CL001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                         6     11      -      - 0.11677848
--                                                                                                                                            7      8      1      5 0.03490328
--                                                                                                                                            8     10      7      4 0.03548617
--                                                                                                                                            9     10      2      3 0.03311486
--                                                                                                                                           10     11      8      9 0.00000000
--                                                                                                                                           11      -     10      6 0.00000000
+Name                                                                                                                                                         Index    Anc   Des1   Des2       Blen
+PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                                         1     12      -      - 0.07279211
+PQ898395.1 Panthera leo persica isolate AIWC AAZP 22 656 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                    2     11      -      - 0.05760464
+OM638834.1 Giraffa camelopardalis camelopardalis isolate Alipore zoo cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                        3     12      -      - 0.09417864
+PV053120.1 Panthera tigris tigris isolate AIWC RES 19 004 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                   4     11      -      - 0.04450699
+PV639009.1 Homo sapiens voucher LV-PHH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                                   5     19      -      - 1.12125484
+OZ347559.1 Cercopithecus sp. mitochondrial partial COI gene for cytochrome oxidase subunit 1                                                                     6     14      -      - 0.09293628
+MZ099451.1 Equus asinus isolate Yunnan donkey8-B-CHM4-2.seq cytochrome c oxidase subunit I (COI) gene partial sequence nuclear copy of mitochondrial gene        7     13      -      - 0.16469806
+OZ347562.1 Pan troglodytes schweinfurthii mitochondrial partial COI gene for cytochrome oxidase subunit 1                                                        8     14      -      - 0.12859147
+OL310913.1 Loxodonta cyclotis isolate 112CO1 seq cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                            9     17      -      - 0.14735627
+OR539506.1 Equus caballus voucher MGL-608 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial                                                  10     13      -      - 0.09473853
+-                                                                                                                                                               11     15      2      4 0.06628850
+-                                                                                                                                                               12     18      1      3 0.04299767
+-                                                                                                                                                               13     16      7     10 0.04754352
+-                                                                                                                                                               14     17      6      8 0.06935751
+-                                                                                                                                                               15     19     11     18 0.00000000
+-                                                                                                                                                               16     18     13     17 0.04546766
+-                                                                                                                                                               17     16     14      9 0.03704233
+-                                                                                                                                                               18     15     12     16 0.03119161
+-                                                                                                                                                               19      -     15      5 0.00000000
