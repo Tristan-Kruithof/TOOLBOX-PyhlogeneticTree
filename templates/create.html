@@ -6,20 +6,49 @@
     <h1 class="title">
         Create
     </h1>
-    <p>
-        Create your tree here.
-    </p>
-    {% if image %}
-    <img src="{{ url_for('static', filename="pipeline_output/" + image) }}" class="create_image" alt="math photo" id="imgbox">
-    {% endif %}
 
-    <form method="POST" action="">
+        {% if tree_image %}
+            {% if new_image %}
+                <p class="black_text">
+                <span class="important">
+                    New tree
+                </span>
 
-        <button type="submit" name="submit">Calculate!</button><br>
-    </form>
+                </p>
+            {% else  %}
+                <p class="black_text">
+                Previous tree
+                </p>
+            {% endif %}
+                <img src="{{ url_for('static', filename="pipeline_output/" + tree_image) }}" class="tool_image" alt="phylogenetic tree" id="imgbox"><br>
+        {% endif %}
 
+            <form id="organism" method="POST" action="#species">
+                <label for="species" class="black_text">Fill in your organisms!</label><br>
+                <input type="text" id="species" class="form-control" name="species" placeholder="Organism" required>
+            </form>
+            <form method="POST" action="#add" id="empty_form">
+            </form>
+
+                <div class="side_to_side">
+                <button type="submit" name="add" class="nav_button page_button" form="organism" id="add">Add</button>
+                    <button type="submit" name="delete_org" class="nav_button page_button" form="empty_form">Del org</button>
+                <button type="submit" name="delete_all" class="nav_button page_button" form="empty_form">Del all</button>
+                </div>
+
+
+            {% if organism_list %}
+                <div class="standard_padding">
+                <span class="title">Species |</span>
+                    <ul class="black_text">
+                        {% for species_name in organism_list %}
+                            <li>{{ species_name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <button type="submit" name="create" class="nav_button page_button" form="empty_form">Create</button><br>
+            {% endif %}
     <br>
-
 </div>
         {% else %}
         <div class="home-boxes">

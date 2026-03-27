@@ -2,28 +2,43 @@ from Bio import Entrez
 import subprocess
 import time
 import os.path as path
-from ete4 import Tree
-import python.login
-
-
-
+import os
+#from ete4 import Tree as ETETree
 
 
 
 class Organisms:
-    def __init__(self, type, input, email):
-        if type == 1:
-            input2 = input.split(",")
-            self.common_name = input2
-            print(self.common_name)
-        elif type == 2:
-            self.scientific_name = input
-        elif type == 3:
-            self.fastas = input
-        elif type == 4:
-            self.multi_fasta = input
+    def __init__(self, method, organisms, email):
+        self.common_name = ""
+        self.scientific_name = []
+        self.fastas = []
+        self.multi_fasta = []
 
+        if isinstance(organisms, str):
+            organisms = organisms.split(",")
+
+        if method == 1:
+            self.common_name = organisms
+            print(self.common_name)
+
+        elif method == 2:
+            self.scientific_name = organisms
+        elif method == 3:
+            self.fastas = organisms
+        elif method == 4:
+            self.multi_fasta = organisms
+
+        Entrez.tool = "PhyloTreePipeline"
         Entrez.email = email
+        self.email = email
+
+
+    def __str__(self):
+        if self.common_name:
+            return 'Your Animals: {}, Your email: {}'.format(self.common_name, self.email)
+        else:
+            return "{}".format(self.email)
+
 
     def find_scientific_names(self):
         self.scientific_names = []
@@ -46,7 +61,6 @@ class Organisms:
                 stream2.close()
                 if record2:
                     science_name = record2[0]["ScientificName"]
-
                 if science_name not in self.scientific_names:
                     self.scientific_names.append(science_name)
                 else:
@@ -62,8 +76,9 @@ class Organisms:
         self.not_found_fastas = []
 
         for name in self.scientific_names:
-            time.sleep(0.4)
-            term = f"{name}[Organism] AND (COI[Gene] OR COX1[Gene] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[Sequence Length]"
+            name = name.strip()
+            time.sleep(0.3)
+            term = f"{name}[ORGN] AND (COI[GENE] OR COX1[GENE] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[SLEN]"
             stream = Entrez.esearch(db="nucleotide", term=term)
             record = Entrez.read(stream)
             stream.close()
@@ -87,57 +102,125 @@ class Organisms:
 
 
 
-class CC_Tools():
-    def __init__(self, location, input, output, settings=False):
+class CC_Tools:
+    def __init__(self, location, data, output, settings=""):
         self.location =location
-        self.input = input
+        self.data = data
         self.output = output
         self.settings = settings
 
+    def __str__(self):
+        if self.settings:
+            return "You're running Mega CC"
+        else:
+            return "You're running MAFFT"
+
 
     def run(self):
+        mafft_path = path.abspath("Tools/mafft-win/mafft.bat")
+
         if self.settings:
-            subprocess.run(["rm", self.output])
-            subprocess.run([path.abspath("Tools/MEGACC/megacc"), "-a", self.settings, "-d", self.input, "-o", self.output], cwd=self.location, check=True, text=True, capture_output=True)
+            if path.exists(self.output):
+                os.remove(self.output)
+
+            subprocess.run([path.abspath("Tools/MEGACC/megacc.exe"), "-a", self.settings, "-d", self.data, "-o", self.output], cwd=self.location, check=True, text=True, capture_output=True)
 
         else:
             with open(self.output, "w") as f:
-                subprocess.run(["mafft", "--auto", self.input], stdout=f, check=True)
+                subprocess.run([mafft_path, "--auto", self.data], stdout=f, check=True)
+
+#class Tree(ETETree)
+class Tree():
+    def __init__(self, newick_file=path.abspath("Tools/newick.nwk")):
+        super().__init__(open(newick_file).read())
+
+    def get_tree(self):
+        return self
 
 
-def boom():
-    return Tree(open(path.abspath("Tools/newick.nwk")).read())
+class Run:
+    def __init__(self, email, method=1, organisms=None,
+                 location=path.abspath("Tools"), input_mafft=path.abspath("Tools/sequences.fasta"),
+                 output_mafft=path.abspath("Tools/aligned_sequences.fasta"),input_mega=path.abspath("Tools/aligned_sequences.fasta"),
+                 output_mega=path.abspath("Tools/newick.nwk"), settings=path.abspath("Tools/infer_ML_nucleotide.mao")):
+
+        if organisms is None:
+            organisms = ["Elephant", "Pig", "Cow", "horse", "Lion", "Tiger"]
+
+        self.location = location
+        self.input_mafft = input_mafft
+        self.output_mafft = output_mafft
+        self.input_mega = input_mega
+        self.output_mega = output_mega
+        self.settings = settings
+        self.method = method
+        self.organisms = organisms
+        self.email = email
 
 
-def compare_trees(tree1, tree2):
-    t1 = Tree(f"{tree1}")
-    t2 = Tree(f"{tree2}")
-    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
+    def standard(self, method=None, organisms=None):
+        method = method or self.method
+        organisms = organisms or self.organisms
 
-    return f"Normalized RF:, {rf / max_rf}"
+        route = Organisms(method, organisms, self.email)
+        route.find_scientific_names()
+        route.find_fastas()
+        route.make_multi_fasta()
+
+        maffie = CC_Tools(self.location, self.input_mafft, self.output_mafft)
+        maffie.run()
+
+        megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
+        megurt.run()
+
+        #tree = Tree()
+        #tree.render("static/pipeline_output/tree.png")
+
+
+
+#def tree():
+#    t = Tree(open(path.abspath("Tools/newick.nwk")).read())
+#
+#    return t
+
+
+#def compare_trees(tree1, tree2):
+#    t1 = Tree(f"{tree1}")
+#    t2 = Tree(f"{tree2}")
+#    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
+
+#    return f"Normalized RF:, {rf / max_rf}"
 
 
 def main():
     time1 = time.time()
-    type = 1
-    what = int(type)
-    ins = "Elephant, Pig, Cow, horse, Lion, Tiger"
 
-    Route = Organisms(what, ins)
-    Route.find_scientific_names()
-    Route.find_fastas()
-    Route.make_multi_fasta()
+    tree = Run("fabserdabser@gmail.com")
+    tree.standard()
 
-    Maffie = CC_Tools(path.abspath("Tools"),path.abspath("Tools/sequences.fasta"),path.abspath("Tools/aligned_sequences.fasta"))
-    Maffie.run()
+    #what = 1
+    #ins = ["Elephant","Pig","Cow","horse","Lion","Tiger"]
 
-    Megurt = CC_Tools(path.abspath("Tools"),path.abspath("Tools/aligned_sequences.fasta"), path.abspath("Tools/newick.nwk"),path.abspath("Tools/infer_ML_nucleotide.mao"))
-    Megurt.run()
+    #Route = Organisms(what, ins, "fabserdabser@gmail.com")
+    #print(Route)
+    #print(Organisms(2, ins, "fabserdabser@gmail.com"))
 
-    Boom = Tree(open(path.abspath("Tools/newick.nwk")).read())
+    #Route.find_scientific_names()
+    #Route.find_fastas()
+    #Route.make_multi_fasta()
+
+    #Maffie = CC_Tools(path.abspath("Tools"),path.abspath("Tools/sequences.fasta"),path.abspath("Tools/aligned_sequences.fasta"))
+    #print(Maffie)
+    #Maffie.run()
+
+    #Megurt = CC_Tools(path.abspath("Tools"),path.abspath("Tools/aligned_sequences.fasta"), path.abspath("Tools/newick.nwk"),path.abspath("Tools/infer_ML_nucleotide.mao"))
+    #print(Megurt)
+    #Megurt.run()
+
+ #   Boom = Tree(open(path.abspath("Tools/newick.nwk")).read())
     time2 = time.time()
     print(time2 - time1)
-    Boom.show()
+#    Boom.show()
 
 
 

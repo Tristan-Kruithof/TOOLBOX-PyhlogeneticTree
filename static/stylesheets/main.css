@@ -18,8 +18,14 @@ body {
 .title {
     color: black;
     font-weight: bold;
+    font-family: "Arial Black", "Helvetica CY", "Nimbus Sans L", sans-serif;
 }
 
+.black_text {
+    color: black;
+    font-family: "Arial Black", "Helvetica CY", "Nimbus Sans L", sans-serif;
+    font-size: 14pt;
+}
 .header {
     text-align: center;
     background-color:#3da45e;
@@ -78,13 +84,6 @@ nav {
     transition: transform 0.2s ease;
 }
 
-.nav_button:hover {
-    background-color: white;
-    color: #e9a400;
-    transform: scale(1.1);
-
-}
-
 .sign_up_button {
     margin-left: auto;
 }
@@ -105,6 +104,14 @@ nav {
     transition: transform 0.2s ease;
 }
 
+.page_button {
+    background-color: #325a98;
+    color: white;
+    font-weight: bold;
+}
+
+.nav_button:hover,
+.page_button button:hover,
 .sign_up_button a:hover {
     background-color: white;
     color: #e9a400;
@@ -243,12 +250,10 @@ CSS FOR THE DROP BUTTON
 }
 
 
-
 .dropdown-content a:hover {
     background-color: white;
     color: #e9a400;
     transform: scale(1.1);
-
 }
 
 
@@ -291,7 +296,6 @@ CSS FOR THE DROP BUTTON
 .side_to_side {
     display: flex;
     flex-grow: 1;
-    justify-content: center;
 }
 
 
@@ -300,4 +304,19 @@ CSS FOR THE DROP BUTTON
     min-width: 10%;
     height: auto;
 }
-.form-control {width: 40%; padding: 20px;}
+
+.form-control {
+    width: 30%;
+    margin: 20px 0;
+    height: 40px;
+}
+
+.standard_padding {
+    padding-top: 40px;
+}
+
+.important {
+    color: #cfae09;
+    font-weight: bold;
+    border: black solid 1px;
+}
