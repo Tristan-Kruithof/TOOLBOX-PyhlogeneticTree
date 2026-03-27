@@ -1,0 +1,45 @@
+;   MEGA-CC (Molecular Evolutionary Genetics Analysis Compute Core)
+;
+;   Suggested Citation for MEGA-CC 12:
+;
+;   Kumar S, Stecher G, Suleski M, Sanderford M, Sharma S, and Tamura K.
+;   Molecular Evolutionary Genetics Analysis Version 12 for adaptive and green computing.
+;   Molecular Biology and Evolution (2024) 41:1-9
+;
+;   Kumar S, Stecher G, Peterson D, and Tamura K
+;   MEGA-CC: Computing Core of Molecular Evolutionary Genetics Analysis Program for Automated and Iterative Data Analysis
+;   Bioinformatics (2012) 28:2685-2686 (Epub 2012 Aug 24)
+
+
+; ****************************************************************************
+;        Please see the important message(s) at the bottom of this file 
+; ****************************************************************************
+
+[Application Info]
+
+	Version                                 = 12.1.2
+	Build                                   = 12251216-x86_64
+	User Interface                          = CommandLine
+	Operating System                        = windows
+
+[General Info]
+
+	Data Type                               = nucleotide (non-coding)
+	No. of Taxa                             =        0
+	Data File                               = 'C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\aligned_sequences.fasta'
+	Settings File                           = 'C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\infer_ML_nucleotide.mao'
+	Command Line                            = C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\MEGACC\megacc.exe -a C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\infer_ML_nucleotide.mao -d C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\aligned_sequences.fasta -o C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\newick.nwk
+
+[Analysis Statistics]
+
+	Start Time                              = 27/03/2026 02:29:53
+	End Time                                = 27/03/2026 02:29:53
+	Execution Time                          =    0.005 (seconds)
+	Peak Memory Used(Working Set)           =   18.250 (MB)
+
+
+; ****************************************************************************
+;                 Please note the following important messages:
+; ****************************************************************************
+;	Warning: No Code table was specified, assuming the Genetic Code Table is 'Standard'
+;	Error: At least 4 taxa are required for likelihood phylogeny reconstruction.
