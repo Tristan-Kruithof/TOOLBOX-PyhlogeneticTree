@@ -2,9 +2,9 @@
 ;
 ;   Suggested Citation for MEGA-CC 12:
 ;
-;   Stecher G, Suleski M, Tao Q, Tamura K, and Kumar S.
-;   MEGA 12.1: Cross-platform Release for macOS and Linux Operating Systems.
-;   Journal of Molecular Evolution (2025) https://doi.org/10.1007/s00239-025-10287-z
+;   Kumar S, Stecher G, Suleski M, Sanderford M, Sharma S, and Tamura K.
+;   Molecular Evolutionary Genetics Analysis Version 12 for adaptive and green computing.
+;   Molecular Biology and Evolution (2024) 41:1-9
 ;
 ;   Kumar S, Stecher G, Peterson D, and Tamura K
 ;   MEGA-CC: Computing Core of Molecular Evolutionary Genetics Analysis Program for Automated and Iterative Data Analysis
@@ -20,83 +20,26 @@
 	Version                                 = 12.1.2
 	Build                                   = 12251216-x86_64
 	User Interface                          = CommandLine
-	Operating System                        = linux
+	Operating System                        = windows
 
 [General Info]
 
 	Data Type                               = nucleotide (non-coding)
-	No. of Taxa                             =        6
-	No. of Sites                            =      804
-	Data File                               = '/homes/fkinds/TOOLBOX-PyhlogeneticTree/Tools/aligned_sequences.fasta'
-	Settings File                           = '/homes/fkinds/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_nucleotide.mao'
-	Command Line                            = /homes/fkinds/TOOLBOX-PyhlogeneticTree/Tools/MEGACC/megacc -a /homes/fkinds/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_nucleotide.mao -d /homes/fkinds/TOOLBOX-PyhlogeneticTree/Tools/aligned_sequences.fasta -o /homes/fkinds/TOOLBOX-PyhlogeneticTree/Tools/newick.nwk
-
-[Analysis Settings]
-
-	Analysis                                = Likelihood Phylogeny Reconstruction
-	Statistical Method                      = Maximum Likelihood
-	Test of Phylogeny                       = None
-	Substitutions Type                      = Nucleotide
-	Model/Method                            = Kimura 2-parameter model
-	Rates among Sites                       = Uniform Rates
-	Gaps/Missing Data                       = Use all sites
-	Select Codon Positions                  = 1st, 2nd, 3rd, Non-Coding
-	ML Heuristic Method                     = Nearest-Neighbor-Interchange (NNI)
-	Initial Tree for ML                     = Make initial tree automatically (Default - NJ/MP)
-	Branch Swap Filter                      = None
-	Number of Threads                       = 4
-	Genetic Code Table                      = Not Applicable
-	Genetic Code                            = Not Applicable
-	Has Time Limit                          = False
-	Maximum Execution Time                  = -1
-	datatype                                = snNucleotide
-	containsCodingNuc                       = True
-	MissingBaseSymbol                       = ?
-	IdenticalBaseSymbol                     = .
-	GapSymbol                               = -
-	Labelled Sites                          = All Sites
+	No. of Taxa                             =        0
+	Data File                               = 'C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\aligned_sequences.fasta'
+	Settings File                           = 'C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\infer_ML_nucleotide.mao'
+	Command Line                            = C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\MEGACC\megacc.exe -a C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\infer_ML_nucleotide.mao -d C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\aligned_sequences.fasta -o C:\Users\detri\BIN jaar 1\Kwartaal 3\Git clones\TOOLBOX-PyhlogeneticTree\Tools\newick.nwk
 
 [Analysis Statistics]
 
-	Start Time                              = 26-03-26 11:44:27
-	End Time                                = 26-03-26 11:44:29
-	Execution Time                          =    2.280 (seconds)
-	Max Heap Memory Used                    = 1.215 (MB)
-	ML Tree Search Start Time               = 26-03-26 11:44:27
-	ML Tree Search End Time                 = 26-03-26 11:44:29
-	ML Tree Search Execution Time           =    2.248 (seconds)
-	Sum of branch lengths                   =    0.745
-	Model                                   = Kimura (1980) 2-parameter model
-	No. of params                           =       10
-	No. of rates                            =        1
-	AICc                                    = 5367.005
-	BIC                                     = 5427.231
-	LnL                                     = -2673.467
-	No. of sites                            = 804
-	No. of common sites                     = 579
-	No. of invar sites                      = 381
-	No. of gap sites                        = 0
-	Site coverage                           = 4
-	Use invar                               = False
-	Invar                                   = n/a
-	Gamma                                   = n/a
-	Ts/Tv                                   =    1.689
-	Rate[1]                                 = 1.00
-	r(A->T)                                 = 0.0464828535599338
-	r(A->C)                                 = 0.0464828535599338
-	r(A->G)                                 = 0.157034292880132
-	r(T->A)                                 = 0.0464828535599338
-	r(T->C)                                 = 0.157034292880132
-	r(T->G)                                 = 0.0464828535599338
-	r(C->A)                                 = 0.0464828535599338
-	r(C->T)                                 = 0.157034292880132
-	r(C->G)                                 = 0.0464828535599338
-	r(G->A)                                 = 0.157034292880132
-	r(G->T)                                 = 0.0464828535599338
-	r(G->C)                                 = 0.0464828535599338
+	Start Time                              = 27/03/2026 02:29:53
+	End Time                                = 27/03/2026 02:29:53
+	Execution Time                          =    0.005 (seconds)
+	Peak Memory Used(Working Set)           =   18.250 (MB)
 
 
 ; ****************************************************************************
 ;                 Please note the following important messages:
 ; ****************************************************************************
 ;	Warning: No Code table was specified, assuming the Genetic Code Table is 'Standard'
+;	Error: At least 4 taxa are required for likelihood phylogeny reconstruction.

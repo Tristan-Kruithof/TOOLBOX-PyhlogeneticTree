@@ -53,8 +53,7 @@ def create_route():
             tree = PipeLine.Run(email)
             tree.standard(organisms=organisms)
             new_image = True
-            # tree = Pipeline.Tree()
-            # tree.render("static/pipeline_output/tree.png")
+
 
         return render_template('create.html', login_status=login_status, tree_image="tree.png", new_image=new_image ,organism_list=organisms)
 

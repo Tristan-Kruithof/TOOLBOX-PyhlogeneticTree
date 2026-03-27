@@ -108,6 +108,7 @@ nav {
     background-color: #325a98;
     color: white;
     font-weight: bold;
+    padding: 3px 12px;
 }
 
 .nav_button:hover,
@@ -311,12 +312,11 @@ CSS FOR THE DROP BUTTON
     height: 40px;
 }
 
-.standard_padding {
+.p_top {
     padding-top: 40px;
 }
 
 .important {
-    color: #cfae09;
+    color: #ca0505;
     font-weight: bold;
-    border: black solid 1px;
 }

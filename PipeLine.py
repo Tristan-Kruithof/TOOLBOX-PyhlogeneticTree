@@ -3,8 +3,7 @@ import subprocess
 import time
 import os.path as path
 import os
-#from ete4 import Tree as ETETree
-
+from ete4 import Tree as ETETree
 
 
 class Organisms:
@@ -129,8 +128,8 @@ class CC_Tools:
             with open(self.output, "w") as f:
                 subprocess.run([mafft_path, "--auto", self.data], stdout=f, check=True)
 
-#class Tree(ETETree)
-class Tree():
+
+class Tree(ETETree):
     def __init__(self, newick_file=path.abspath("Tools/newick.nwk")):
         super().__init__(open(newick_file).read())
 
@@ -146,12 +145,15 @@ class Run:
 
         if organisms is None:
             organisms = ["Elephant", "Pig", "Cow", "horse", "Lion", "Tiger"]
-
+        # Location
         self.location = location
+        # Input and output for mafft
         self.input_mafft = input_mafft
         self.output_mafft = output_mafft
+        # Input and output for mega
         self.input_mega = input_mega
         self.output_mega = output_mega
+        # Tool parameters
         self.settings = settings
         self.method = method
         self.organisms = organisms
@@ -173,8 +175,8 @@ class Run:
         megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
         megurt.run()
 
-        #tree = Tree()
-        #tree.render("static/pipeline_output/tree.png")
+        tree = Tree()
+        tree.render("static/pipeline_output/tree.png")
 
 
 
