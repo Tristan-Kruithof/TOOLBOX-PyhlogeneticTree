@@ -320,3 +320,7 @@ CSS FOR THE DROP BUTTON
     color: #ca0505;
     font-weight: bold;
 }
+
+.bigger {
+    width: 1800px;
+}
