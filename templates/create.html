@@ -6,74 +6,80 @@
     <h1 class="title">
         Create
     </h1>
-
-
-
-
-
-        {% if tree_image %}
-            {% if new_image %}
-                <p class="black_text">
-                <span class="important">
-                    New tree
-                </span>
-
-                </p>
-            {% else  %}
-                <p class="black_text">
-                Previous tree
-                </p>
-            {% endif %}
-                <img src="{{ url_for('static', filename="pipeline_output/" + tree_image) }}" class="tool_image bigger" alt="phylogenetic tree" id="imgbox"><br>
+    {% if tree_image %}
+        {% if new_image %}
+            <p class="black_text important red">
+                New tree
+            </p>
+        {% else  %}
+            <p class="black_text important green">
+            Previous tree
+            </p>
         {% endif %}
-
-            <form id="organism" method="POST" action="#species">
-                <div class="black_text">
-                    <label for="input_method">Method of input</label>
-                    <select id="input_method">
-                        <option value="common">Common names</option>
-                        <option value="fasta">Multi-fasta</option>
-                    </select>
-                </div>
-                {% if input_method %}
-                <label for="species" class="black_text">Fill in your organisms!</label><br>
-                <input type="text" id="species" class="form-control" name="species" placeholder="Organism" required>
-                {% endif %}
-            </form>
-            <form method="POST" action="#add" id="empty_form">
-            </form>
-
-            {% if input_method %}
-                <div class="side_to_side">
-                <button type="submit" name="add" class="nav_button page_button" form="organism" id="add">Add</button>
-                    <button type="submit" name="delete_org" class="nav_button page_button" form="empty_form">Del org</button>
-                <button type="submit" name="delete_all" class="nav_button page_button" form="empty_form">Del all</button>
-                </div>
-            {% endif %}
-
-
-            {% if organism_list %}
-                <div class="p_top">
-                <span class="title">Species |</span>
-                    <ul class="black_text">
-                        {% for species_name in organism_list %}
-                            <li>{{ species_name }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <button type="submit" name="create" class="nav_button page_button" form="empty_form">Create</button><br>
-            {% endif %}
-    <br>
-</div>
-        {% else %}
-        <div class="home-boxes">
+        <div class="image_box">
+            <a href=/static/pipeline_output/tree.png download="phylogenetic tree">
+                <img src="{{ url_for('static', filename="pipeline_output/" + tree_image) }}" class="tool_image bigger" alt="phylogenetic tree" id="imgbox">
+            </a>
+            <br>
             <p>
-            Can only be used when logged in!
+                Click to download!
             </p>
         </div>
     {% endif %}
+
+    <form id="organism" method="POST" action="#species" class="black_text small_text">
+        <div>
+            <label for="input_method">Method of input</label><br>
+            <select id="input_method" name="input_method" form="organism">
+                <option value="common" {% if input_method == "common" %}selected{% endif %}>Common names</option>
+                <option value="fasta" {% if input_method == "fasta" %}selected{% endif %}>Multi-fasta</option>
+            </select>
+        </div>
+
+        <div id="input_fasta" class="p_top p_left" style="display: none">
+            <label for="multi_fasta_file" class="black_text small_text">Select fasta file</label><br>
+            <input type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna" placeholder="Multi-fasta"><br><br>
+            <button type="submit" name="create" class="nav_button page_button" form="organism">Create</button>
+        </div>
+
+        <div id="input_common" style="display: block" class="p_top p_left">
+            <label for="species" class="black_text small_text">Add organisms</label><br>
+            <input type="text" id="species" class="form-control max_width" name="species" form="organism" placeholder="Organism">
+            <div class="side_to_side">
+            <button type="submit" name="add" class="nav_button page_button" form="organism" id="add">Add</button>
+                <button type="submit" name="delete_org" class="nav_button page_button" form="organism" formnovalidate>Del org</button>
+            <button type="submit" name="delete_all" class="nav_button page_button" form="organism" formnovalidate>Del all</button>
+            </div>
+
+        {% if organism_list  %}
+            <div class="p_top p_left">
+            <span class="title">| Species |</span>
+                <ul class="black_text">
+                    {% for species_name in organism_list %}
+                        <li class="small_text">{{ species_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <button type="submit" name="create" class="nav_button page_button" form="organism" formnovalidate>Create</button><br>
+        {% endif %}
+        </div>
+        </form>
+    <br>
+    {% else %}
+
+        <p>
+        Can only be used when logged in!
+        </p>
+
+    {% endif %}
+
+    <p class="black_text important red">
+        {{ message }}
+    </p>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
-
+    <script src="/static/javascript/create.js"></script>
 {% endblock %}
