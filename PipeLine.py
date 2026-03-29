@@ -3,9 +3,9 @@ import subprocess
 import time
 import os.path as path
 import os
-#from ete4 import Tree
+from ete4 import Tree
 
-Entrez.email = "superherofabs08@gmail.com"
+#Entrez.email = "superherofabs08@gmail.com"
 Entrez.api_key = "94b49b77b56c715b8dab043b667c611d8408"
 
 class Organisms:
@@ -98,7 +98,7 @@ class Organisms:
         print(self.fastas)
 
     def make_multi_fasta(self):
-        with open("./Tools/sequences.fasta", "w") as f:
+        with open("Tools/mafft_input/sequences.fasta", "w") as f:
             for fasta in self.fastas:
                 f.write(fasta)
 
@@ -132,21 +132,17 @@ class CC_Tools:
 
 
 
-#def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
-#    with open(newick_file) as f:
-#        newick = f.read()
-#        return Tree(newick)
-
-
-
-
+def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
+    with open(newick_file) as f:
+        newick = f.read()
+        return Tree(newick)
 
 
 class Run:
     def __init__(self, email, method=1, organisms=None,
-                 location=path.abspath("Tools"), input_mafft=path.abspath("Tools/sequences.fasta"),
-                 output_mafft=path.abspath("Tools/aligned_sequences.fasta"),input_mega=path.abspath("Tools/aligned_sequences.fasta"),
-                 output_mega=path.abspath("Tools/newick.nwk"), settings=path.abspath("Tools/infer_ML_nucleotide.mao")):
+                 location=path.abspath("Tools"), input_mafft=path.abspath("Tools/mafft_input/sequences.fasta"),
+                 output_mafft=path.abspath("Tools/mega_input/aligned_sequences.fasta"),input_mega=path.abspath("Tools/mega_input/aligned_sequences.fasta"),
+                 output_mega=path.abspath("Tools/ete4_input/newick.nwk"), settings=path.abspath("Tools/infer_ML_nucleotide.mao")):
 
         if organisms is None:
             organisms = ["Elephant", "Pig", "horse", "Lion", "Tiger"]
@@ -180,9 +176,19 @@ class Run:
         megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
         megurt.run()
 
-        #tree = make_tree()
-        #tree.render("static/pipeline_output/tree.png")
+        tree = make_tree()
+        tree.render("static/pipeline_output/tree.png")
 
+    def fasta_run(self):
+
+        maffie = CC_Tools(self.location, path.abspath("Tools/mafft_input/user_uploads/sequences.fasta"), self.output_mafft)
+        maffie.run()
+
+        megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
+        megurt.run()
+
+        tree = make_tree()
+        tree.render("static/pipeline_output/tree.png")
 
 
 #def tree():

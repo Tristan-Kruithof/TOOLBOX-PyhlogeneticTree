@@ -1,3 +1,5 @@
+import os
+import threading
 from flask import Flask, render_template, request, session
 from python.login import Account
 import PipeLine
@@ -5,7 +7,7 @@ import os.path as path
 
 app = Flask(__name__)
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
-
+app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
 @app.route('/')
 def root():
     login_status = session.get('login_status')
@@ -57,28 +59,33 @@ def create_route():
             organisms.pop()
 
         else:
-            fasta_extensions = ["fasta","fna","fa"]
+            acc = Account(email=email)
+            tree = PipeLine.Run(email)
 
             if input_method == "common":
+
                 if len(organisms) >= 4:
-                    acc = Account(email=email)
                     status, info = acc.add_run()
                     message = info
-
-                    tree = PipeLine.Run(email)
+                    #thread = threading.Thread(target=tree.standard(organisms=organisms))
+                    #thread.start()
                     tree.standard(organisms=organisms)
                     new_image = True
-
-
                 else:
                     message = "Not enough species to make a tree!"
             else:
-                fasta_file = form['multi_fasta_file']
 
-                if fasta_file.split('.')[1] in fasta_extensions:
-                    acc = Account(email=email)
+                file_types = ["fasta", "fna", "fa"]
+                fasta_file = request.files['multi_fasta_file']
+                file_name = fasta_file.filename
+
+                if file_name.split('.')[1] in file_types:
                     status, info = acc.add_run()
                     message = info
+                    fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
+
+                    tree.fasta_run()
+                    new_image = True
                 else:
                     message = "Not a fasta file!"
 
