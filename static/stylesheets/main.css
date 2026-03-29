@@ -26,8 +26,6 @@ body {
     font-family: "Arial Black", "Helvetica CY", "Nimbus Sans L", sans-serif;
     font-size: 14pt;
     font-weight: normal;
-
-
 }
 
 .small_text {
@@ -355,4 +353,28 @@ CSS FOR THE DROP BUTTON
 
 .max_width {
     max-width: 30%;
+}
+
+/*
+Loading spinner styling and logic
+ */
+
+.spinner {
+    border: 8px solid #ffffff;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-left-color: #3c5a28;
+    animation: spinner 0.8s infinite ease-in-out;
+    align-self: center;
+    display: flex;
+}
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+
 }

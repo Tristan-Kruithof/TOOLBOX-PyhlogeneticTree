@@ -8,6 +8,7 @@
         Create
     </h1>
     {% if tree_image %}
+        <!--<div class="spinner"></div>-->
         {% if new_image %}
             <p class="black_text important red">
                 New tree
@@ -28,7 +29,7 @@
         </div>
     {% endif %}
 
-    <form id="organism" method="POST" action="#species" class="black_text small_text">
+    <form id="organism" method="POST" action="#species" class="black_text small_text" enctype="multipart/form-data">
         <div>
             <label for="input_method">Method of input</label><br>
             <select id="input_method" name="input_method" form="organism">
@@ -39,7 +40,7 @@
 
         <div id="input_fasta" class="p_top p_left" style="display: none">
             <label for="multi_fasta_file" class="black_text small_text">Select fasta file</label><br>
-            <input type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna" placeholder="Multi-fasta"><br><br>
+            <input type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna" placeholder="Multi-fasta" ><br><br>
             <button type="submit" name="create" class="nav_button page_button" form="organism">Create</button>
         </div>
 
