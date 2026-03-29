@@ -41,17 +41,20 @@ def create_route():
             input_organism = form.get('species')
             split_input = [item.strip().lower() for item in input_organism.split(',')]
 
-            organisms.extend(split_input)
-            organisms = list(set(organisms))
-            session["organisms"] = organisms
+            if organisms:
+                organisms_set = set(organisms)
+                split_input_set = set(split_input)
+                new_organisms = split_input_set.difference(organisms_set)
+            else:
+                new_organisms = split_input
+
+            organisms.extend(new_organisms)
 
         elif "delete_all" in form:
-            session["organisms"] = []
             organisms = []
 
         elif "delete_org" in form:
-            organisms = organisms[0:-1]
-            session["organisms"] = organisms
+            organisms.pop()
 
         else:
             fasta_extensions = ["fasta","fna","fa"]
@@ -79,6 +82,7 @@ def create_route():
                 else:
                     message = "Not a fasta file!"
 
+        session["organisms"] = organisms
 
         return render_template('create.html', login_status=login_status, tree_image="tree.png", new_image=new_image ,organism_list=organisms, message=message, input_method=input_method)
 
