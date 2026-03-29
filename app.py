@@ -32,11 +32,15 @@ def create_route():
 
     if request.method == 'POST':
         form = request.form
+        input_method = form.get('input_method')
+        message = ""
+
         if "add" in form:
             input_organism = form.get('species')
-            split_input = [item.strip() for item in input_organism.split(',')]
+            split_input = [item.strip().lower() for item in input_organism.split(',')]
 
             organisms.extend(split_input)
+            organisms = list(set(organisms))
             session["organisms"] = organisms
 
         elif "delete_all" in form:
@@ -49,13 +53,26 @@ def create_route():
 
         else:
             email = session.get('email')
+            fasta_extensions = ["fasta","fna","fa"]
 
-            tree = PipeLine.Run(email)
-            tree.standard(organisms=organisms)
-            new_image = True
+            if input_method == "common":
+                if len(organisms) >= 4:
+                    tree = PipeLine.Run(email)
+                    tree.standard(organisms=organisms)
+                    new_image = True
+                else:
+                    message = "Not enough species to make a tree!"
+            else:
+                fasta_file = form['multi_fasta_file']
+
+                if fasta_file.split('.')[1] in fasta_extensions:
+                    # Put logic here
+                    print("Correct")
+                else:
+                    message = "Not a fasta file!"
 
 
-        return render_template('create.html', login_status=login_status, tree_image="tree.png", new_image=new_image ,organism_list=organisms)
+        return render_template('create.html', login_status=login_status, tree_image="tree.png", new_image=new_image ,organism_list=organisms, message=message, input_method=input_method)
 
     return render_template('create.html', login_status=login_status, tree_image="tree.png",new_image=new_image, organism_list=organisms)
 

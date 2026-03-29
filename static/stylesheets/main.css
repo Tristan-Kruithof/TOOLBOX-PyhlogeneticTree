@@ -25,7 +25,20 @@ body {
     color: black;
     font-family: "Arial Black", "Helvetica CY", "Nimbus Sans L", sans-serif;
     font-size: 14pt;
+    font-weight: normal;
+
+
 }
+
+.small_text {
+    text-align:left;
+    color: #1b1a1a;
+    font-size: 12.5pt;
+    font-weight: lighter;
+    margin: 0;
+}
+
+
 .header {
     text-align: center;
     background-color:#3da45e;
@@ -184,12 +197,6 @@ CSS FOR THE FOOTER
     padding: 5px;
 }
 
-.small_text {
-    text-align:left;
-    max-width: 500px;
-    padding:20px;
-    margin: 0;
-}
 
 /*
 CSS FOR IMAGE LINKS
@@ -299,6 +306,9 @@ CSS FOR THE DROP BUTTON
     flex-grow: 1;
 }
 
+.center {
+    justify-content: center;
+}
 
 .phylotree{
     max-width: 100%;
@@ -307,20 +317,42 @@ CSS FOR THE DROP BUTTON
 }
 
 .form-control {
-    width: 30%;
-    margin: 20px 0;
+    width: 100%;
+    margin-bottom: 10px;
     height: 40px;
 }
 
-.p_top {
-    padding-top: 40px;
+.file-control {
+    margin: 20px 0;
+    padding: 0;
+    width: 100%;
+    display: block;
 }
 
-.important {
-    color: #ca0505;
-    font-weight: bold;
+.p_top {
+    padding-top: 25px;
+}
+
+.p_left {
+    padding-left: 20px;
+}
+
+.important{
+    text-shadow: 2px 0 1px #fff, 0 2px 1px #fff, -2px 0 1px #fff, 0 -2px 1px #fff;
+}
+
+.red {
+    color: #ea0202;
+}
+
+.green {
+    color: rgba(44, 85, 45, 0.69);
 }
 
 .bigger {
     width: 1800px;
+}
+
+.max_width {
+    max-width: 30%;
 }
