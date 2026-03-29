@@ -1,27 +1,26 @@
 {% extends "main.html" %}
 
 {% block content %}
-    {% if login_status == True %}
     <div class="home-boxes">
+    {% if login_status == True %}
         <div class="side_to_side center">
             <div>
                 {{ login_message }}
             </div>
             <a href="{{ url_for('signup_route') }}" class="nav_button">Sign Out</a>
         </div>
-    </div>
+
 
 
     {% elif login_status == False %}
-    <div class="home-boxes">
-        <div>
+
+        <div class="side_to_side center">
             {{ login_message }}
         </div>
-    </div>
+
 
 
     {% else %}
-        <div class="home-boxes">
         <form action="" method="POST">
             <label for="email">Fill in your email!</label>
             <input id="email" type="email" name="email" placeholder="Email address" required><br><br>
@@ -30,6 +29,6 @@
             <input type="checkbox" name="newsletter" id="newsletter">
             <button type="submit" name="submit">Login</button>
         </form>
-        </div>
     {% endif %}
+    </div>
 {% endblock %}
