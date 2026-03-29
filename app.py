@@ -27,6 +27,8 @@ def tools_route():
 @app.route('/home/create', methods=['POST', 'GET'])
 def create_route():
     login_status = session.get('login_status')
+    email = session.get('email')
+
     organisms = session.get('organisms', [])
     new_image = False
 
@@ -52,22 +54,28 @@ def create_route():
             session["organisms"] = organisms
 
         else:
-            email = session.get('email')
             fasta_extensions = ["fasta","fna","fa"]
 
             if input_method == "common":
                 if len(organisms) >= 4:
+                    acc = Account(email=email)
+                    status, info = acc.add_run()
+                    message = info
+
                     tree = PipeLine.Run(email)
                     tree.standard(organisms=organisms)
                     new_image = True
+
+
                 else:
                     message = "Not enough species to make a tree!"
             else:
                 fasta_file = form['multi_fasta_file']
 
                 if fasta_file.split('.')[1] in fasta_extensions:
-                    # Put logic here
-                    print("Correct")
+                    acc = Account(email=email)
+                    status, info = acc.add_run()
+                    message = info
                 else:
                     message = "Not a fasta file!"
 
