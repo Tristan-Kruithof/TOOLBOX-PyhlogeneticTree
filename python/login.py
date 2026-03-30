@@ -85,7 +85,7 @@ class Account:
 
                 self.save_accounts(self.accounts)
 
-                return True, "Added run!"
+                return True, ""
 
         return False, "No account added!"
 

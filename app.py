@@ -69,23 +69,46 @@ def create_route():
                     message = info
                     #thread = threading.Thread(target=tree.standard(organisms=organisms))
                     #thread.start()
+
                     tree.standard(organisms=organisms)
                     new_image = True
                 else:
                     message = "Not enough species to make a tree!"
             else:
-
                 file_types = ["fasta", "fna", "fa"]
                 fasta_file = request.files['multi_fasta_file']
                 file_name = fasta_file.filename
+                fasta_file.seek(0)
+
+                organism_count = 0
+                organisms = set()
 
                 if file_name.split('.')[1] in file_types:
-                    status, info = acc.add_run()
-                    message = info
-                    fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
 
-                    tree.fasta_run()
-                    new_image = True
+                    for line in fasta_file:
+                        if line.startswith('>'):
+                            organism = line.split(' ')[0]
+                            if organism not in organisms:
+                                organisms.add(organism)
+                            else:
+                                message = "Duplicate animals!"
+                                break
+
+                            organism_count += 1
+                        else:
+                            continue
+
+                    if organism_count < 4:
+                        message = "Not enough species to make a tree!"
+
+                    else:
+                        status, info = acc.add_run()
+                        if info:
+                            message = info
+
+                        fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
+                        tree.fasta_run()
+                        new_image = True
                 else:
                     message = "Not a fasta file!"
 
