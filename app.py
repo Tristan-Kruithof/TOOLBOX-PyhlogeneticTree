@@ -69,23 +69,42 @@ def create_route():
                     message = info
                     #thread = threading.Thread(target=tree.standard(organisms=organisms))
                     #thread.start()
+
                     tree.standard(organisms=organisms)
                     new_image = True
                 else:
                     message = "Not enough species to make a tree!"
             else:
-
                 file_types = ["fasta", "fna", "fa"]
                 fasta_file = request.files['multi_fasta_file']
                 file_name = fasta_file.filename
+                fasta_file.seek(0)
+
+                organisms_set = set()
 
                 if file_name.split('.')[1] in file_types:
-                    status, info = acc.add_run()
-                    message = info
-                    fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
+                    for line in fasta_file:
+                        decoded_line = line.decode('utf-8')
 
-                    tree.fasta_run()
-                    new_image = True
+                        if decoded_line.startswith('>'):
+                            organism = decoded_line.split(' ')[0]
+                            if organism not in organisms_set:
+                                organisms_set.add(organism)
+                            else:
+                                message = "Duplicate animals!"
+                                break
+
+                    if len(organisms_set) < 4 and not message:
+                        message = "Not enough species to make a tree!"
+
+                    else:
+                        status, info = acc.add_run()
+                        if info:
+                            message = info
+
+                        fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
+                        tree.fasta_run()
+                        new_image = True
                 else:
                     message = "Not a fasta file!"
 
