@@ -80,25 +80,21 @@ def create_route():
                 file_name = fasta_file.filename
                 fasta_file.seek(0)
 
-                organism_count = 0
-                organisms = set()
+                organisms_set = set()
 
                 if file_name.split('.')[1] in file_types:
-
                     for line in fasta_file:
-                        if line.startswith('>'):
-                            organism = line.split(' ')[0]
-                            if organism not in organisms:
-                                organisms.add(organism)
+                        decoded_line = line.decode('utf-8')
+
+                        if decoded_line.startswith('>'):
+                            organism = decoded_line.split(' ')[0]
+                            if organism not in organisms_set:
+                                organisms_set.add(organism)
                             else:
                                 message = "Duplicate animals!"
                                 break
 
-                            organism_count += 1
-                        else:
-                            continue
-
-                    if organism_count < 4:
+                    if len(organisms_set) < 4 and not message:
                         message = "Not enough species to make a tree!"
 
                     else:

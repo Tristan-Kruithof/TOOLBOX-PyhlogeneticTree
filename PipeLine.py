@@ -3,7 +3,7 @@ import subprocess
 import time
 import os.path as path
 import os
-from ete4 import Tree
+#from ete4 import Tree
 
 #Entrez.email = "superherofabs08@gmail.com"
 Entrez.api_key = "94b49b77b56c715b8dab043b667c611d8408"
@@ -132,10 +132,10 @@ class CC_Tools:
 
 
 
-def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
-    with open(newick_file) as f:
-        newick = f.read()
-        return Tree(newick)
+#def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
+#    with open(newick_file) as f:
+#        newick = f.read()
+#        return Tree(newick)
 
 
 class Run:
