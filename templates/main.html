@@ -32,8 +32,11 @@
                   <a href="{{ url_for('about_route') }}">About</a>
               </div>
           </div>
-          <div class="sign_up_button">
-              <a href="{{ url_for('signup_route') }}">Sign {% if login_status %}Out{% else %}In{% endif %}</a>
+         <div class="sign_up_button">
+      {% if user["admin"] and user["active"] %}
+              <a href="{{ url_for('newsletter_route') }}">Newsletter</a>
+      {% endif %}
+              <a href="{{ url_for('signup_route') }}">Sign {% if user["active"] %}Out{% else %}In{% endif %}</a>
           </div>
       </nav>
     </div>

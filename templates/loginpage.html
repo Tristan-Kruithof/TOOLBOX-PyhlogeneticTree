@@ -2,8 +2,8 @@
 
 {% block content %}
     <div class="home-boxes">
-    {% if login_status == True %}
-        <div class="side_to_side center">
+    {% if user["active"] == True %}
+        <div class="side_to_side center_x">
             <div>
                 {{ login_message }}
             </div>
@@ -12,23 +12,35 @@
 
 
 
-    {% elif login_status == False %}
+    {% elif user["active"] == False %}
 
-        <div class="side_to_side center">
+        <div class="side_to_side center_x">
             {{ login_message }}
         </div>
 
 
-
     {% else %}
         <form action="" method="POST">
-            <label for="email">Fill in your email!</label>
-            <input id="email" type="email" name="email" placeholder="Email address" required><br><br>
+            <div class="p_bottom">
+                <label for="email">Email |</label>
+                <input id="email" type="email" name="email" placeholder="Email address" required><br><br>
 
-            <label for="newsletter">Sign up for our newsletter!</label>
-            <input type="checkbox" name="newsletter" id="newsletter">
-            <button type="submit" name="submit">Login</button>
+                <label for="newsletter">Newsletter |</label>
+                <input type="checkbox" name="newsletter" id="newsletter">
+                <label for="admin_check">Admin |</label>
+                <input type="checkbox" name="admin_check" id="admin_check">
+            </div>
+            <div id="admin_box" style="display: none">
+                <label for="admin_pass"></label>
+                <input type="password" name="admin_pass" placeholder="Fill in secret password" id="admin_pass" maxlength="30">
+            </div>
+            <br>
+            <button type="submit" name="submit" class="nav_button page_button">Login</button>
         </form>
     {% endif %}
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/javascript/login.js"></script>
 {% endblock %}

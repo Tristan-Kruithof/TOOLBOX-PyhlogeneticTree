@@ -11,10 +11,10 @@ dependencies:
   - cheroot
   - flask
   - flask-cors
-  - flask-httpauth
-  - flask-restful
-  - flask-compress
   - sqlalchemy
   - numpy
   - pyqt6
-  - gcc_linux-64
+  - dnspython
+  - pip
+  - pip:
+      - email-validator

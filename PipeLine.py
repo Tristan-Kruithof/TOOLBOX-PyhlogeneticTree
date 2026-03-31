@@ -131,11 +131,18 @@ class CC_Tools:
                 subprocess.run(["mafft", "--auto", self.data], stdout=f, check=True)
 
 
-
 #def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
 #    with open(newick_file) as f:
 #        newick = f.read()
 #        return Tree(newick)
+
+
+#def compare_trees(tree1, tree2):
+#    t1 = Tree(f"{tree1}")
+#    t2 = Tree(f"{tree2}")
+#    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
+
+#    return f"Normalized RF:, {rf / max_rf}"
 
 
 class Run:
@@ -177,7 +184,7 @@ class Run:
         megurt.run()
 
         tree = make_tree()
-        tree.render("static/pipeline_output/tree.png")
+        tree.render(f"static/pipeline_output/{self.email}_tree.png")
 
     def fasta_run(self):
 
@@ -188,119 +195,17 @@ class Run:
         megurt.run()
 
         tree = make_tree()
-        tree.render("static/pipeline_output/tree.png")
+        tree.render(f"static/pipeline_output/{self.email}_tree.png")
 
-
-#def tree():
-#    t = Tree(open(path.abspath("Tools/newick.nwk")).read())
-#
-#    return t
-
-
-#def compare_trees(tree1, tree2):
-#    t1 = Tree(f"{tree1}")
-#    t2 = Tree(f"{tree2}")
-#    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
-
-#    return f"Normalized RF:, {rf / max_rf}"
 
 
 def main():
     time1 = time.time()
-    tree = Run("superherofabs08@gmail.com")
+    tree = Run("detristank@gmail.com")
     tree.standard()
 
-    #what = 1
-    #ins = ["Elephant","Pig","Cow","horse","Lion","Tiger"]
-
-    #Route = Organisms(what, ins, "fabserdabser@gmail.com")
-    #print(Route)
-    #print(Organisms(2, ins, "fabserdabser@gmail.com"))
-
-    #Route.find_scientific_names()
-    #Route.find_fastas()
-    #Route.make_multi_fasta()
-
-    #Maffie = CC_Tools(path.abspath("Tools"),path.abspath("Tools/sequences.fasta"),path.abspath("Tools/aligned_sequences.fasta"))
-    #print(Maffie)
-    #Maffie.run()
-
-    #Megurt = CC_Tools(path.abspath("Tools"),path.abspath("Tools/aligned_sequences.fasta"), path.abspath("Tools/newick.nwk"),path.abspath("Tools/infer_ML_nucleotide.mao"))
-    #print(Megurt)
-    #Megurt.run()
-
- #   Boom = Tree(open(path.abspath("Tools/newick.nwk")).read())
     time2 = time.time()
     print(time2 - time1)
-#    Boom.show()
-
-
 
 if __name__ == "__main__":
-
     main()
-
-
-# mafft_in = "./Tools/sequences.fasta"
-# mafft_out = "aligned_sequences.fasta"
-# mafft_loc = "./TOOLBOX-PyhlogeneticTree/Tools"
-#
-# with open(mafft_out, "w") as f:
-#     subprocess.run(["C:/Users/Fabian/MAFFT/mafft.bat", "--auto", mafft_in], cwd=mafft_loc, stdout=f, check=True)
-#
-# mega_in = "C:/Users/Fabian/PyCharmMiscProject/aligned_sequences.fasta"
-# mega_set = "C:/Users/Fabian/Mega/infer_ML_nucleotide.mao"
-# mega_out = "newick.nwk"
-# mega_loc = "./TOOLBOX-PyhlogeneticTree/Tools"
-#
-#
-# subprocess.run(["megacc", "-a", mega_set, "-d", mega_in, "-o", mega_out], cwd=mega_loc, check=True, capture_output=True)
-
-#for name in names_list:
-#     stream = Entrez.esearch(
-#         db="taxonomy",
-#         term=name
-#     )
-#     record = Entrez.read(stream)
-#     stream.close()
-#
-#     if record["IdList"]:
-#         taxid = record["IdList"][0]
-#         stream2 = Entrez.efetch(db="taxonomy", id=taxid)
-#         record2 = Entrez.read(stream2)
-#         stream2.close()
-#         science_name = record2[0]["ScientificName"]
-#
-#         if science_name not in scientific_names:
-#             scientific_names.append(science_name)
-#         else:
-#             multiple_names.append(science_name)
-#
-#     else:
-#         not_found_names.append(name)
-#
-# print(scientific_names)
-# print(f"Multiple sub-species, which can not be individually added, where detected form the following species: {multiple_names}")
-# print(not_found_names)
-#
-# for name in scientific_names:
-#     term = f"{name}[Organism] AND (COI[Gene] OR COX1[Gene] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[Sequence Length]"
-#     stream = Entrez.esearch(db="nucleotide", term=term)
-#     record = Entrez.read(stream)
-#     stream.close()
-#
-#     if record["IdList"]:
-#         seq_id = record["IdList"][0]
-#         stream2 = Entrez.efetch(db="nucleotide", id=seq_id, rettype="fasta", retmode="text")
-#         fasta = stream2.read()
-#         stream2.close()
-#         fastas.append(fasta)
-#
-#     else:
-#         not_found_fastas.append(name)
-#
-# with open("sequences.fasta", "w") as f:
-#     for fasta in fastas:
-#         f.write(fasta)
-#
-# print(not_found_fastas)
