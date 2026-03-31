@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="home-boxes">
+    {% if user["active"] %}
+        <h1 class="title">
+            Newsletter
+        </h1>
+    {% else %}
+        <p>
+            Can only be used when logged in!
+        </p>
+    {% endif %}
+</div>
+{% endblock %}
