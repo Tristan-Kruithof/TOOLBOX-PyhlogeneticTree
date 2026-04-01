@@ -1,11 +1,12 @@
 import json
 import os
 import datetime
+from email_validator import validate_email
 
 
 class Account:
     def __init__(self, email="", newsletter=""):
-        self.email = email
+        self.email = email.strip()
         self.newsletter = newsletter
         self.runs = 0
         self.status = [None, ""]
@@ -13,7 +14,13 @@ class Account:
         self.filepath_acc = os.path.join(self.BASE_DIR, '../static', 'database', "accounts.json")
         self.filepath_time = os.path.join(self.BASE_DIR, '../static', 'database', "time")
         self.accounts = None
+        self.admin = False
+        self.secret_password = "ditiseensupergeheimwachtwoord"
         self.check_date()
+
+
+    def __str__(self):
+        return f"Email: {self.email}, Newsletter: {self.newsletter}, Runs: {self.runs}, Status: {self.status}"
 
 
     def check_date(self):
@@ -43,28 +50,39 @@ class Account:
             json.dump(account_list, account_file, indent=2)
 
 
-    def signin(self):
-        self.email = self.email.strip()
-
+    def signin(self, password=""):
         account = self.load_accounts()
-
+        
         if not account:
-            if self.newsletter:
-                self.newsletter = True
+            try:
+                verified = validate_email(self.email, check_deliverability=True)
+                self.email = verified.normalized
 
-            self.accounts.append({"email": self.email, "newsletter": self.newsletter, "runs" : self.runs})
-            self.save_accounts(self.accounts)
+                self.newsletter = bool(self.newsletter)
 
-            self.status = [True, "Successfully registered and logged in! |"]
+                self.accounts.append({"email": self.email, "newsletter": self.newsletter, "runs" : self.runs, "admin": self.admin})
+                self.save_accounts(self.accounts)
+
+                if self.admin:
+                    self.status = [True, "Successfully registered and logged in as admin!"]
+                else:
+                    self.status = [True, "Successfully registered and logged in! |"]
+
+            except Exception as e:
+                self.status = [False, f"Email is invalid | {str(e)}"]
 
         else:
             self.runs = account['runs']
+            self.admin = account['admin']
 
-            if self.runs < 10:
+            if self.runs < 10 and not self.admin:
                 self.status = [True, "Account already exists, but logged in anyways. |"]
+            elif self.runs < 10 and self.admin:
+                self.status = [True, "Account already exists, but logged in anyways as admin. |"]
+            elif self.runs >= 10 and not self.admin:
+                self.status = [False, "Account has had too many runs and cannot be used!"]
             else:
-                self.status = [False, "Account has had too many runs and cannot be used! |"]
-
+                self.status = [True, "Account has had more than 10 runs, but logged in anyways as admin. |"]
 
     def send_newsletter(self):
         pass
@@ -100,4 +118,6 @@ class Account:
 
 
 if __name__ == '__main__':
-    pass
+    test_account = Account("test@gmail.com")
+    test_account.signin()
+    print(test_account)
