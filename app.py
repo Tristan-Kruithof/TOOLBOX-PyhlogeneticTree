@@ -61,6 +61,7 @@ def create_route():
     if request.method == 'POST':
         if not active_pipeline:
             form = request.form
+            gene = form.get('gene')
             input_method = form.get('input_method')
 
             if "add" in form:
@@ -84,7 +85,7 @@ def create_route():
 
             else:
                 acc = Account(email=email)
-                tree = PipeLine.Run(email)
+                tree = PipeLine.Run(email, gene)
                 thread_kwargs =  {"organisms": organisms, "tree_instance": tree, "option": "common", "email": email}
 
                 if input_method == "common":
