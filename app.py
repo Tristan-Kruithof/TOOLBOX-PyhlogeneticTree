@@ -37,6 +37,7 @@ def create_route():
     if request.method == 'POST':
         form = request.form
         input_method = form.get('input_method')
+        gene = form.get('gene')
         message = ""
 
         if "add" in form:
@@ -60,7 +61,7 @@ def create_route():
 
         else:
             acc = Account(email=email)
-            tree = PipeLine.Run(email)
+            tree = PipeLine.Run(email, gene)
 
             if input_method == "common":
 
