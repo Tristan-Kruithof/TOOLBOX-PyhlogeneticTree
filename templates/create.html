@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="home-boxes">
-    {% if active_pipeline %}
+    {% if active_thread %}
         <div class="center_y">
             <div class="spinner"></div>
             <p class="spinner_text">
@@ -16,7 +16,7 @@
         {% if user["active"] %}
             <h1 class="title">
                 Create
-            </h1>
+            </h1><br>
 
             {% if image_exists %}
 
@@ -51,15 +51,25 @@
 
                 <div id="input_fasta" class="p_top p_left" style="display: none">
                     <label for="multi_fasta_file" class="black_text small_text">Select fasta file</label><br>
-                    <input type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna" placeholder="Multi-fasta" ><br><br>
+                    <input type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna .faa" placeholder="Multi-fasta" ><br><br>
                     <button type="submit" name="create" class="nav_button page_button">Create</button>
                 </div>
 
                 <div id="input_common" style="display: block" class="p_top p_left">
+                    <label for="gene">Compared gene</label><br>
+                    <select id="gene" name="gene">
+                        <option value="(COI[GENE] OR COX1[GENE] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[SLEN]" {% if Gene == "(COI[GENE] OR COX1[GENE] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[SLEN]" %}selected{% endif %}>Animals, COI</option>
+                        <option value="BRCA1[GENE] AND 1700:2000[SLEN]" {% if Gene == "BRCA1[GENE] AND 1700:2000[SLEN]" %}selected{% endif %}>Animals, BRCA1</option>
+                        <option value="rbcL[GENE] AND 400:600[SLEN]" {% if Gene == "rbcL[GENE] AND 400:600[SLEN]" %}selected{% endif %}>Plants, rbcL</option>
+                        <option value="matK[GENE] AND 400:600[SLEN]" {% if Gene == "matK[GENE] AND 400:600[SLEN]" %}selected{% endif %}>Plants, matK</option>
+                        <option value="ITS1" {% if Gene == "ITS1" %}selected{% endif %}>Funghi, ITS1</option>
+                        <option value="16s rRNA" {% if Gene == "16s rRNA" %}selected{% endif %}>Bacteria, 16s rRNA</option>
+                    </select>
+                    <br><br>
                     <label for="species" class="black_text small_text">Add organisms</label><br>
                     <input type="text" id="species" class="form-control max_width" name="species" placeholder="Organism">
                     <div class="side_to_side">
-                    <button type="submit" name="add" class="nav_button page_button">Add</button>
+                    <button type="submit" name="add" class="nav_button page_button" id="add">Add</button>
                         <button type="submit" name="delete_org" class="nav_button page_button" formnovalidate>Del org</button>
                     <button type="submit" name="delete_all" class="nav_button page_button" formnovalidate>Del all</button>
                     </div>

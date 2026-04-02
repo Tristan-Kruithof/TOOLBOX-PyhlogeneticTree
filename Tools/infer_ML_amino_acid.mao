@@ -3,8 +3,7 @@
 [ MEGAinfo ]
 ver                                  = 12251216-x86_64 MS Windows          
 [ DataSettings ]
-datatype                             = snNucleotide
-containsCodingNuc                    = True
+datatype                             = snProtein
 MissingBaseSymbol                    = ?
 IdenticalBaseSymbol                  = .
 GapSymbol                            = -
@@ -17,24 +16,20 @@ ppML                                 = true
 Analysis                             = Likelihood Phylogeny Reconstruction
 Statistical Method                   = Maximum Likelihood
 Phylogeny Test                       = ====================
-Test of Phylogeny                    = None
+Test of Phylogeny                    = Adaptive Bootstrap (fast)
+Threshold                            = 10.00
 Substitution Model                   = ====================
-Substitutions Type                   = Nucleotide
-Model/Method                         = Kimura 2-parameter model
+Substitutions Type                   = Amino acid
+Model/Method                         = Jones-Taylor-Thornton (JTT) model
 Rates and Patterns                   = ====================
 Rates among Sites                    = Uniform Rates
 Data Subset to Use                   = ====================
 Gaps/Missing Data                    = Use all sites
-Select Codon Positions               = 1st, 2nd, 3rd, Non-Coding
 Tree Inference Options               = ====================
 ML Heuristic Method                  = Nearest-Neighbor-Interchange (NNI)
 Initial Tree for ML                  = Make initial tree automatically (Default - NJ/MP)
 Branch Swap Filter                   = None
 System Resource Usage                = ====================
 Number of Threads                    = 4
-Genetic Code Table                   = Not Applicable
-Genetic Code                         = Not Applicable
 Has Time Limit                       = False
 Maximum Execution Time               = -1
-Rooting Method                       = Outgroup
-Outgroup Taxa                        = Homo_sapiens

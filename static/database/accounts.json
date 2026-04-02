@@ -1,26 +1,14 @@
 [
   {
-    "email": "tristankruithof19@gmail.com",
-    "newsletter": false,
-    "runs": 0,
-    "admin": true
-  },
-  {
     "email": "detristank@gmail.com",
-    "newsletter": false,
+    "newsletter": true,
+    "runs": 10,
+    "admin": false
+  },
+  {
+    "email": "tristankruithof19@gmail.com",
+    "newsletter": true,
     "runs": 0,
     "admin": true
-  },
-  {
-    "email": "jippiejajee@gmail.com",
-    "newsletter": false,
-    "runs": 0,
-    "admin": false
-  },
-  {
-    "email": "jsdafkjsadf@gmail.com",
-    "newsletter": false,
-    "runs": 0,
-    "admin": false
   }
 ]

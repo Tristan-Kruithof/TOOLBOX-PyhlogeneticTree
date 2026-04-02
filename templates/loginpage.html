@@ -3,24 +3,29 @@
 {% block content %}
     <div class="home-boxes">
     {% if user["active"] == True %}
-        <div class="side_to_side center_x">
+        <div class="side_to_side center_x black_text green">
             <div>
                 {{ login_message }}
             </div>
             <a href="{{ url_for('signup_route') }}" class="nav_button">Sign Out</a>
         </div>
 
-
-
     {% elif user["active"] == False %}
 
-        <div class="side_to_side center_x">
+        <div class="side_to_side center_x black_text important red">
             {{ login_message }}
         </div>
 
-
+    {% elif thread_state %}
+         <div class="center_y">
+            <div class="spinner"></div>
+            <p class="spinner_text">
+            Please wait...
+            </p>
+        </div>
+        <meta http-equiv="refresh" content="1">
     {% else %}
-        <form action="" method="POST">
+        <form action="" method="POST" class="black_text">
             <div class="p_bottom">
                 <label for="email">Email |</label>
                 <input id="email" type="email" name="email" placeholder="Email address" required><br><br>
