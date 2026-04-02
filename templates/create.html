@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="home-boxes">
-    {% if active_pipeline %}
+    {% if active_thread %}
         <div class="center_y">
             <div class="spinner"></div>
             <p class="spinner_text">
@@ -16,7 +16,7 @@
         {% if user["active"] %}
             <h1 class="title">
                 Create
-            </h1>
+            </h1><br>
 
             {% if image_exists %}
 
