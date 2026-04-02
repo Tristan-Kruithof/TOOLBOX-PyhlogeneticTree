@@ -1,27 +1,26 @@
 [
   {
+    "email": "tristankruithof19@gmail.com",
+    "newsletter": false,
+    "runs": 0,
+    "admin": true
+  },
+  {
     "email": "detristank@gmail.com",
-    "newsletter": true,
-    "warnings": 0
+    "newsletter": false,
+    "runs": 0,
+    "admin": true
   },
   {
     "email": "jippiejajee@gmail.com",
-    "newsletter": null,
-    "warnings": 0
+    "newsletter": false,
+    "runs": 0,
+    "admin": false
   },
   {
-    "email": "tristankruithof@gmail.com",
-    "newsletter": null,
-    "warnings": 0
-  },
-  {
-    "email": "fabser@gmail.com",
-    "newsletter": null,
-    "warnings": 0
-  },
-  {
-    "email": "dedf@ggm.com",
-    "newsletter": null,
-    "warnings": 0
+    "email": "jsdafkjsadf@gmail.com",
+    "newsletter": false,
+    "runs": 0,
+    "admin": false
   }
 ]

@@ -1,0 +1,20 @@
+name: toolbox_tree
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13
+  - biopython=1.86
+  - ete4=4.4.0
+  - mafft
+  - cython
+  - cheroot
+  - flask
+  - flask-cors
+  - sqlalchemy
+  - numpy
+  - pyqt6
+  - dnspython
+  - pip
+  - pip:
+      - email-validator

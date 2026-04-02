@@ -36,3 +36,5 @@ Genetic Code Table                   = Not Applicable
 Genetic Code                         = Not Applicable                      
 Has Time Limit                       = False                               
 Maximum Execution Time               = -1                                  
+Rooting Method                       = Outgroup
+Outgroup Taxa                        = Homo_sapiens
