@@ -3,6 +3,7 @@ import subprocess
 import time
 import os.path as path
 import os
+import re
 #from ete4 import Tree
 
 #Entrez.email = "superherofabs08@gmail.com"
@@ -48,7 +49,7 @@ class Organisms:
         self.not_found_names = []
         science_name = ""
 
-        for name in self.common_name:
+        for i, name in enumerate(self.common_name):
             time.sleep(1)
             stream = Entrez.esearch(
                 db="taxonomy",
@@ -78,10 +79,12 @@ class Organisms:
                     self.scientific_names.append(science_name)
                 else:
                     self.multiple_names.append(name)
+                    self.common_name.pop(i)
                 science_name = ""
 
             else:
                 self.not_found_names.append(name)
+                self.common_name.pop(i)
                 science_name = ""
 
         print(self.scientific_names)
@@ -89,9 +92,10 @@ class Organisms:
     def find_fastas(self):
         self.fastas = []
         self.not_found_fastas = []
+        pattern = re.compile("(.+?)\n(.+)", re.DOTALL)
 
 
-        for name in self.scientific_names:
+        for i,name in enumerate(self.scientific_names):
             if isinstance(name, str):
                 print(name)
                 name = name.strip()
@@ -103,10 +107,12 @@ class Organisms:
 
                 if record["IdList"]:
                     seq_id = record["IdList"][0]
-                    stream2 = Entrez.efetch(db="nucleotide", id=seq_id, rettype="fasta", retmode="text")
+                    stream2 = Entrez.efetch(db="protein", id=seq_id, rettype="fasta", retmode="text")
                     fasta = stream2.read()
                     stream2.close()
-                    self.fastas.append(fasta)
+                    fa = re.search(pattern, fasta)
+                    new = f"{self.common_name[i]}\n{fa[2]}"
+                    self.fastas.append(new)
 
                 else:
                     self.not_found_fastas.append(name)
@@ -123,10 +129,12 @@ class Organisms:
 
                     if record["IdList"]:
                         seq_id = record["IdList"][0]
-                        stream2 = Entrez.efetch(db="nucleotide", id=seq_id, rettype="fasta", retmode="text")
+                        stream2 = Entrez.efetch(db="protein", id=seq_id, rettype="fasta", retmode="text")
                         fasta = stream2.read()
                         stream2.close()
-                        self.fastas.append(fasta)
+                        fa = re.search(pattern, fasta)
+                        new = f"{self.common_name[i]}\n{fa[2]}"
+                        self.fastas.append(new)
                         break
 
                     else:
@@ -181,7 +189,7 @@ class Run:
                  output_mega=path.abspath("Tools/ete4_input/newick.nwk"), settings=path.abspath("Tools/infer_ML_amino_acid.mao")):
 
         if organisms is None:
-            organisms = ["Elephant", "Pig", "horse", "Lion", "Tiger"]
+            organisms = ["Elephant", "FAKE_ANIMAL", "Pig", "horse", "Lion", "Tiger"]
         # Location
         self.location = location
         # Gene
@@ -246,7 +254,7 @@ class Run:
 
 def main():
     time1 = time.time()
-    tree = Run("superherofabs08@gmail.com")
+    tree = Run("superherofabs08@gmail.com", "BRCA1[GENE] AND 1700:2000[SLEN]")
     tree.standard()
 
     time2 = time.time()
