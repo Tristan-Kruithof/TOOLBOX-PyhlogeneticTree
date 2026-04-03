@@ -4,7 +4,9 @@ import time
 import os.path as path
 import os
 import re
-#from ete4 import Tree, TreeStyle, NodeStyle
+from ete4 import Tree
+from ete4.treeview import TreeStyle
+
 
 #Entrez.email = "superherofabs08@gmail.com"
 #Entrez.api_key = "94b49b77b56c715b8dab043b667c611d8408"
@@ -111,7 +113,7 @@ class Organisms:
                     fasta = stream2.read()
                     stream2.close()
                     fa = re.search(pattern, fasta)
-                    new = f"{self.common_name[i]}\n{fa[2]}"
+                    new = f">{self.common_name[i]}\n{fa[2]}"
                     self.fastas.append(new)
 
                 else:
@@ -133,7 +135,7 @@ class Organisms:
                         fasta = stream2.read()
                         stream2.close()
                         fa = re.search(pattern, fasta)
-                        new = f"{self.common_name[i]}\n{fa[2]}"
+                        new = f">{self.common_name[i]}\n{fa[2]}"
                         self.fastas.append(new)
                         break
 
@@ -176,15 +178,13 @@ class CC_Tools:
 
 
 
-#def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
-#    "https://etetoolkit.org/docs/latest/reference/reference_treeview.html"
-#    style = TreeStyle()
-#    color = NodeStyle()
-#    color.bgcolor = "SlateBlue"
-#    style.mode = "r" or "c"
-#    with open(newick_file) as f:
-#        newick = f.read()
-#        return Tree(newick)
+def make_tree(newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
+    with open(newick_file) as f:
+        newick = f.read()
+        t = Tree(newick)
+        style = TreeStyle()
+        style.mode = "c"
+        return t, style
 
 
 class Run:
@@ -227,8 +227,8 @@ class Run:
         megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
         megurt.run()
 
-        tree = make_tree()
-        tree.render(f"static/pipeline_output/{self.email}tree.png")
+        tree, style = make_tree()
+        tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style= style)
 
 
     def fasta_run(self):
@@ -240,7 +240,7 @@ class Run:
         megurt.run()
 
         tree = make_tree()
-        tree.render(f"static/pipeline_output/{self.email}tree.png")
+        tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style=style)
 
 
 #def tree():
