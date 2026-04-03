@@ -4,7 +4,7 @@ import time
 import os.path as path
 import os
 import re
-#from ete4 import Tree
+#from ete4 import Tree, TreeStyle, NodeStyle
 
 #Entrez.email = "superherofabs08@gmail.com"
 #Entrez.api_key = "94b49b77b56c715b8dab043b667c611d8408"
@@ -177,6 +177,11 @@ class CC_Tools:
 
 
 #def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
+#    "https://etetoolkit.org/docs/latest/reference/reference_treeview.html"
+#    style = TreeStyle()
+#    color = NodeStyle()
+#    color.bgcolor = "SlateBlue"
+#    style.mode = "r" or "c"
 #    with open(newick_file) as f:
 #        newick = f.read()
 #        return Tree(newick)
