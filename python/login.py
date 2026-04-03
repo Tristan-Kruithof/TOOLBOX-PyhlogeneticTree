@@ -2,25 +2,29 @@ import json
 import os
 import datetime
 from email_validator import validate_email
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 class Account:
-    def __init__(self, email="", newsletter=""):
+    def __init__(self, email="", newsletter="", admin=False, **kwargs):
         self.email = email.strip()
-        self.newsletter = newsletter
+        self.newsletter = bool(newsletter)
         self.runs = 0
         self.status = [None, ""]
         self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         self.filepath_acc = os.path.join(self.BASE_DIR, '../static', 'database', "accounts.json")
         self.filepath_time = os.path.join(self.BASE_DIR, '../static', 'database', "time")
         self.accounts = None
-        self.admin = False
+        self.account = None
+        self.admin = admin
         self.secret_password = "ditiseensupergeheimwachtwoord"
         self.check_date()
 
 
     def __str__(self):
-        return f"Email: {self.email}, Newsletter: {self.newsletter}, Runs: {self.runs}, Status: {self.status}"
+        return f"Email: {self.email}, Newsletter: {self.newsletter}, Admin {self.admin}, Runs: {self.runs}, Status: {self.status}"
 
 
     def check_date(self):
@@ -40,9 +44,11 @@ class Account:
     def load_accounts(self):
         with open(self.filepath_acc, "r") as account_file:
             self.accounts = json.load(account_file)
-            account = next((user for user in self.accounts if user["email"] == self.email), None)
-
-        return account
+            self.account = next((user for user in self.accounts if user["email"] == self.email), None)
+            if self.account:
+                self.newsletter = self.account['newsletter']
+                self.runs = self.account['runs']
+                self.admin = self.account['admin']
 
 
     def save_accounts(self, account_list):
@@ -51,20 +57,22 @@ class Account:
 
 
     def signin(self, password=""):
-        account = self.load_accounts()
+        self.load_accounts()
         
-        if not account:
+        if not self.account:
             try:
+                print(self.email)
                 verified = validate_email(self.email, check_deliverability=True)
                 self.email = verified.normalized
 
-                self.newsletter = bool(self.newsletter)
+                if password:
+                    self.admin = self.secret_password == password.lower().strip()
 
                 self.accounts.append({"email": self.email, "newsletter": self.newsletter, "runs" : self.runs, "admin": self.admin})
                 self.save_accounts(self.accounts)
 
                 if self.admin:
-                    self.status = [True, "Successfully registered and logged in as admin!"]
+                    self.status = [True, "Successfully registered and logged in as admin! |"]
                 else:
                     self.status = [True, "Successfully registered and logged in! |"]
 
@@ -72,8 +80,8 @@ class Account:
                 self.status = [False, f"Email is invalid | {str(e)}"]
 
         else:
-            self.runs = account['runs']
-            self.admin = account['admin']
+            self.runs = self.account['runs']
+            self.admin = self.account['admin']
 
             if self.runs < 10 and not self.admin:
                 self.status = [True, "Account already exists, but logged in anyways. |"]
@@ -84,28 +92,61 @@ class Account:
             else:
                 self.status = [True, "Account has had more than 10 runs, but logged in anyways as admin. |"]
 
-    def send_newsletter(self):
-        pass
+
+    def send_newsletter(self, title="", body="", exclude=True):
+        if title and body:
+            self.load_accounts()
+            accounts = self.accounts
+            bool(exclude)
+
+            accounts = [user for user in accounts if user["newsletter"]]
+
+            if exclude and self.newsletter:
+                accounts = [user for user in accounts if not user["email"] == self.email]
+
+            if accounts:
+                sender = "tristankruithof19@gmail.com"
+                password = "xske qevv xtyu xovp"
+
+                with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+                    server.login(sender, password)
+                    for account in accounts:
+                        email = account['email']
+                        msg = MIMEMultipart()
+                        msg['From'] = sender
+                        msg['To'] = email
+                        msg['Subject'] = title
+                        msg.attach(MIMEText(body, "plain"))
+                        server.sendmail(sender, email, msg.as_string())
+
+            self.status = [True, "Newsletter sent!"]
+            return self.status
+        else:
+            self.status = [False, "No title or body was given!"]
+            return self.status
 
 
     def add_run(self, email=''):
         if email:
             self.email = email
-        account = self.load_accounts()
-        if account:
-            runs = account['runs']
+        self.load_accounts()
+        if self.account:
+            runs = self.account['runs']
             if runs >= 10:
-                return False, "Too many runs!"
+                self.status = [False, "Too many runs!"]
+                return self.status
             else:
                 for user in self.accounts:
-                    if user['email'] == account['email']:
+                    if user['email'] == self.account['email']:
                         user['runs'] += 1
 
                 self.save_accounts(self.accounts)
 
-                return True, ""
+                self.status = [True, ""]
+                return self.status
 
-        return False, "No account added!"
+        self.status = [False, "No account added!"]
+        return self.status
 
 
     def reset_runs(self):

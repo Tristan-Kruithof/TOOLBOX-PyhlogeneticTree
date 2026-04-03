@@ -95,7 +95,7 @@ class Organisms:
             if isinstance(name, str):
                 print(name)
                 name = name.strip()
-                time.sleep(1)
+                time.sleep(0.5)
                 term = f"{name}[Organism] AND {self.gene}"
                 stream = Entrez.esearch(db="protein", term=term, retmax=1)
                 record = Entrez.read(stream)
@@ -115,7 +115,7 @@ class Organisms:
                 for item in name:
                     print(item)
                     item = item.strip()
-                    time.sleep(1)
+                    time.sleep(0.5)
                     term = f"{item}[Organism] AND {self.gene}"
                     stream = Entrez.esearch(db="protein", term=term, retmax=1)
                     record = Entrez.read(stream)
@@ -167,18 +167,11 @@ class CC_Tools:
                 subprocess.run(["mafft", "--auto", self.data], stdout=f, check=True)
 
 
+
 #def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
 #    with open(newick_file) as f:
 #        newick = f.read()
 #        return Tree(newick)
-
-
-#def compare_trees(tree1, tree2):
-#    t1 = Tree(f"{tree1}")
-#    t2 = Tree(f"{tree2}")
-#    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
-
-#    return f"Normalized RF:, {rf / max_rf}"
 
 
 class Run:
@@ -222,7 +215,8 @@ class Run:
         megurt.run()
 
         tree = make_tree()
-        tree.render(f"static/pipeline_output/{self.email}_tree.png")
+        tree.render(f"static/pipeline_output/{self.email}tree.png")
+
 
     def fasta_run(self):
 
@@ -233,17 +227,31 @@ class Run:
         megurt.run()
 
         tree = make_tree()
-        tree.render(f"static/pipeline_output/{self.email}_tree.png")
+        tree.render(f"static/pipeline_output/{self.email}tree.png")
 
+
+#def tree():
+#    t = Tree(open(path.abspath("Tools/newick.nwk")).read())
+#
+#    return t
+
+
+#def compare_trees(tree1, tree2):
+#    t1 = Tree(f"{tree1}")
+#    t2 = Tree(f"{tree2}")
+#    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
+
+#    return f"Normalized RF:, {rf / max_rf}"
 
 
 def main():
     time1 = time.time()
-    tree = Run("detristank@gmail.com")
+    tree = Run("superherofabs08@gmail.com")
     tree.standard()
 
     time2 = time.time()
     print(time2 - time1)
+
 
 if __name__ == "__main__":
     main()

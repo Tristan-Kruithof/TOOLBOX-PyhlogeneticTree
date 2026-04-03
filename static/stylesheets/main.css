@@ -425,3 +425,21 @@ Loading spinner styling and logic
     }
 }
 
+.title {
+    height: 30px;
+}
+
+.body {
+    height: 400px
+}
+
+.news {
+    color: darkslategray;
+    font-weight: lighter;
+    width: 500px;
+    resize: none;
+    border: 3px #3c5a28 solid;
+    border-radius: 10px;
+}
+
+
