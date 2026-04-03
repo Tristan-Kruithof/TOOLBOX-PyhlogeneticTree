@@ -10,5 +10,11 @@
     "newsletter": true,
     "runs": 0,
     "admin": true
+  },
+  {
+    "email": "kindsfabian@ziggo.nl",
+    "newsletter": false,
+    "runs": 1,
+    "admin": false
   }
 ]
