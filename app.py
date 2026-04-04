@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+
+import DNA
 from python.login import Account
 import PipeLine
 import os.path as path
@@ -125,6 +127,20 @@ def front_end_route():
         return redirect(url_for('front_end_route'))
     return render_template('get.html', login_status=login_status)
 
-  
+@app.route('/home/DNA', methods=['POST', 'GET'])
+def DNA_route():
+    if request.method == 'POST':
+        kwargs = {
+            'DNA_sequentie': request.form['DNA_sequentie']
+        }
+
+        DNA_sequence = []
+        DNA_field = request.form.get('DNA_sequentie')
+        if DNA_field:
+            DNA_sequence.append(DNA_field)
+            DNA_function = DNA.DNA(sequentie=DNA_field)
+            #DNA_function.vertalen_naar_RNA()
+        return render_template('DNA.html', sequence=DNA_function)
+    return render_template('get.html')
 if __name__ == '__main__':
     app.run()

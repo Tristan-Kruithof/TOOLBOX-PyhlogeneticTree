@@ -2,7 +2,7 @@ from Bio import Entrez
 import subprocess
 import time
 import os.path as path
-from ete4 import Tree
+#from ete4 import Tree
 import python.login
 
 
