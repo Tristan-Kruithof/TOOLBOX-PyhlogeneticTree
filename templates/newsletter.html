@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+    <div class="home-boxes">
+    {% if threaded_state %}
+        <div class="center_y">
+            <div class="spinner"></div>
+            <p class="spinner_text">
+            Please wait...
+            </p>
+        </div>
+        <meta http-equiv="refresh" content="2">
+    {% else %}
+        {% if user["active"] %}
+            <h1 class="title">
+                Newsletter
+            </h1><br>
+            <form class="black_text small_text" action="" method="POST">
+                <label for="title">Title</label><br>
+                <input id="title" type="text" name="title" class="news title" placeholder="Write your title... 45 max" maxlength="45" required><br><br>
+                <label for="body">Description</label><br>
+                <textarea id="body" name="body" rows="8" class="news body" placeholder="Write your news... 1000 max" autocomplete="on" maxlength="400" required></textarea><br><br>
+                <button type="submit" class="nav_button page_button">Send</button>
+                <input type="checkbox" id="exclude" name="exclude">
+                <label for="exclude">Exclude yourself</label>
+            </form><br><br>
+            {% if status %}
+            <div class="black_text green">
+            {% else %}
+            <div class="black_text important red">
+            {% endif %}
+                {{ message }}
+            </div>
+        {% else %}
+            <p>
+                Can only be used when logged in!
+            </p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

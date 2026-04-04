@@ -2,10 +2,10 @@
 
 {% block content %}
     <div class="home-boxes">
-    {% if login_status%}
+    {% if user["active"] %}
             <h1 class="title">
                 Compare
-            </h1>
+            </h1><br>
             <p>
                 Compare your trees here.
             </p>

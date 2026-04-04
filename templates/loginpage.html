@@ -1,35 +1,51 @@
 {% extends "main.html" %}
 
 {% block content %}
-    {% if login_status == True %}
     <div class="home-boxes">
-        <div class="side_to_side">
+    {% if user["active"] == True %}
+        <div class="side_to_side center_x black_text green">
             <div>
                 {{ login_message }}
             </div>
             <a href="{{ url_for('signup_route') }}" class="nav_button">Sign Out</a>
         </div>
-    </div>
 
+    {% elif user["active"] == False %}
 
-    {% elif login_status == False %}
-    <div class="home-boxes">
-        <div>
+        <div class="side_to_side center_x black_text important red">
             {{ login_message }}
         </div>
-    </div>
 
-
-    {% else %}
-        <div class="home-boxes">
-        <form action="" method="POST">
-            <label for="email">Fill in your email!</label>
-            <input id="email" type="email" name="email" placeholder="Email address" required><br><br>
-
-            <label for="newsletter">Sign up for our newsletter!</label>
-            <input type="checkbox" name="newsletter" id="newsletter">
-            <button type="submit" name="submit">Login</button>
-        </form>
+    {% elif thread_state %}
+         <div class="center_y">
+            <div class="spinner"></div>
+            <p class="spinner_text">
+            Please wait...
+            </p>
         </div>
+        <meta http-equiv="refresh" content="1">
+    {% else %}
+        <form action="" method="POST" class="black_text">
+            <div class="p_bottom">
+                <label for="email">Email |</label>
+                <input id="email" type="email" name="email" placeholder="Email address" required><br><br>
+
+                <label for="newsletter">Newsletter |</label>
+                <input type="checkbox" name="newsletter" id="newsletter">
+                <label for="admin_check">Admin |</label>
+                <input type="checkbox" name="admin_check" id="admin_check">
+            </div>
+            <div id="admin_box" style="display: none">
+                <label for="admin_pass"></label>
+                <input type="password" name="admin_pass" placeholder="Fill in secret password" id="admin_pass" maxlength="30">
+            </div>
+            <br>
+            <button type="submit" name="submit" class="nav_button page_button">Login</button>
+        </form>
     {% endif %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/javascript/login.js"></script>
 {% endblock %}
