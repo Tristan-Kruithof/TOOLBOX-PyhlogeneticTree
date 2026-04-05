@@ -8,16 +8,18 @@ from email.mime.multipart import MIMEMultipart
 
 
 class Account:
-    def __init__(self, email="", newsletter="", admin=False, **kwargs):
+    def __init__(self, email="", newsletter="", admin=False, active=False):
         self.email = email.strip()
         self.newsletter = bool(newsletter)
         self.runs = 0
-        self.status = [None, ""]
+        self.status = [active, ""]
         self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         self.filepath_acc = os.path.join(self.BASE_DIR, '../static', 'database', "accounts.json")
         self.filepath_time = os.path.join(self.BASE_DIR, '../static', 'database', "time")
-        self.accounts = None
-        self.account = None
+        self.newick_path = os.path.join(self.BASE_DIR, '../Tools', 'ete4_input', "newick.nwk")
+        self.accounts = []
+
+        self.account = {}
         self.admin = admin
         self.secret_password = "ditiseensupergeheimwachtwoord"
         self.check_date()
@@ -44,32 +46,36 @@ class Account:
     def load_accounts(self):
         with open(self.filepath_acc, "r") as account_file:
             self.accounts = json.load(account_file)
-            self.account = next((user for user in self.accounts if user["email"] == self.email), None)
+            self.account = next((user for user in self.accounts if user["email"] == self.email), {})
             if self.account:
                 self.newsletter = self.account['newsletter']
                 self.runs = self.account['runs']
                 self.admin = self.account['admin']
 
 
-    def save_accounts(self, account_list):
+    def save_accounts(self):
         with open(self.filepath_acc, "w") as account_file:
-            json.dump(account_list, account_file, indent=2)
+            if self.account:
+                acc_index = next(idx for idx, user in enumerate(self.accounts) if user['email'] == self.account['email'])
+                self.accounts[acc_index] = self.account
+
+            json.dump(self.accounts, account_file, indent=2)
 
 
     def signin(self, password=""):
         self.load_accounts()
-        
+        print(self.account)
+
         if not self.account:
             try:
-                print(self.email)
                 verified = validate_email(self.email, check_deliverability=True)
                 self.email = verified.normalized
 
                 if password:
                     self.admin = self.secret_password == password.lower().strip()
 
-                self.accounts.append({"email": self.email, "newsletter": self.newsletter, "runs" : self.runs, "admin": self.admin})
-                self.save_accounts(self.accounts)
+                self.accounts.append({"email": self.email, "newsletter": self.newsletter, "runs" : self.runs, "admin": self.admin, "trees" : {}})
+                self.save_accounts()
 
                 if self.admin:
                     self.status = [True, "Successfully registered and logged in as admin! |"]
@@ -78,7 +84,6 @@ class Account:
 
             except Exception as e:
                 self.status = [False, f"Email is invalid | {str(e)}"]
-
         else:
             self.runs = self.account['runs']
             self.admin = self.account['admin']
@@ -136,11 +141,8 @@ class Account:
                 self.status = [False, "Too many runs!"]
                 return self.status
             else:
-                for user in self.accounts:
-                    if user['email'] == self.account['email']:
-                        user['runs'] += 1
-
-                self.save_accounts(self.accounts)
+                self.account['runs'] += 1
+                self.save_accounts()
 
                 self.status = [True, ""]
                 return self.status
@@ -149,13 +151,33 @@ class Account:
         return self.status
 
 
+    def save_tree(self, tree_name):
+        if os.path.exists(self.newick_path):
+            with open(os.path.join(self.newick_path), "r") as tree_file:
+                tree_newick = tree_file.read()
+
+                self.load_accounts()
+                trees = self.account['trees']
+
+                if tree_name in trees:
+                    self.status = [False, "Tree already exists!"]
+                else:
+                    trees[tree_name] = tree_newick
+                    self.account['trees'] = trees
+                    self.save_accounts()
+
+                    self.status = [True, "Tree saved!"]
+        else:
+            self.status = [False, "No newick found!"]
+
+
     def reset_runs(self):
         self.load_accounts()
 
         for user in self.accounts:
             user['runs'] = 0
 
-        self.save_accounts(self.accounts)
+        self.save_accounts()
 
 
 if __name__ == '__main__':

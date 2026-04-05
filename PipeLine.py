@@ -101,7 +101,7 @@ class Organisms:
                 name = name.strip()
                 time.sleep(0.5)
                 term = f"{name}[Organism] AND {self.gene}"
-                stream = Entrez.esearch(db="protein", term=term, retmax=1)
+                stream = Entrez.esearch(db="nucleotide", term=term, retmax=1)
                 record = Entrez.read(stream)
                 stream.close()
 
@@ -123,7 +123,7 @@ class Organisms:
                     item = item.strip()
                     time.sleep(0.5)
                     term = f"{item}[Organism] AND {self.gene}"
-                    stream = Entrez.esearch(db="protein", term=term, retmax=1)
+                    stream = Entrez.esearch(db="nucleotide", term=term, retmax=1)
                     record = Entrez.read(stream)
                     stream.close()
 
@@ -228,7 +228,7 @@ class Run:
         megurt.run()
 
         tree = make_tree()
-        tree.render(f"static/pipeline_output/{self.email}tree.png")
+        tree.render(f"static/pipeline_output/{self.email}_tree.png")
 
 
     def fasta_run(self):
@@ -240,21 +240,16 @@ class Run:
         megurt.run()
 
         tree = make_tree()
-        tree.render(f"static/pipeline_output/{self.email}tree.png")
+        tree.render(f"static/pipeline_output/{self.email}_tree.png")
 
 
-#def tree():
-#    t = Tree(open(path.abspath("Tools/newick.nwk")).read())
-#
-#    return t
+def compare_trees(tree1, tree2):
+   t1 = Tree(f"{tree1}")
+   t2 = Tree(f"{tree2}")
 
+   rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.robinson_foulds(t2, unrooted_trees=True)
 
-#def compare_trees(tree1, tree2):
-#    t1 = Tree(f"{tree1}")
-#    t2 = Tree(f"{tree2}")
-#    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
-
-#    return f"Normalized RF:, {rf / max_rf}"
+   return {"rf" : rf, "max_rf" : max_rf, "eff_size" : eff_size, "f1" : f1, "f2" : f2, "common_nodes" : common_nodes, "subtrees" : subtrees}
 
 
 def main():

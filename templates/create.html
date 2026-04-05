@@ -26,7 +26,7 @@
                     </p>
                 {% else  %}
                     <p class="black_text important green">
-                    Previous tree
+                        Previous tree
                     </p>
                 {% endif %}
                 <div class="image_box">
@@ -38,8 +38,12 @@
                         Click to download!
                     </p>
                 </div>
+                <form action="" method="POST" class="black_text small_text" enctype="multipart/form-data">
+                    <button  type="submit" name="save" class="nav_button page_button">Save as</button>
+                    <label for="tree_name"></label>
+                    <input id="tree_name" class="input_box" name="tree_name" type="text" maxlength="30" placeholder="name" required><br><br>
+                </form>
             {% endif %}
-
             <form id="organism" method="POST" action="#species" class="black_text small_text" enctype="multipart/form-data">
                 <div>
                     <label for="input_method">Method of input</label><br>
@@ -51,7 +55,7 @@
 
                 <div id="input_fasta" class="p_top p_left" style="display: none">
                     <label for="multi_fasta_file" class="black_text small_text">Select fasta file</label><br>
-                    <input type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna .faa" placeholder="Multi-fasta" ><br><br>
+                    <input class="input_box file_input" type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna .faa" placeholder="Multi-fasta" ><br><br>
                     <button type="submit" name="create" class="nav_button page_button">Create</button>
                 </div>
 
@@ -67,7 +71,7 @@
                     </select>
                     <br><br>
                     <label for="species" class="black_text small_text">Add organisms</label><br>
-                    <input type="text" id="species" class="form-control max_width" name="species" placeholder="Organism">
+                    <input type="text" id="species" class="organism_input max_width input_box" name="species" placeholder="Organism">
                     <div class="side_to_side">
                     <button type="submit" name="add" class="nav_button page_button" id="add">Add</button>
                         <button type="submit" name="delete_org" class="nav_button page_button" formnovalidate>Del org</button>

@@ -3,16 +3,43 @@
 {% block content %}
     <div class="home-boxes">
     {% if user["active"] %}
-            <h1 class="title">
-                Compare
-            </h1><br>
-            <p>
-                Compare your trees here.
-            </p>
+        <h1 class="title">
+            Compare
+        </h1><br>
+        <div class="black_text">
+        <p>Compare your trees saved on | {{ user['email'] }}</p><br>
+        {% if compare %}
+            <ol>
+            {% for key, value in compare.items() %}
+            <li><strong>{{ key }}</strong> : {{ value }}</li><br><br>
+            {% endfor %}
+            </ol>
+        {% else %}
+            {% if trees %}
+            <form action="" method="POST" >
+                <label for="tree1">Tree 1</label>
+                <select id="tree1" name="tree1">
+                    {% for name, tree in trees.items() %}
+                    <option value="{{ tree }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="tree2">Tree 2</label>
+                <select id="tree2" name="tree2">
+                    {% for name, tree in trees.items() %}
+                    <option value="{{ tree }}">{{ name }}</option>
+                    {% endfor %}
+                </select><br><br><br>
+                <button type="submit" class="nav_button page_button">Compare</button>
+            </form>
+            {% else %}
+                <p>No trees were found!</p>
+            {% endif %}
+        {% endif %}
     {% else %}
         <p>
             Can only be used when logged in!
         </p>
     {% endif %}
+        </div>
     </div>
 {% endblock %}

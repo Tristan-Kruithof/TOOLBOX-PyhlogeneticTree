@@ -293,6 +293,11 @@ CSS FOR THE DROP BUTTON
     width: 900px;
 }
 
+.phylotree {
+    width: 100%;
+    height: auto;
+}
+
 .create_image {
     max-width: 100%;
     height: auto;
@@ -321,7 +326,7 @@ CSS FOR THE DROP BUTTON
 }
 
 
-.form-control {
+.organism_input {
     width: 100%;
     margin-bottom: 10px;
     height: 40px;
@@ -425,21 +430,35 @@ Loading spinner styling and logic
     }
 }
 
-.title {
+.news_title {
     height: 30px;
-}
-
-.body {
-    height: 400px
-}
-
-.news {
-    color: darkslategray;
-    font-weight: lighter;
     width: 500px;
-    resize: none;
-    border: 3px #3c5a28 solid;
     border-radius: 10px;
 }
 
+.news_body {
+    height: 400px;
+    width: 500px;
+    resize: none;
+    border-radius: 10px;
+}
+
+.file_input {
+    background-color: #fff;
+}
+
+.input_box {
+    color: darkslategray;
+    font-weight: lighter;
+    border: 4px #1e1e1d solid;
+    border-radius: 5px;
+}
+
+select {
+    color : #ffffff;
+    font-weight: bold;
+    border: 3px #1e1e1d solid;
+    background-color: #454444;
+    border-radius: 5px;
+}
 
