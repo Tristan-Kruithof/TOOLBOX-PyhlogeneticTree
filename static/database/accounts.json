@@ -14,6 +14,19 @@
     "email": "tristankruithof19@gmail.com",
     "newsletter": false,
     "runs": 0,
+    "admin": true
+  },
+  {
+    "email": "kindsfabian@ziggo.nl",
+    "newsletter": false,
+    "runs": 0,
+    "admin": false
+  },
+  {
+    "email": "superherofabs08@gmail.com",
+    "newsletter": false,
+    "runs": 6,
+    "admin": false
     "admin": true,
     "trees": {}
   }

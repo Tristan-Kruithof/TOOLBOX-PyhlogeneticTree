@@ -85,6 +85,7 @@ def create_route():
     elif request.method == 'POST':
         form = request.form
         gene = form.get('gene')
+        shape = form.get('Graph')
         input_method = form.get('input_method')
 
         if "add" in form:
@@ -114,7 +115,7 @@ def create_route():
 
         else:
             acc = Account(**user)
-            tree = PipeLine.Run(email, gene)
+            tree = PipeLine.Run(email, gene, shape)
             thread_kwargs =  {"organisms": organisms, "tree_instance": tree, "option": "common", "email": email}
 
             if input_method == "common":
@@ -178,7 +179,7 @@ def compare_route():
     acc.load_accounts()
     trees = acc.account.get('trees')
     compare = {}
-    
+
     if request.method == 'POST':
         tree1 = request.form.get('tree1')
         tree2 = request.form.get('tree2')

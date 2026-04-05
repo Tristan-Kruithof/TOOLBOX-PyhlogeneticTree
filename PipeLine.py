@@ -4,7 +4,9 @@ import time
 import os.path as path
 import os
 import re
-#from ete4 import Tree, TreeStyle, NodeStyle
+from ete4 import Tree
+from ete4.treeview import TreeStyle
+
 
 #Entrez.email = "superherofabs08@gmail.com"
 #Entrez.api_key = "94b49b77b56c715b8dab043b667c611d8408"
@@ -101,7 +103,7 @@ class Organisms:
                 name = name.strip()
                 time.sleep(0.5)
                 term = f"{name}[Organism] AND {self.gene}"
-                stream = Entrez.esearch(db="nucleotide", term=term, retmax=1)
+                stream = Entrez.esearch(db="protein", term=term, retmax=1)
                 record = Entrez.read(stream)
                 stream.close()
 
@@ -111,7 +113,7 @@ class Organisms:
                     fasta = stream2.read()
                     stream2.close()
                     fa = re.search(pattern, fasta)
-                    new = f"{self.common_name[i]}\n{fa[2]}"
+                    new = f">{self.common_name[i]}\n{fa[2]}"
                     self.fastas.append(new)
 
                 else:
@@ -123,7 +125,7 @@ class Organisms:
                     item = item.strip()
                     time.sleep(0.5)
                     term = f"{item}[Organism] AND {self.gene}"
-                    stream = Entrez.esearch(db="nucleotide", term=term, retmax=1)
+                    stream = Entrez.esearch(db="protein", term=term, retmax=1)
                     record = Entrez.read(stream)
                     stream.close()
 
@@ -133,7 +135,7 @@ class Organisms:
                         fasta = stream2.read()
                         stream2.close()
                         fa = re.search(pattern, fasta)
-                        new = f"{self.common_name[i]}\n{fa[2]}"
+                        new = f">{self.common_name[i]}\n{fa[2]}"
                         self.fastas.append(new)
                         break
 
@@ -176,19 +178,17 @@ class CC_Tools:
 
 
 
-#def make_tree(newick_file=path.abspath("Tools/newick.nwk")):
-#    "https://etetoolkit.org/docs/latest/reference/reference_treeview.html"
-#    style = TreeStyle()
-#    color = NodeStyle()
-#    color.bgcolor = "SlateBlue"
-#    style.mode = "r" or "c"
-#    with open(newick_file) as f:
-#        newick = f.read()
-#        return Tree(newick)
+def make_tree(shape, newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
+    with open(newick_file) as f:
+        newick = f.read()
+        t = Tree(newick)
+        style = TreeStyle()
+        style.mode = shape
+        return t, style
 
 
 class Run:
-    def __init__(self, email, gene, method=1, organisms=None,
+    def __init__(self, email, gene, shape, method=1, organisms=None,
                  location=path.abspath("Tools"), input_mafft=path.abspath("Tools/mafft_input/sequences.fasta"),
                  output_mafft=path.abspath("Tools/mega_input/aligned_sequences.fasta"),input_mega=path.abspath("Tools/mega_input/aligned_sequences.fasta"),
                  output_mega=path.abspath("Tools/ete4_input/newick.nwk"), settings=path.abspath("Tools/infer_ML_amino_acid.mao")):
@@ -210,6 +210,7 @@ class Run:
         self.method = method
         self.organisms = organisms
         self.email = email
+        self.shape = shape
 
 
     def standard(self, method=None, organisms=None):
@@ -227,8 +228,8 @@ class Run:
         megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
         megurt.run()
 
-        tree = make_tree()
-        tree.render(f"static/pipeline_output/{self.email}_tree.png")
+        tree, style = make_tree(self.shape)
+        tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style= style)
 
 
     def fasta_run(self):
@@ -239,8 +240,8 @@ class Run:
         megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
         megurt.run()
 
-        tree = make_tree()
-        tree.render(f"static/pipeline_output/{self.email}_tree.png")
+        tree, style = make_tree(self.shape)
+        tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style=style)
 
 
 def compare_trees(tree1, tree2):
