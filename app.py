@@ -210,9 +210,11 @@ def about_route():
 def signup_route():
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     global threading_active
-    email = session.get('pending_email', '')
-    threaded_state = threading_active.get(user['email'], {})
+
+    email = session.get('pending_email', '') or user['email']
+    threaded_state = threading_active.get(email, {})
     active = threaded_state.get('active')
+
     info_packet = threaded_state.get('info_packet')
     message = ''
 
