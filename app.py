@@ -77,6 +77,7 @@ def create_route():
         if request.method == 'POST':
             form = request.form
             gene = form.get('gene')
+            shape = form.get('Graph')
             input_method = form.get('input_method')
 
             if "add" in form:
@@ -100,7 +101,14 @@ def create_route():
 
             else:
                 acc = Account(**user)
-                tree = PipeLine.Run(email, gene)
+                try:
+                    tree = PipeLine.Run(email, gene, shape)
+                except RuntimeError:
+                    return render_template('create.html', user=user, image_exists=image_exists, email=email,
+                                           new_image=new_image,
+                                           organism_list=organisms, message=message, input_method=input_method,
+                                           active_thread=active_thread)
+
                 thread_kwargs =  {"organisms": organisms, "tree_instance": tree, "option": "common", "email": email}
 
                 if input_method == "common":

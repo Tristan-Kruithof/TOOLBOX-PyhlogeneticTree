@@ -2,7 +2,7 @@
   {
     "email": "detristank@gmail.com",
     "newsletter": true,
-    "runs": 10,
+    "runs": 0,
     "admin": false
   },
   {
@@ -14,7 +14,13 @@
   {
     "email": "kindsfabian@ziggo.nl",
     "newsletter": false,
-    "runs": 7,
+    "runs": 0,
+    "admin": false
+  },
+  {
+    "email": "superherofabs08@gmail.com",
+    "newsletter": false,
+    "runs": 6,
     "admin": false
   }
 ]

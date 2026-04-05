@@ -178,17 +178,17 @@ class CC_Tools:
 
 
 
-def make_tree(newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
+def make_tree(shape, newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
     with open(newick_file) as f:
         newick = f.read()
         t = Tree(newick)
         style = TreeStyle()
-        style.mode = "c"
+        style.mode = shape
         return t, style
 
 
 class Run:
-    def __init__(self, email, gene, method=1, organisms=None,
+    def __init__(self, email, gene, shape, method=1, organisms=None,
                  location=path.abspath("Tools"), input_mafft=path.abspath("Tools/mafft_input/sequences.fasta"),
                  output_mafft=path.abspath("Tools/mega_input/aligned_sequences.fasta"),input_mega=path.abspath("Tools/mega_input/aligned_sequences.fasta"),
                  output_mega=path.abspath("Tools/ete4_input/newick.nwk"), settings=path.abspath("Tools/infer_ML_amino_acid.mao")):
@@ -210,6 +210,7 @@ class Run:
         self.method = method
         self.organisms = organisms
         self.email = email
+        self.shape = shape
 
 
     def standard(self, method=None, organisms=None):
@@ -227,7 +228,7 @@ class Run:
         megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
         megurt.run()
 
-        tree, style = make_tree()
+        tree, style = make_tree(self.shape)
         tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style= style)
 
 
