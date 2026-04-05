@@ -3,9 +3,13 @@ import subprocess
 import time
 import os.path as path
 import os
+os.environ["QT_QPA_PLATFORM"] = "offscreen"
+os.environ["DISPLAY"] = ""
+
 import re
 from ete4 import Tree
 from ete4.treeview import TreeStyle
+
 
 
 #Entrez.email = "superherofabs08@gmail.com"
@@ -184,6 +188,9 @@ def make_tree(shape, newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
         t = Tree(newick)
         style = TreeStyle()
         style.mode = shape
+
+        print(shape)
+        print(style)
         return t, style
 
 
@@ -213,6 +220,7 @@ class Run:
         self.shape = shape
 
 
+
     def standard(self, method=None, organisms=None):
         method = method or self.method
         organisms = organisms or self.organisms
@@ -229,7 +237,8 @@ class Run:
         megurt.run()
 
         tree, style = make_tree(self.shape)
-        tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style= style)
+        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1500, units='px', dpi=150)
+
 
 
     def fasta_run(self):
@@ -241,8 +250,7 @@ class Run:
         megurt.run()
 
         tree, style = make_tree(self.shape)
-        tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style=style)
-
+        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1500, units='px', dpi=150)
 
 def compare_trees(tree1, tree2):
    t1 = Tree(f"{tree1}")

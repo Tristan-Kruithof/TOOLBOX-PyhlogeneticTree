@@ -21,10 +21,10 @@
 
 	Data Type                               = amino acid
 	No. of Taxa                             =        5
-	No. of Sites                            =     1891
-	Data File                               = '/mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/mega_input/aligned_sequences.fasta'
-	Settings File                           = '/mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_amino_acid.mao'
-	Command Line                            = /mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/MEGACC/megacc -a /mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_amino_acid.mao -d /mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/mega_input/aligned_sequences.fasta -o /mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/ete4_input/newick.nwk
+	No. of Sites                            =      722
+	Data File                               = '/mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/mega_input/aligned_sequences.fasta'
+	Settings File                           = '/mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_amino_acid.mao'
+	Command Line                            = /mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/MEGACC/megacc -a /mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_amino_acid.mao -d /mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/mega_input/aligned_sequences.fasta -o /mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/ete4_input/newick.nwk
 
 [Analysis Settings]
 
@@ -50,26 +50,26 @@
 
 [Analysis Statistics]
 
-	Start Time                              = 04/05/26 03:25:12 PM
-	End Time                                = 04/05/26 03:25:19 PM
-	Execution Time                          =    7.366 (seconds)
-	Max Heap Memory Used                    = 1.412 (MB)
-	ML Tree Search Start Time               = 04/05/26 03:25:12 PM
-	ML Tree Search End Time                 = 04/05/26 03:25:14 PM
-	ML Tree Search Execution Time           =    2.213 (seconds)
-	ML Bootstrap Start Time                 = 04/05/26 03:25:12 PM
-	ML Bootstrap End Time                   = 04/05/26 03:25:19 PM
-	ML Bootstrap Execution Time             =    7.270 (seconds)
-	Sum of branch lengths                   =    0.400
+	Start Time                              = 04/05/26 08:50:57 PM
+	End Time                                = 04/05/26 08:51:10 PM
+	Execution Time                          =   13.308 (seconds)
+	Max Heap Memory Used                    = 1.310 (MB)
+	ML Tree Search Start Time               = 04/05/26 08:50:57 PM
+	ML Tree Search End Time                 = 04/05/26 08:51:03 PM
+	ML Tree Search Execution Time           =    6.106 (seconds)
+	ML Bootstrap Start Time                 = 04/05/26 08:50:57 PM
+	ML Bootstrap End Time                   = 04/05/26 08:51:10 PM
+	ML Bootstrap Execution Time             =   13.247 (seconds)
+	Sum of branch lengths                   =    2.326
 	Model                                   = Jones-Taylor-Thornton (1992) model
 	No. of params                           =        7
 	No. of rates                            =        1
-	AICc                                    = 18166.740
-	BIC                                     = 18216.135
-	LnL                                     = -9076.363
-	No. of sites                            = 1891
-	No. of common sites                     = 1718
-	No. of invar sites                      = 1124
+	AICc                                    = 7596.517
+	BIC                                     = 7635.398
+	LnL                                     = -3791.229
+	No. of sites                            = 722
+	No. of common sites                     = 385
+	No. of invar sites                      = 85
 	No. of gap sites                        = 0
 	Site coverage                           = 5
 	Use invar                               = False

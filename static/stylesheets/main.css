@@ -364,7 +364,7 @@ CSS FOR THE DROP BUTTON
 }
 
 .bigger {
-    width: 1800px;
+    max-width: 1800px;
 }
 
 .max_width {

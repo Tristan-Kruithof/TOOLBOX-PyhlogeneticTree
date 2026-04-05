@@ -74,6 +74,7 @@ def create_route():
     organisms = session.get('organisms', [])
     message = ''
     input_method = ''
+    shape = ''
 
     if active:
         pass
@@ -168,7 +169,7 @@ def create_route():
 
         session["organisms"] = organisms
 
-    return render_template('create.html',input_method=input_method,message=message, user=user, image_exists=image_exists ,email=email, new_image=new_image, organism_list=organisms, active_thread=active)
+    return render_template('create.html',input_method=input_method,message=message, user=user, image_exists=image_exists ,email=email, new_image=new_image, organism_list=organisms, active_thread=active, shape=shape)
 
 
 @app.route('/home/compare', methods=['POST', 'GET'])

@@ -13,5 +13,5 @@ No_of_Taxa=5
 No_of_bootstrap_reps=25
 Frequency_cutoff=50%
 
-11000	80%
-00110	100%
+01110	100%
+01100	100%
