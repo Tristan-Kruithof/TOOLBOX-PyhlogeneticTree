@@ -3,33 +3,33 @@
 [ MEGAinfo ]
 ver                                  = 12251216-x86_64 MS Windows          
 [ DataSettings ]
-datatype                             = snProtein
-MissingBaseSymbol                    = ?
-IdenticalBaseSymbol                  = .
-GapSymbol                            = -
-Labelled Sites                       = All Sites
-Labels to Include                    =
+datatype                             = snProtein                           
+MissingBaseSymbol                    = ?                                   
+IdenticalBaseSymbol                  = .                                   
+GapSymbol                            = -                                   
+Labelled Sites                       = All Sites                           
+Labels to Include                    =                                     
 [ ProcessTypes ]
-ppInfer                              = true
-ppML                                 = true
+ppInfer                              = true                                
+ppML                                 = true                                
 [ AnalysisSettings ]
-Analysis                             = Likelihood Phylogeny Reconstruction
-Statistical Method                   = Maximum Likelihood
-Phylogeny Test                       = ====================
-Test of Phylogeny                    = Adaptive Bootstrap (fast)
-Threshold                            = 10.00
-Substitution Model                   = ====================
-Substitutions Type                   = Amino acid
-Model/Method                         = Jones-Taylor-Thornton (JTT) model
-Rates and Patterns                   = ====================
-Rates among Sites                    = Uniform Rates
-Data Subset to Use                   = ====================
-Gaps/Missing Data                    = Use all sites
-Tree Inference Options               = ====================
-ML Heuristic Method                  = Nearest-Neighbor-Interchange (NNI)
+Analysis                             = Likelihood Phylogeny Reconstruction 
+Statistical Method                   = Maximum Likelihood                  
+Phylogeny Test                       = ====================                
+Test of Phylogeny                    = Adaptive Bootstrap (fast)           
+Threshold                            = 10.00                               
+Substitution Model                   = ====================                
+Substitutions Type                   = Amino acid                          
+Model/Method                         = Jones-Taylor-Thornton (JTT) model   
+Rates and Patterns                   = ====================                
+Rates among Sites                    = Uniform Rates                       
+Data Subset to Use                   = ====================                
+Gaps/Missing Data                    = Use all sites                       
+Tree Inference Options               = ====================                
+ML Heuristic Method                  = Nearest-Neighbor-Interchange (NNI)  
 Initial Tree for ML                  = Make initial tree automatically (Default - NJ/MP)
-Branch Swap Filter                   = None
-System Resource Usage                = ====================
-Number of Threads                    = 4
-Has Time Limit                       = False
-Maximum Execution Time               = -1
+Branch Swap Filter                   = None                                
+System Resource Usage                = ====================                
+Number of Threads                    = 4                                   
+Has Time Limit                       = False                               
+Maximum Execution Time               = -1                                  
