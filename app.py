@@ -4,7 +4,8 @@ from flask import Flask, render_template, request, session
 from python.login import Account
 import PipeLine
 import os.path as path
-
+import cProfile
+import pstats
 app = Flask(__name__)
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
 app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
