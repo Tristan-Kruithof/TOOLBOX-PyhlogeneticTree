@@ -240,22 +240,17 @@ class Run:
         megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
         megurt.run()
 
-        tree = make_tree()
+        tree, style = make_tree(self.shape)
         tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style=style)
 
 
-#def tree():
-#    t = Tree(open(path.abspath("Tools/newick.nwk")).read())
-#
-#    return t
+def compare_trees(tree1, tree2):
+   t1 = Tree(f"{tree1}")
+   t2 = Tree(f"{tree2}")
 
+   rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.robinson_foulds(t2, unrooted_trees=True)
 
-#def compare_trees(tree1, tree2):
-#    t1 = Tree(f"{tree1}")
-#    t2 = Tree(f"{tree2}")
-#    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
-
-#    return f"Normalized RF:, {rf / max_rf}"
+   return {"rf" : rf, "max_rf" : max_rf, "eff_size" : eff_size, "f1" : f1, "f2" : f2, "common_nodes" : common_nodes, "subtrees" : subtrees}
 
 
 def main():

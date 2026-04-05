@@ -3,12 +3,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.13
-  - biopython=1.86
-  - ete4=4.4.0
-  - mafft
   - cython
   - cheroot
+  - conda-forge::gcc_linux-64
+  - python=3.13
+  - biopython=1.86
+  - mafft
   - flask
   - flask-cors
   - sqlalchemy
@@ -18,3 +18,4 @@ dependencies:
   - pip
   - pip:
       - email-validator
+      - ete4==4.4.0

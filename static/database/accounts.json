@@ -1,13 +1,18 @@
 [
   {
     "email": "detristank@gmail.com",
-    "newsletter": true,
-    "runs": 0,
-    "admin": false
+    "newsletter": false,
+    "runs": 3,
+    "admin": true,
+    "trees": {
+      "Big ass tree": "(('PQ898395.1 Panthera leo persica isolate AIWC AAZP 22 656 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0576046447312095,'PV053120.1 Panthera tigris tigris isolate AIWC RES 19 004 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0445069875979176):0.0662884996459222,(('PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0727921105658322,'OM638834.1 Giraffa camelopardalis camelopardalis isolate Alipore zoo cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0941786416477563):0.0429976671019204,(('MZ099451.1 Equus asinus isolate Yunnan donkey8-B-CHM4-2.seq cytochrome c oxidase subunit I (COI) gene partial sequence nuclear copy of mitochondrial gene':0.164698063901494,'OR539506.1 Equus caballus voucher MGL-608 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0947385269761897):0.0475435153644645,((OZ347559.1_Cercopithecus_sp._mitochondrial_partial_COI_gene_for_cytochrome_oxidase_subunit_1:0.0929362782602392,OZ347562.1_Pan_troglodytes_schweinfurthii_mitochondrial_partial_COI_gene_for_cytochrome_oxidase_subunit_1:0.128591466340609):0.0693575143803604,'OL310913.1 Loxodonta cyclotis isolate 112CO1 seq cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.147356271973502):0.0370423303081202):0.0454676552556329):0.0311916103617498,'PV639009.1 Homo sapiens voucher LV-PHH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':1.12125483838845);\n",
+      "Tree1": "('PV636066.1 Gallus gallus voucher PQ284536.1 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.11311191023801,('PX864072.1 Rattus norvegicus voucher PLAL-09 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.102456561202925,'PV639632.1 Capra hircus isolate CH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0732016366447326)0.5600:0.0187453165612936,('PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0940504985083449,(('PZ072333.1 Sus scrofa isolate P7 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.100960539572728,'PZ092955.1 Ziphius cavirostris voucher AIWC RES 24 447 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0974739090690204)0.3600:0.0350407172107256,'OR539506.1 Equus caballus voucher MGL-608 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.133222480796988)0.2800:0.0209158419289982)0.4800:0.0398563876860563);\n",
+      "lion": "('PQ898395.1 Panthera leo persica isolate AIWC AAZP 22 656 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.124380556819693,'PX864072.1 Rattus norvegicus voucher PLAL-09 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0834002065681019,(((('PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0912713816092214,('OR539506.1 Equus caballus voucher MGL-608 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.131444925374752,'PZ092955.1 Ziphius cavirostris voucher AIWC RES 24 447 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0900140727751625)0.4815:0.0364772368828389)0.2222:0.0197040498217789,('PZ072333.1 Sus scrofa isolate P7 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0985196144552228,'PV639633.1 Canis lupus familiaris isolate CL001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.124141813671738)0.2963:0.0346259822291275)0.4074:0.0343115260654123,'PV636066.1 Gallus gallus voucher PQ284536.1 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.114027647651307)0.3333:0.0241102789700982,'PV639632.1 Capra hircus isolate CH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.059521029802875)0.3704:0.0258373433691179);\n"
+    }
   },
   {
     "email": "tristankruithof19@gmail.com",
-    "newsletter": true,
+    "newsletter": false,
     "runs": 0,
     "admin": true
   },
@@ -22,5 +27,7 @@
     "newsletter": false,
     "runs": 6,
     "admin": false
+    "admin": true,
+    "trees": {}
   }
 ]
