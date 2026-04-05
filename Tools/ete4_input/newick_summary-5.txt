@@ -20,11 +20,11 @@
 [General Info]
 
 	Data Type                               = amino acid
-	No. of Taxa                             =        8
-	No. of Sites                            =      515
-	Data File                               = '/mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/mega_input/aligned_sequences.fasta'
-	Settings File                           = '/mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_amino_acid.mao'
-	Command Line                            = /mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/MEGACC/megacc -a /mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_amino_acid.mao -d /mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/mega_input/aligned_sequences.fasta -o /mnt/c/Users/Fabian/TOOLBOX-PyhlogeneticTree/Tools/ete4_input/newick.nwk
+	No. of Taxa                             =        6
+	No. of Sites                            =      673
+	Data File                               = '/mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/mega_input/aligned_sequences.fasta'
+	Settings File                           = '/mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_amino_acid.mao'
+	Command Line                            = /mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/MEGACC/megacc -a /mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/infer_ML_amino_acid.mao -d /mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/mega_input/aligned_sequences.fasta -o /mnt/c/Users/detri/BIN jaar 1/Kwartaal 3/Git clones/TOOLBOX-PyhlogeneticTree/Tools/ete4_input/newick.nwk
 
 [Analysis Settings]
 
@@ -50,28 +50,28 @@
 
 [Analysis Statistics]
 
-	Start Time                              = 04/03/26 11:47:35 PM
-	End Time                                = 04/03/26 11:47:42 PM
-	Execution Time                          =    6.626 (seconds)
-	Max Heap Memory Used                    = 1.397 (MB)
-	ML Tree Search Start Time               = 04/03/26 11:47:35 PM
-	ML Tree Search End Time                 = 04/03/26 11:47:38 PM
-	ML Tree Search Execution Time           =    2.176 (seconds)
-	ML Bootstrap Start Time                 = 04/03/26 11:47:35 PM
-	ML Bootstrap End Time                   = 04/03/26 11:47:42 PM
-	ML Bootstrap Execution Time             =    6.550 (seconds)
-	Sum of branch lengths                   =    0.203
+	Start Time                              = 04/05/26 08:48:54 PM
+	End Time                                = 04/05/26 08:49:04 PM
+	Execution Time                          =   10.142 (seconds)
+	Max Heap Memory Used                    = 1.309 (MB)
+	ML Tree Search Start Time               = 04/05/26 08:48:54 PM
+	ML Tree Search End Time                 = 04/05/26 08:48:56 PM
+	ML Tree Search Execution Time           =    2.284 (seconds)
+	ML Bootstrap Start Time                 = 04/05/26 08:48:54 PM
+	ML Bootstrap End Time                   = 04/05/26 08:49:04 PM
+	ML Bootstrap Execution Time             =   10.089 (seconds)
+	Sum of branch lengths                   =    2.502
 	Model                                   = Jones-Taylor-Thornton (1992) model
-	No. of params                           =       13
+	No. of params                           =        9
 	No. of rates                            =        1
-	AICc                                    = 4283.313
-	BIC                                     = 4365.380
-	LnL                                     = -2128.612
-	No. of sites                            = 515
-	No. of common sites                     = 513
-	No. of invar sites                      = 443
+	AICc                                    = 7722.111
+	BIC                                     = 7773.947
+	LnL                                     = -3852.017
+	No. of sites                            = 673
+	No. of common sites                     = 394
+	No. of invar sites                      = 77
 	No. of gap sites                        = 0
-	Site coverage                           = 8
+	Site coverage                           = 6
 	Use invar                               = False
 	Invar                                   = n/a
 	Gamma                                   = n/a

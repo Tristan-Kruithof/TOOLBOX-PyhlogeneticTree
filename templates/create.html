@@ -45,7 +45,12 @@
                 </form>
             {% endif %}
 
-            <form id="organism" method="POST" action="#species" class="black_text small_text" enctype="multipart/form-data">
+            <form id="organism" method="POST" action="#species" class="black_text small_text p_left" enctype="multipart/form-data">
+                <label for="Graph">Tree Style</label><br>
+                <select id="Graph" name="Graph">
+                    <option value="c" {% if shape == "c" %}selected{% endif %}>Circular</option>
+                    <option value="r" {% if shape == "r" %}selected{% endif %}>Rectangular</option>
+                </select><br><br>
                 <div>
                     <label for="input_method">Method of input</label><br>
                     <select id="input_method" name="input_method" form="organism">
@@ -53,19 +58,14 @@
                         <option value="fasta" {% if input_method == "fasta" %}selected{% endif %}>Multi-fasta</option>
                     </select>
                 </div>
-
+                <div class="p_left">
                 <div id="input_fasta" class="p_top" style="display: none">
                     <label for="multi_fasta_file" class="black_text small_text">Select fasta file</label><br>
                     <input class="input_box file_input" type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna .faa" placeholder="Multi-fasta" ><br><br>
-                    <label for="Graph">Tree Style</label><br>
-                    <select id="Graph" name="Graph">
-                        <option value="c" {% if Gene == "c" %}selected{% endif %}>Circular</option>
-                        <option value="r" {% if Gene == "r" %}selected{% endif %}>Rectangular</option>
-                    </select>
+
                     <br><br>
                     <button type="submit" name="create" class="nav_button page_button">Create</button>
                 </div>
-
                 <div id="input_common" style="display: block" class="p_top">
                     <label for="gene">Compared gene</label><br>
                     <select id="gene" name="gene">
@@ -84,13 +84,6 @@
                         <button type="submit" name="delete_org" class="nav_button page_button" formnovalidate>Del org</button>
                     <button type="submit" name="delete_all" class="nav_button page_button" formnovalidate>Del all</button>
                     </div>
-                    <br><br>
-                    <label for="Graph">Tree Style</label><br>
-                    <select id="Graph" name="Graph">
-                        <option value="c" {% if Gene == "c" %}selected{% endif %}>Circular</option>
-                        <option value="r" {% if Gene == "r" %}selected{% endif %}>Rectangular</option>
-                    </select>
-                    <br><br>
 
                 {% if organism_list  %}
                     <div class="p_top p_left">
@@ -103,6 +96,7 @@
                     </div>
                     <button type="submit" name="create" class="nav_button page_button" formnovalidate>Create</button><br>
                 {% endif %}
+                </div>
                 </div>
                 </form>
             <br>
