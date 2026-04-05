@@ -1,13 +1,11 @@
-import os
-import threading
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, redirect, url_for, session
 from python.login import Account
 import PipeLine
 import os.path as path
-import cProfile
-import pstats
+
 app = Flask(__name__)
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
+<<<<<<< HEAD
 app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
 
 # THIS GLOBAL MUST BE USED IN ORDER TO USE THREADING
@@ -37,30 +35,31 @@ def threaded_pipeline(tree_instance, organisms, option, email):
             tree_instance.fasta_run()
     finally:
         threading_active[email] = {'active': False, 'info_packet': {'new_image' : True}}
+=======
+
+
+>>>>>>> 6e46949fe8d1b8d8fa7a3bfa6ad6b700bdb26b4b
 
 @app.route('/')
 def root():
-    user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
-
-    return render_template('home.html',user=user, title="Phylogenetic Tree")
-
+    login_status = session.get('login_status')
+    return render_template('home.html', title="Phylogenetic Tree", login_status=login_status)
 
 @app.route('/home')
 def home_route():
-    user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
-    return render_template('home.html',user=user, title="Home")
-
+    login_status = session.get('login_status')
+    return render_template('home.html', title="Home", login_status=login_status)
 
 @app.route('/home/tools')
 def tools_route():
-    user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
-    return render_template('tools.html',user=user , title="Tools")
-
+    login_status = session.get('login_status')
+    return render_template('tools.html', title="Tools", login_status=login_status)
 
 @app.route('/home/create', methods=['POST', 'GET'])
 def create_route():
-    global threading_active
+    login_status = session.get('login_status')
 
+<<<<<<< HEAD
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     email = user["email"]
     threaded_state = threading_active.get(email, {})
@@ -168,10 +167,39 @@ def create_route():
         session["organisms"] = organisms
 
     return render_template('create.html',input_method=input_method,message=message, user=user, image_exists=image_exists ,email=email, new_image=new_image, organism_list=organisms, active_thread=active)
+=======
+    if request.method == 'POST':
+        if login_status:
+            value = 1
+            ins = "Elephant, Pig, Cow, horse, Lion, Tiger"
+            email = session.get('email')
+
+            tree_pipeline = PipeLine.Organisms(value, ins, email)
+            tree_pipeline.find_scientific_names()
+            tree_pipeline.find_fastas()
+            tree_pipeline.make_multi_fasta()
+
+            Maffie = PipeLine.CC_Tools(path.abspath("Tools"), path.abspath("Tools/sequences.fasta"),
+                                       path.abspath("Tools/aligned_sequences.fasta"))
+            Maffie.run()
+
+            Megurt = PipeLine.CC_Tools(path.abspath("Tools"), path.abspath("Tools/aligned_sequences.fasta"),
+                                       path.abspath("Tools/newick.nwk"), path.abspath("Tools/infer_ML_nucleotide.mao"))
+            Megurt.run()
+
+            tree = PipeLine.boom()
+            tree.render("static/pipeline_output/image.png")
+
+        return render_template('create.html', title="Create", login_status=login_status, image="image.png")
+
+
+    return render_template('create.html', title="Create", login_status=login_status)
+>>>>>>> 6e46949fe8d1b8d8fa7a3bfa6ad6b700bdb26b4b
 
 
 @app.route('/home/compare', methods=['POST', 'GET'])
 def compare_route():
+<<<<<<< HEAD
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
 
     acc = Account(**user)
@@ -179,35 +207,44 @@ def compare_route():
     trees = acc.account.get('trees')
     compare = {}
     
+=======
+    login_status = session.get('login_status')
+
+>>>>>>> 6e46949fe8d1b8d8fa7a3bfa6ad6b700bdb26b4b
     if request.method == 'POST':
         tree1 = request.form.get('tree1')
         tree2 = request.form.get('tree2')
         compare = PipeLine.compare_trees(tree1=tree1, tree2=tree2)
 
+<<<<<<< HEAD
 
     return render_template('compare.html',user=user, title="Compare",trees=trees ,compare=compare)
+=======
+        return render_template('compare.html', title="Compare", login_status=login_status, compare=compare)
+    return render_template('compare.html', title="Compare", login_status=login_status)
+>>>>>>> 6e46949fe8d1b8d8fa7a3bfa6ad6b700bdb26b4b
 
 
 @app.route('/home/help/contact')
 def contact_route():
-    user = session.get('account', {"email": "", "admin": False, "active": False, "newsletter" : False})
-    return render_template('contact.html',user=user ,title="Contact")
+    login_status = session.get('login_status')
+    return render_template('contact.html', title="Contact", login_status=login_status)
 
   
 @app.route('/home/help/installation')
 def installation_route():
-    user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
-    return render_template('installation.html',user=user,title="Installation")
+    login_status = session.get('login_status')
+    return render_template('installation.html', title="Installation", login_status=login_status)
 
   
 @app.route('/home/help/about')
 def about_route():
-    user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
-    return render_template('about.html', user=user, title="About")
-
+    login_status = session.get('login_status')
+    return render_template('about.html', title="About", login_status=login_status)
 
 @app.route('/home/signup', methods=['POST', 'GET'])
 def signup_route():
+<<<<<<< HEAD
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     global threading_active
     email = session.get('pending_email', '')
@@ -235,12 +272,13 @@ def signup_route():
         user = session.get('account')
 
     elif request.method == 'POST':
+=======
+    if request.method == 'POST' :
+>>>>>>> 6e46949fe8d1b8d8fa7a3bfa6ad6b700bdb26b4b
         email = request.form.get('email')
-        newsletter = bool(request.form.get('newsletter'))
-        admin_password = request.form.get('admin_pass')
-        session['pending_email'] = email
-
+        newsletter = request.form.get('newsletter')
         acc = Account(email, newsletter)
+<<<<<<< HEAD
         thread = threading.Thread(target=threaded_signin, args=[acc, admin_password])
         thread.start()
         active = True
@@ -282,7 +320,42 @@ def newsletter_route():
 
     return render_template('newsletter.html', user=user, message=message, status=status, title="Newsletter",
                            threaded_state=active)
+=======
+        acc.signin()
+        status = acc.status
 
+        validation = status[0]
+        message = status[1]
 
+        session['login_status'] = validation
+        login_status = validation
+
+        if validation:
+            session['email'] = email
+
+        return render_template('loginpage.html', title="Login", status=login_status, login_status=login_status, login_message=message)
+
+    session['login_status'] = None
+    login_status = session.get('login_status')
+    return render_template('loginpage.html', title="Login", status=login_status, login_status=login_status)
+>>>>>>> 6e46949fe8d1b8d8fa7a3bfa6ad6b700bdb26b4b
+
+  
+@app.route('/home/front_end', methods=['POST', 'GET'])
+def front_end_route():
+    login_status = session.get('login_status')
+    if request.method == 'POST':
+        kwargs = {
+            'species': request.form['species']
+        }
+        saved_organisms = []
+        input_species = request.form.get('species')
+        if input_species:
+            saved_organisms.append(input_species)
+            print(saved_organisms)
+        return redirect(url_for('front_end_route'))
+    return render_template('get.html', login_status=login_status)
+
+  
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
