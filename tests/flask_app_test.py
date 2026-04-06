@@ -7,7 +7,12 @@ from app import app
 
 @pytest.fixture
 def client():
-    return app.test_client()
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        with client.session_transaction() as session:
+            session['user'] = {"email" : "detristank@gmail.com", "admin" : True, "active" : True, "newsletter" : True}  # fake user
+        yield client
+
 
 @pytest.mark.parametrize('uri', [
     # '/',
