@@ -11,7 +11,7 @@
         {% if compare %}
             <ol>
             {% for key, value in compare.items() %}
-            <li><strong>{{ key }}</strong> : {{ value }}</li><br><br>
+            <li><strong>{{ key }}</strong> : {{ value }}<br><br></li>
             {% endfor %}
             </ol>
         {% else %}
@@ -35,11 +35,11 @@
                 <p>No trees were found!</p>
             {% endif %}
         {% endif %}
+        </div>
     {% else %}
         <p>
             Can only be used when logged in!
         </p>
     {% endif %}
-        </div>
     </div>
 {% endblock %}

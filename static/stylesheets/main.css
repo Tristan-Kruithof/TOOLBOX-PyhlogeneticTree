@@ -207,6 +207,7 @@ CSS FOR IMAGE LINKS
 
 .image_box a img {
     border:5px solid #325a98;
+    background-color: white;
 }
 
 .image_box:hover {
