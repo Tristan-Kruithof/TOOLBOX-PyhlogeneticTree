@@ -19,3 +19,5 @@ dependencies:
   - pip:
       - email-validator
       - ete4==4.4.0
+      - pytest
+      - html5lib
