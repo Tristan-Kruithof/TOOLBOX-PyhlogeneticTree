@@ -1,5 +1,11 @@
 import os
-import threading
+os.environ["DISPLAY"] = ":0"
+os.environ["WAYLAND_DISPLAY"] = "wayland-0"
+os.environ["QT_QPA_PLATFORM"] = "offscreen"
+
+from multiprocessing import Process, Manager
+
+#import threading
 from flask import Flask, render_template, request, session
 from python.login import Account
 import PipeLine
@@ -11,7 +17,9 @@ app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
 app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
 
 # THIS GLOBAL MUST BE USED IN ORDER TO USE THREADING
-threading_active = {}
+manager = Manager()
+threading_active = manager.dict()
+
 
 def threaded_newsletter(acc, title, body, exclude):
     global threading_active
@@ -122,12 +130,11 @@ def create_route():
             if input_method == "common":
 
                 if len(organisms) >= 4:
-                    status, info = acc.add_run()
-                    message = info
-
-                    thread = threading.Thread(target=threaded_pipeline, kwargs=thread_kwargs)
-                    thread.start()
-                    active = True
+                    status, message = acc.add_run()
+                    if status:
+                        thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                        thread.start()
+                        active = True
                 else:
                     message = "Not enough species to make a tree!"
             else:
@@ -154,16 +161,15 @@ def create_route():
                         message = "Not enough species to make a tree!"
 
                     else:
-                        status, info = acc.add_run()
-                        if info:
-                            message = info
+                        status, message = acc.add_run()
 
-                        fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
-                        thread_kwargs["option"] = "fasta"
+                        if status:
+                            fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
+                            thread_kwargs["option"] = "fasta"
 
-                        thread = threading.Thread(target=threaded_pipeline, kwargs=thread_kwargs)
-                        thread.start()
-                        active = True
+                            thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                            thread.start()
+                            active = True
                 else:
                     message = "Not a fasta file!"
 
@@ -245,7 +251,7 @@ def signup_route():
         session['pending_email'] = email
 
         acc = Account(email, newsletter)
-        thread = threading.Thread(target=threaded_signin, args=[acc, admin_password])
+        thread = Process(target=threaded_signin, args=[acc, admin_password])
         thread.start()
         active = True
 
@@ -280,7 +286,7 @@ def newsletter_route():
         body = request.form.get('body')
         exclude = request.form.get('exclude')
 
-        thread = threading.Thread(target=threaded_newsletter, args=[acc, title, body, exclude])
+        thread = Process(target=threaded_newsletter, args=[acc, title, body, exclude])
         thread.start()
         active = True
 

@@ -1,11 +1,8 @@
+import os.path as path
+import os
 from Bio import Entrez
 import subprocess
 import time
-import os.path as path
-import os
-os.environ["QT_QPA_PLATFORM"] = "offscreen"
-os.environ["DISPLAY"] = ""
-
 import re
 from ete4 import Tree
 from ete4.treeview import TreeStyle
@@ -237,7 +234,7 @@ class Run:
         megurt.run()
 
         tree, style = make_tree(self.shape)
-        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1500, units='px', dpi=150)
+        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1200, units='px', dpi=100)
 
 
 
@@ -250,7 +247,7 @@ class Run:
         megurt.run()
 
         tree, style = make_tree(self.shape)
-        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1500, units='px', dpi=150)
+        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1200, units='px', dpi=100)
 
 def compare_trees(tree1, tree2):
    t1 = Tree(f"{tree1}")
