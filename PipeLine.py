@@ -68,6 +68,52 @@ class Organisms:
             record = Entrez.read(stream)
             stream.close()
 
+<<<<<<< HEAD
+        for i,name in enumerate(self.scientific_names):
+            if isinstance(name, str):
+                print(name)
+                name = name.strip()
+                time.sleep(0.5)
+                term = f"{name}[Organism] AND {self.gene}"
+                stream = Entrez.esearch(db="nucleotide", term=term, retmax=1)
+                record = Entrez.read(stream)
+                stream.close()
+
+                if record["IdList"]:
+                    seq_id = record["IdList"][0]
+                    stream2 = Entrez.efetch(db="protein", id=seq_id, rettype="fasta", retmode="text")
+                    fasta = stream2.read()
+                    stream2.close()
+                    fa = re.search(pattern, fasta)
+                    new = f"{self.common_name[i]}\n{fa[2]}"
+                    self.fastas.append(new)
+
+                else:
+                    self.not_found_fastas.append(name)
+
+            else:
+                for item in name:
+                    print(item)
+                    item = item.strip()
+                    time.sleep(0.5)
+                    term = f"{item}[Organism] AND {self.gene}"
+                    stream = Entrez.esearch(db="nucleotide", term=term, retmax=1)
+                    record = Entrez.read(stream)
+                    stream.close()
+
+                    if record["IdList"]:
+                        seq_id = record["IdList"][0]
+                        stream2 = Entrez.efetch(db="protein", id=seq_id, rettype="fasta", retmode="text")
+                        fasta = stream2.read()
+                        stream2.close()
+                        fa = re.search(pattern, fasta)
+                        new = f"{self.common_name[i]}\n{fa[2]}"
+                        self.fastas.append(new)
+                        break
+
+                    else:
+                        self.not_found_fastas.append(item)
+=======
             if record["IdList"]:
                 seq_id = record["IdList"][0]
                 stream2 = Entrez.efetch(db="nucleotide", id=seq_id, rettype="fasta", retmode="text")
@@ -77,6 +123,7 @@ class Organisms:
 
             else:
                 self.not_found_fastas.append(name)
+>>>>>>> 6e46949fe8d1b8d8fa7a3bfa6ad6b700bdb26b4b
 
         print(self.fastas)
 
@@ -114,7 +161,67 @@ def compare_trees(tree1, tree2):
     t2 = Tree(f"{tree2}")
     rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.compare(t2)
 
+<<<<<<< HEAD
+        if organisms is None:
+            organisms = ["Elephant", "FAKE_ANIMAL", "Pig", "horse", "Lion", "Tiger"]
+        # Location
+        self.location = location
+        # Gene
+        self.gene = gene
+        # Input and output for mafft
+        self.input_mafft = input_mafft
+        self.output_mafft = output_mafft
+        # Input and output for mega
+        self.input_mega = input_mega
+        self.output_mega = output_mega
+        # Tool parameters
+        self.settings = settings
+        self.method = method
+        self.organisms = organisms
+        self.email = email
+
+
+    def standard(self, method=None, organisms=None):
+        method = method or self.method
+        organisms = organisms or self.organisms
+
+        route = Organisms(method, organisms, self.gene, self.email)
+        route.find_scientific_names()
+        route.find_fastas()
+        route.make_multi_fasta()
+
+        maffie = CC_Tools(self.location, self.input_mafft, self.output_mafft)
+        maffie.run()
+
+        megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
+        megurt.run()
+
+        tree = make_tree()
+        tree.render(f"static/pipeline_output/{self.email}_tree.png")
+
+
+    def fasta_run(self):
+
+        maffie = CC_Tools(self.location, path.abspath("Tools/mafft_input/user_uploads/sequences.fasta"), self.output_mafft)
+        maffie.run()
+
+        megurt = CC_Tools(self.location, self.input_mega, self.output_mega, self.settings)
+        megurt.run()
+
+        tree = make_tree()
+        tree.render(f"static/pipeline_output/{self.email}_tree.png")
+
+
+def compare_trees(tree1, tree2):
+   t1 = Tree(f"{tree1}")
+   t2 = Tree(f"{tree2}")
+
+   rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.robinson_foulds(t2, unrooted_trees=True)
+
+   return {"rf" : rf, "max_rf" : max_rf, "eff_size" : eff_size, "f1" : f1, "f2" : f2, "common_nodes" : common_nodes, "subtrees" : subtrees}
+=======
     return f"Normalized RF:, {rf / max_rf}"
+>>>>>>> 6e46949fe8d1b8d8fa7a3bfa6ad6b700bdb26b4b
 
 
 def main():
