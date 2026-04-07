@@ -2,11 +2,12 @@
 
 {% block content %}
 
-<h1>give the data</h1>
-<form action="" method="POST">
-
-<ul>
-    <li><strong>DNA:</strong> {{ sequence }}</li>
-</ul>
-</form>
+    <div class="app">
+    </div>
+        <div class="form-section">
+            <form action="/home/DNA" method="post" enctype="multipart/form-data">
+                <input type="file" name="fasta_file">
+                <input type="submit" value="Upload fasta-file">
+            </form>
+        </div>
 {% endblock %}

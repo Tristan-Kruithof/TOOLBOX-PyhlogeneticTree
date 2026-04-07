@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from python.login import Account
 import PipeLine
 import os.path as path
+from werkzeug.utils import secure_filename
+import DNA
 
 app = Flask(__name__)
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
@@ -43,7 +45,8 @@ def create_route():
             Maffie.run()
 
             Megurt = PipeLine.CC_Tools(path.abspath("Tools"), path.abspath("Tools/aligned_sequences.fasta"),
-                                       path.abspath("Tools/newick.nwk"), path.abspath("Tools/infer_ML_nucleotide.mao"))
+                                       path.abspath("Tools/newick.nwk"), path.abspath(
+                    "Tools/infer_ML_nucleotide.mao"))
             Megurt.run()
 
             tree = PipeLine.boom()
@@ -125,6 +128,31 @@ def front_end_route():
         return redirect(url_for('front_end_route'))
     return render_template('get.html', login_status=login_status)
 
-  
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+@app.route('/home/DNA', methods=['GET', 'POST'])
+def DNA_route():
+    file_lines = []
+    if request.method == 'POST':
+        fasta_file = request.files.get('fasta_file')
+
+        if fasta_file:
+            valid_file = fasta_file.save(secure_filename(fasta_file.filename))
+            with open(fasta_file.filename, 'r') as file:
+                for line in file:
+                    if line[0] != '>':
+                        file_lines.append(line.replace('\n', ''))
+
+                # opent het fasta-bestand
+            DNA_sequence = ''.join(file_lines)
+
+
+                # zet de regels van het bestand in een lijst
+
+
+        return redirect(url_for('DNA_route'))
+    return render_template('DNA.html')
 if __name__ == '__main__':
     app.run()
