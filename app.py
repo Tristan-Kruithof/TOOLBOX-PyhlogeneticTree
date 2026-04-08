@@ -6,12 +6,15 @@ os.environ["QT_QPA_PLATFORM"] = "offscreen"
 from multiprocessing import Process, Manager
 
 #import threading
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from python.login import Account
 import PipeLine
 import os.path as path
 import cProfile
 import pstats
+from werkzeug.utils import secure_filename
+import DNA
+import jinja2
 app = Flask(__name__)
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
 app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
@@ -293,6 +296,48 @@ def newsletter_route():
     return render_template('newsletter.html', user=user, message=message, status=status, title="Newsletter",
                            threaded_state=active)
 
+@app.route('/home/DNA', methods=['GET', 'POST'])
+def DNA_route():
+    user = session.get('account', {"email": "", "admin": False, "active": False, "newsletter": False})
+    file_lines = []
+
+    if request.method == 'POST':
+        fasta_file = request.files.get('fasta_file')
+
+        if fasta_file:
+            save_file = fasta_file.save(secure_filename(fasta_file.filename))
+            valid_filename = secure_filename(fasta_file.filename)
+
+            with open(valid_filename, 'r') as file:
+                for line in file:
+                    if line[0] != '>':
+                        file_lines.append(line.replace('\n', ''))
+
+            DNA_sequence = ''.join(file_lines)
+            translation = DNA.DNA(DNA_sequence)
+            translated_RNA = translation.vertalen_naar_RNA()
+            translated_proteins = translation.vertalen_naar_eiwitten()
+
+            RNA_dict = {'translated-sequence': translation}
+            for sequence in RNA_dict:
+                translated_sequence = RNA_dict['translated-sequence']
+
+                with open(f'translated_sequence.txt', 'w') as file:
+                    file.write('RNA-sequence\n')
+                    for i in range(0, len(translated_RNA), 70):
+                        juiste_lengte = translated_RNA[i:i + 70]
+                        file.write(f'{juiste_lengte}{'\n'}')
+
+                    file.write('\nproteins\n')
+                    for i in range(0, len(translated_proteins), 70):
+                        juiste_lengte = translated_proteins[i:i + 70]
+                        file.write(f'{juiste_lengte}{'\n'}')
+
+                return render_template('DNA.html', translated_sequence=translated_sequence, user=user)
+
+        return redirect(url_for('DNA_route'))
+
+    return render_template('DNA.html', user=user)
 
 if __name__ == '__main__':
     app.run(debug=True)
