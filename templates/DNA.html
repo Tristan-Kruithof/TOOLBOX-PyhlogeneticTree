@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+    <h1> translate a DNA-sequence</h1>
+
+    <p> Here you can upload a fasta-file.
+        The DNA-sequence will be translated to RNA and the amino acids the DNA codes for.
+        The result will be downloaded to your computer.</p>
+
+    <div class="app">
+    </div>
+        <div class="form-section">
+            <form action="/home/DNA" method="post" enctype="multipart/form-data">
+                <input type="file" name="fasta_file">
+                <input type="submit" value="Upload fasta-file">
+            </form>
+        </div>
+
+    {{ translated_sequence }}
+
+{% endblock %}
