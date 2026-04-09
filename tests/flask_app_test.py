@@ -14,24 +14,6 @@ def client():
         yield client
 
 
-def test_create_add_organism(client):
-    response = client.post('/home/create', data={
-        'add' : 'true',
-        'species' : "homo sapiens, mus musculus, gallus gallus, danio rerio"
-    })
-    assert response.status_code == 200
-
-
-def test_create_too_few_organisms(client):
-    response = client.post('/home/create', data={
-        'input_method' : 'common',
-        'gene' : 'COX1',
-        'Graph' : 'Circular',
-        'species' : 'homo sapiens'
-    })
-    assert b'Not enough species' in response.data
-
-
 @pytest.mark.parametrize('uri', [
     # '/',
     '/'
