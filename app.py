@@ -1,17 +1,28 @@
 import os
-import threading
-from flask import Flask, render_template, request, session
+os.environ["DISPLAY"] = ":0"
+os.environ["WAYLAND_DISPLAY"] = "wayland-0"
+os.environ["QT_QPA_PLATFORM"] = "offscreen"
+
+from multiprocessing import Process, Manager
+
+#import threading
+from flask import Flask, render_template, request, session, redirect, url_for
 from python.login import Account
 import PipeLine
 import os.path as path
 import cProfile
 import pstats
+from werkzeug.utils import secure_filename
+import DNA
+import jinja2
 app = Flask(__name__)
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
 app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
 
 # THIS GLOBAL MUST BE USED IN ORDER TO USE THREADING
-threading_active = {}
+manager = Manager()
+threading_active = manager.dict()
+
 
 def threaded_newsletter(acc, title, body, exclude):
     global threading_active
@@ -74,6 +85,7 @@ def create_route():
     organisms = session.get('organisms', [])
     message = ''
     input_method = ''
+    shape = ''
 
     if active:
         pass
@@ -121,12 +133,11 @@ def create_route():
             if input_method == "common":
 
                 if len(organisms) >= 4:
-                    status, info = acc.add_run()
-                    message = info
-
-                    thread = threading.Thread(target=threaded_pipeline, kwargs=thread_kwargs)
-                    thread.start()
-                    active = True
+                    status, message = acc.add_run()
+                    if status:
+                        thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                        thread.start()
+                        active = True
                 else:
                     message = "Not enough species to make a tree!"
             else:
@@ -153,22 +164,21 @@ def create_route():
                         message = "Not enough species to make a tree!"
 
                     else:
-                        status, info = acc.add_run()
-                        if info:
-                            message = info
+                        status, message = acc.add_run()
 
-                        fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
-                        thread_kwargs["option"] = "fasta"
+                        if status:
+                            fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
+                            thread_kwargs["option"] = "fasta"
 
-                        thread = threading.Thread(target=threaded_pipeline, kwargs=thread_kwargs)
-                        thread.start()
-                        active = True
+                            thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                            thread.start()
+                            active = True
                 else:
                     message = "Not a fasta file!"
 
         session["organisms"] = organisms
 
-    return render_template('create.html',input_method=input_method,message=message, user=user, image_exists=image_exists ,email=email, new_image=new_image, organism_list=organisms, active_thread=active)
+    return render_template('create.html',input_method=input_method,message=message, user=user, image_exists=image_exists ,email=email, new_image=new_image, organism_list=organisms, active_thread=active, shape=shape)
 
 
 @app.route('/home/compare', methods=['POST', 'GET'])
@@ -244,7 +254,7 @@ def signup_route():
         session['pending_email'] = email
 
         acc = Account(email, newsletter)
-        thread = threading.Thread(target=threaded_signin, args=[acc, admin_password])
+        thread = Process(target=threaded_signin, args=[acc, admin_password])
         thread.start()
         active = True
 
@@ -279,13 +289,55 @@ def newsletter_route():
         body = request.form.get('body')
         exclude = request.form.get('exclude')
 
-        thread = threading.Thread(target=threaded_newsletter, args=[acc, title, body, exclude])
+        thread = Process(target=threaded_newsletter, args=[acc, title, body, exclude])
         thread.start()
         active = True
 
     return render_template('newsletter.html', user=user, message=message, status=status, title="Newsletter",
                            threaded_state=active)
 
+@app.route('/home/DNA', methods=['GET', 'POST'])
+def DNA_route():
+    user = session.get('account', {"email": "", "admin": False, "active": False, "newsletter": False})
+    file_lines = []
+
+    if request.method == 'POST':
+        fasta_file = request.files.get('fasta_file')
+
+        if fasta_file:
+            save_file = fasta_file.save(secure_filename(fasta_file.filename))
+            valid_filename = secure_filename(fasta_file.filename)
+
+            with open(valid_filename, 'r') as file:
+                for line in file:
+                    if line[0] != '>':
+                        file_lines.append(line.replace('\n', ''))
+
+            DNA_sequence = ''.join(file_lines)
+            translation = DNA.DNA(DNA_sequence)
+            translated_RNA = translation.vertalen_naar_RNA()
+            translated_proteins = translation.vertalen_naar_eiwitten()
+
+            RNA_dict = {'translated-sequence': translation}
+            for sequence in RNA_dict:
+                translated_sequence = RNA_dict['translated-sequence']
+
+                with open(f'translated_sequence.txt', 'w') as file:
+                    file.write('RNA-sequence\n')
+                    for i in range(0, len(translated_RNA), 70):
+                        juiste_lengte = translated_RNA[i:i + 70]
+                        file.write(f'{juiste_lengte}{'\n'}')
+
+                    file.write('\nproteins\n')
+                    for i in range(0, len(translated_proteins), 70):
+                        juiste_lengte = translated_proteins[i:i + 70]
+                        file.write(f'{juiste_lengte}{'\n'}')
+
+                return render_template('DNA.html', translated_sequence=translated_sequence, user=user)
+
+        return redirect(url_for('DNA_route'))
+
+    return render_template('DNA.html', user=user)
 
 if __name__ == '__main__':
     app.run(debug=True)

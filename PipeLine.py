@@ -1,11 +1,12 @@
+import os.path as path
+import os
 from Bio import Entrez
 import subprocess
 import time
-import os.path as path
-import os
 import re
 from ete4 import Tree
 from ete4.treeview import TreeStyle
+
 
 
 #Entrez.email = "superherofabs08@gmail.com"
@@ -214,6 +215,7 @@ class Run:
         self.shape = shape
 
 
+
     def standard(self, method=None, organisms=None):
         method = method or self.method
         organisms = organisms or self.organisms
@@ -230,7 +232,8 @@ class Run:
         megurt.run()
 
         tree, style = make_tree(self.shape)
-        tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style= style)
+        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1200, units='px', dpi=100)
+
 
 
     def fasta_run(self):
@@ -242,8 +245,7 @@ class Run:
         megurt.run()
 
         tree, style = make_tree(self.shape)
-        tree.render(f"static/pipeline_output/{self.email}tree.png", tree_style=style)
-
+        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1200, units='px', dpi=100)
 
 def compare_trees(tree1, tree2):
    t1 = Tree(f"{tree1}")

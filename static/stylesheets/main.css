@@ -205,6 +205,11 @@ CSS FOR IMAGE LINKS
     margin: 20px 0;
 }
 
+.image_box a img {
+    border:5px solid #325a98;
+    background-color: white;
+}
+
 .image_box:hover {
     transform: scale(1.03);
 }
@@ -364,7 +369,7 @@ CSS FOR THE DROP BUTTON
 }
 
 .bigger {
-    width: 1800px;
+    max-width: 1800px;
 }
 
 .max_width {
