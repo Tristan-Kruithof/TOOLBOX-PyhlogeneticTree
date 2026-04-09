@@ -99,6 +99,7 @@ def create_route():
         gene = form.get('gene')
         shape = form.get('Graph')
         input_method = form.get('input_method')
+        sequence = form.get('sequence')
 
         if "add" in form:
             input_organism = form.get('species')
@@ -127,7 +128,7 @@ def create_route():
 
         else:
             acc = Account(**user)
-            tree = PipeLine.Run(email, gene, shape)
+            tree = PipeLine.Run(email, gene, shape, sequence)
             thread_kwargs =  {"organisms": organisms, "tree_instance": tree, "option": "common", "email": email}
 
             if input_method == "common":
@@ -135,29 +136,20 @@ def create_route():
                 if len(organisms) >= 4:
                     status, message = acc.add_run()
                     if status:
-                        # thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
-                        # thread.start()
-
-                        profiler = cProfile.Profile()
-                        profiler.enable()
-
-                        threaded_pipeline(**thread_kwargs)
-                        profiler.disable()
-
-                        profiler.dump_stats("profile.prof")
-                        stats = pstats.Stats(profiler)
-                        stats.sort_stats('cumulative').print_stats(20)
-
-
+                        thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                        thread.start()
                         active = True
                 else:
                     message = "Not enough species to make a tree!"
             else:
                 file_types = ["fasta", "fna", "fa", "faa"]
                 fasta_file = request.files.get('multi_fasta_file')
-                file_name = fasta_file.filename
-                fasta_file.seek(0)
 
+                if fasta_file and fasta_file.filename:
+                    file_name = fasta_file.filename
+                    fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
+
+                fasta_file.seek(0)
                 organisms_set = set()
 
                 if file_name.split('.')[1] in file_types:
@@ -179,22 +171,11 @@ def create_route():
                         status, message = acc.add_run()
 
                         if status:
-                            fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
                             thread_kwargs["option"] = "fasta"
 
-                            # thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
-                            # thread.start()
-                            # active = True
-
-                            profiler = cProfile.Profile()
-                            profiler.enable()
-
-                            threaded_pipeline(**thread_kwargs)
-                            profiler.disable()
-
-                            profiler.dump_stats("profile.prof")
-                            stats = pstats.Stats(profiler)
-                            stats.sort_stats('cumulative').print_stats(20)
+                            thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                            thread.start()
+                            active = True
                 else:
                     message = "Not a fasta file!"
 
