@@ -14,12 +14,14 @@
             </p>
                 <ul>
                     <li><a href="#biopython">Biopython</a></li>
+                    <li><a href="#mafft">MAFFT</a></li>
                     <li><a href="#megacc">MEGA cc</a></li>
                     <li><a href="#ete4">ETE4</a></li>
                 </ul>
             <p>
                 Biopython is used to handle our user input and request taxonomy data from the NCBI database.
-                MEGA cc is used to align DNA sequences, compare them with each other, and create a phylogenetic tree based on this comparison.
+                MAFFT is used to align DNA or protein sequences.
+                MEGA cc is used to compare DNA or protein sequences with each other, and create a phylogenetic tree based on this comparison.
                 ETE4 is used to make and compare trees with a newick file as input.<br><br> And for more info about the tools.
             </p>
                 <ul>
@@ -79,19 +81,51 @@
         </div>
 
     </div>
+    <div class="side_to_side">
+        <div class="home-boxes text_box">
+            <h2 id="mafft" class="title">
+                MAFFT
+            </h2>
+            <p>
+                MAFFT is used to align sequences. It takes a multi-fasta file containing DNA or protein sequences and aligns these.
+                It then outputs a new multi-fasta file, containing lots of --- when theres no nucleotide or amino acid in that place.
+                Mega than takes this file to create the blueprint for the phylogentic tree<br><br>
+
+                It is very important to align the DNA sequences before comparing them, because this ensures that you are comparing homologous positions. If you dont align them properly, your tree will be made based of incorrect data and just be completely off.
+
+                A homologous position means that, from an evolutionary perspective, they come from the same area, so I am comparing the same genetic data from different sequences.
+                If you do not align them, or do not align them properly, you may not be comparing the same genetic data, which can lead to errors in the phylogenetic tree.
+            </p>
+
+        </div>
+        <div class="home-boxes">
+            <div class="image_box">
+               <a href="https://sysimm.org/tools" target="_blank">
+                   <img src="/static/images/tools_mafft.png"  class="tool_image" alt="toolkit_image">
+               </a>
+               <p>
+                   The MAFFT logo.  |  Click for the reference
+               </p>
+            </div>
+            <div class="image_box">
+                <img src="/static/images/mafft_output.png"  class="tool_image" alt="toolkit_image">
+               <p>
+                   Example of output.
+               </p>
+            </div>
+        </div>
+    </div>
      <div class="side_to_side">
         <div class="home-boxes text_box">
             <h2 id="megacc" class="title">
                 Mega CC
             </h2>
             <p>
-                Mega cc is used to align DNA sequences, compare them with each other, and create a phylogenetic tree based on this.
+                Mega cc is used to compare DNA sequences and create a phylogenetic tree based on this.
                 In our case, it creates a file in newick format that contains data for a phylogenetic tree, which can then be read by ETE4.<br><br>
 
-                It is very important to align the DNA sequences before comparing them, because this ensures that you are comparing homologous positions. If you dont align them properly, your tree will be made based of incorrect data and just be completely off.
-
-                A homologous position means that, from an evolutionary perspective, they come from the same area, so I am comparing the same genetic data from different sequences.
-                If you do not align them, or do not align them properly, you may not be comparing the same genetic data, which can lead to errors in the phylogenetic tree.
+                The GUI version of Mega can also align sequences, but the Command Line version can only compare them, so MAFFT is also used.
+                It is also important to specify what kind of sequences are being compared, since mega requires a different settings file based of this.
             </p>
 
         </div>
@@ -158,10 +192,11 @@
             <p>
             Each tool requires its own specific input. For the user, they will only have to provide the start input for Biopython and receive the output of ETE4, which is the phylogenetic tree.<br><br>
             The rest of the inputs and outputs will be tuned to each other and not be seen by the user, but for completeness they will also be explained here.<br><br>
-            In order to start the whole process biopython requires the input of the user in order to process it for mega. To make sure that people off all levels of biology knowledge can use this site, there will be a lot of options for input, which include:
-            the common name of species, the scientific names of species, fasta files of the correct gene or even multi fasta files of the correct gene. The chosen gene per kingdom is already set, but can be changed by the user if they want to.<br><br>
-            Biopython than takes this data and puts all the dna sequences into a multi-fasta tool, if it isn't already and passes it on to Mega.
-            Mega needs two inputs: an input file with the dna sequences and a settings file, so it knows which methods to use when analyzing. The input file is provided by biopython and the settings file is already defined by the website, with as for now know plans to let users edit it.
+            In order to start the whole process biopython requires the input of the user in order to process it for mafft, and later mega. To make sure that people off all levels of biology knowledge can use this site, there will be a lot of options for input, which include:
+            the common name of species or multi fasta files of the correct gene. The chosen gene per kingdom is already set, but can be changed by the user if they want to.<br><br>
+            Biopython than takes this data and puts all the dna sequences into a multi-fasta tool, if it isn't already and passes it on to MAFFT.
+            MAFFT than aligns these sequences and passes them on to Mega.
+            Mega needs two inputs: an input file with the aligned sequences and a settings file, so it knows which methods to use when analyzing. The input file is provided by MAFFT and the settings file is already defined by the website, with as for now know plans to let users edit it.
             When Mega has processed this it will spit out a newick file, which can be used by ETE4 to create a phylogenetic tree.<br><br>
             ETE4 has plenty of design options, of which a few such as changing colours, sizes, and even adding pictures for each organism will be added to the site.
             </p>
@@ -196,6 +231,9 @@
             <br>
             <a href="https://biopython.org/" target="_blank"><span class="title">For Biopython:</span></a><br>
             Cock PA, Antao T, Chang JT, Chapman BA, Cox CJ, Dalke A, Friedberg I, Hamelryck T, Kauff F, Wilczynski B and de Hoon MJL (2009) Biopython: freely available Python tools for computational molecular biology and bioinformatics. Bioinformatics, 25, 1422-1423
+            <br><br>
+            <a href="https://mafft.cbrc.jp/alignment/software/" target="_blank"><span class="title">For MAFFT:</span></a><br>
+            Rozewicki, J., Li, S., Amada, K. M., Standley, D. M., & Katoh, K. (2019). MAFFT-DASH: integrated protein sequence and structural alignment. Nucleic Acids Research, 47(W1), W5–W10. https://doi.org/10.1093/nar/gkz342
             <br><br>
             <a href="https://www.megasoftware.net/" target="_blank"><span class="title">For Mega CC:</span></a><br>
             Stecher G, Suleski M, Tao Q, Tamura K, and Kumar S (2025) Journal of Molecular Evolution https://doi.org/10.1007/s00239-025-10287-z
