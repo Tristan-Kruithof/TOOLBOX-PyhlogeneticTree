@@ -170,9 +170,19 @@ def create_route():
                             fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
                             thread_kwargs["option"] = "fasta"
 
-                            thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
-                            thread.start()
-                            active = True
+                            # thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                            # thread.start()
+                            # active = True
+
+                            profiler = cProfile.Profile()
+                            profiler.enable()
+
+                            threaded_pipeline(**thread_kwargs)
+                            profiler.disable()
+
+                            profiler.dump_stats("profile.prof")
+                            stats = pstats.Stats(profiler)
+                            stats.sort_stats('cumulative').print_stats(20)
                 else:
                     message = "Not a fasta file!"
 
