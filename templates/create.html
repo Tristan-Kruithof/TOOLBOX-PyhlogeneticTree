@@ -60,8 +60,14 @@
                 </div>
                 <div class="p_left">
                 <div id="input_fasta" class="p_top" style="display: none">
+                    <label for="sequence">Type of sequence</label><br>
+                    <select id="sequence" name="sequence">
+                        <option value="nucleotide" {% if Gene == "nucleotide" %}selected{% endif %}>DNA</option>
+                        <option value="protein" {% if Gene == "protein" %}selected{% endif %}>Protein</option>
+                    </select>
+                    <br><br>
                     <label for="multi_fasta_file" class="black_text small_text">Select fasta file</label><br>
-                    <input class="input_box file_input" type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna .faa" placeholder="Multi-fasta" ><br><br>
+                    <input class="input_box file_input" type="file" id="multi_fasta_file" name="multi_fasta_file" accept=".fasta, .fa, .fna, .faa" placeholder="Multi-fasta" ><br><br>
 
                     <br><br>
                     <button type="submit" name="create" class="nav_button page_button">Create</button>

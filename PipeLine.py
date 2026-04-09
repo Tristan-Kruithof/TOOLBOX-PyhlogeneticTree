@@ -263,7 +263,7 @@ class Run:
     """
     Class called in the app.py to run the pipeline
     """
-    def __init__(self, email, gene, shape, method=1, organisms=None,
+    def __init__(self, email, gene, shape, sequence, method=1, organisms=None,
                  location=path.abspath("Tools"), input_mafft=path.abspath("Tools/mafft_input/sequences.fasta"),
                  output_mafft=path.abspath("Tools/mega_input/aligned_sequences.fasta"),input_mega=path.abspath("Tools/mega_input/aligned_sequences.fasta"),
                  output_mega=path.abspath("Tools/ete4_input/newick.nwk"), settings=path.abspath("Tools/infer_ML_amino_acid.mao")):
@@ -301,7 +301,7 @@ class Run:
         self.organisms = organisms
         self.email = email
         self.shape = shape
-
+        self.sequence = sequence
         self.form = dna_or_protein(gene)
 
         if self.form == "protein":
@@ -332,6 +332,10 @@ class Run:
 
 
     def fasta_run(self):
+        if self.sequence == "protein":
+            self.settings = path.abspath("Tools/infer_ML_amino_acid.mao")
+        else:
+            self.settings = path.abspath("Tools/infer_ML_nucleotide.mao")
 
         maffie = CC_Tools(self.location, path.abspath("Tools/mafft_input/user_uploads/sequences.fasta"), self.output_mafft)
         maffie.run()
@@ -347,17 +351,15 @@ def compare_trees(tree1, tree2):
    t2 = Tree(f"{tree2}")
 
    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.robinson_foulds(t2, unrooted_trees=True)
+   difference = (rf/max_rf)*100
 
-   return {"rf" : rf, "max_rf" : max_rf, "eff_size" : eff_size, "f1" : f1, "f2" : f2, "common_nodes" : common_nodes, "subtrees" : subtrees}
+   return {"rf" : rf, "max_rf" : max_rf, "difference" : f"{difference}%", "eff_size" : eff_size, "f1" : f1, "f2" : f2, "common_nodes" : common_nodes, "subtrees" : subtrees}
 
 
 def main():
-    time1 = time.time()
-    tree = Run("superherofabs08@gmail.com", "BRCA1[GENE] AND 1700:2000[SLEN]")
+    tree = Run("superherofabs08@gmail.com", "BRCA1[GENE] AND 1700:2000[SLEN]", "r")
     tree.standard()
 
-    time2 = time.time()
-    print(time2 - time1)
 
 
 if __name__ == "__main__":
