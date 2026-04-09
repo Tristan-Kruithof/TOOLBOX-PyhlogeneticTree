@@ -15,18 +15,19 @@ def client():
 
 
 @pytest.mark.parametrize('uri', [
-    # '/',
     '/'
     ,'/home'
     ,'/home/tools'
     , '/home/create'
     , '/home/compare'
+    , '/home/DNA'
     , '/home/newsletter'
-    ,  '/home/signup'
+    , '/home/signup'
     , '/home/help/about'
     , '/home/help/installation'
     , '/home/help/contact'
 ])
+
 def test_html_parse(client, uri):
     response = client.get(uri)
     assert response.status_code == 200
@@ -36,10 +37,3 @@ def test_html_parse(client, uri):
     except html5lib.html5parser.ParseError as error:
         pytest.fail(f'{error.__class__.__name__}: {str(error)}', pytrace=False)
 
-    # forms = htmldoc.findall('./body/div/form')
-    # assert len(forms) == 1
-    # form = forms[0]
-    # names = set()
-    # for inp in form.iter('input'):
-    #     names.add(inp.attrib['name'])
-    # assert names == {'course', 'teacher', 'ec'}

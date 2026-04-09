@@ -242,6 +242,7 @@ def make_tree(shape, newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
         style.scale = 500
         return t, style
 
+
 def dna_or_protein(gene):
     """
     Determine if sequences will be DNA or Protein
@@ -256,6 +257,7 @@ def dna_or_protein(gene):
         return "protein"
 
     return "nucleotide"
+
 
 class Run:
     """

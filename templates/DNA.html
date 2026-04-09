@@ -1,22 +1,32 @@
 {% extends "main.html" %}
 
 {% block content %}
+    <div class="home-boxes">
+    {% if user["active"] %}
+        <h1 class="title">
+            Translate a DNA-sequence
+        </h1><br>
 
-    <h1> translate a DNA-sequence</h1>
+        <p class="small_text">
+            Here you can upload a fasta-file.
+            The DNA-sequence will be translated to RNA and the amino acids the DNA codes for.
+            The result will be downloaded to your computer.
+        </p><br>
 
-    <p> Here you can upload a fasta-file.
-        The DNA-sequence will be translated to RNA and the amino acids the DNA codes for.
-        The result will be downloaded to your computer.</p>
-
-    <div class="app">
-    </div>
-        <div class="form-section">
-            <form action="/home/DNA" method="post" enctype="multipart/form-data">
-                <input type="file" name="fasta_file">
-                <input type="submit" value="Upload fasta-file">
-            </form>
+        <div class="app">
         </div>
+            <div class="form-section">
+                <form action="/home/DNA" method="post" enctype="multipart/form-data">
+                    <input type="file" name="fasta_file" class="input_box file_input" required accept=".fasta, .fa, .fna .faa">
+                    <button type="submit" class='nav_button page_button' value="Upload fasta-file">Translate</button>
+                </form>
+            </div>
 
-    {{ translated_sequence }}
-
+        {{ translated_sequence }}
+    {% else %}
+        <p>
+        Can only be used when logged in!
+        </p>
+    {% endif %}
+    </div>
 {% endblock %}
