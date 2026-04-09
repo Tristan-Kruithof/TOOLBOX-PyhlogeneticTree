@@ -21,6 +21,8 @@ def test_stop_codon():
 
 
 # These fail or do not deliver the expected outcome
+# That means DNA.py could be improved, but there was not enough time for now
+# And it does not matter that much as it should not fall within these errors frequently.
 
 def test_lowercase_ignored():
     assert DNA("atg").vertalen_naar_RNA() == ""

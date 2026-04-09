@@ -28,6 +28,7 @@ def client():
     , '/home/help/contact'
 ])
 
+
 def test_html_parse(client, uri):
     response = client.get(uri)
     assert response.status_code == 200

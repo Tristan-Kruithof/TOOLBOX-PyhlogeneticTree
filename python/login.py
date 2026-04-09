@@ -9,6 +9,15 @@ from email.mime.multipart import MIMEMultipart
 
 class Account:
     def __init__(self, email="", newsletter="", admin=False, active=False):
+        """
+        Initializes an Account object and calls the check_date function.
+
+        :param str email: Email of the account
+        :param bool newsletter: If the account wants a newsletter
+        :param bool admin: If account is an admin
+        :param bool active: If account is active
+        """
+
         self.email = email.strip()
         self.newsletter = bool(newsletter)
         self.runs = 0
@@ -26,10 +35,21 @@ class Account:
 
 
     def __str__(self):
+        """
+        Returns a string with the current account information and status
+
+        :return: str : with current account information
+        """
         return f"Email: {self.email}, Newsletter: {self.newsletter}, Admin {self.admin}, Runs: {self.runs}, Status: {self.status}"
 
 
     def check_date(self):
+        """
+        Checks if the current time is equal to the time in the file, time.
+        If so calls reset_runs.
+
+        :return: None
+        """
         with open(self.filepath_time, "r+") as time_file:
             time = time_file.read()
             time_now = str(datetime.datetime.now().date())
@@ -44,6 +64,11 @@ class Account:
 
 
     def load_accounts(self):
+        """
+        Opens the account file and gets the current account and all the accounts.
+
+        :return: None
+        """
         with open(self.filepath_acc, "r") as account_file:
             self.accounts = json.load(account_file)
             self.account = next((user for user in self.accounts if user["email"] == self.email), {})
@@ -54,6 +79,11 @@ class Account:
 
 
     def save_accounts(self):
+        """
+        Saves the current account to the accounts file or all the accounts.
+
+        :return:
+        """
         with open(self.filepath_acc, "w") as account_file:
             if self.account:
                 acc_index = next(idx for idx, user in enumerate(self.accounts) if user['email'] == self.account['email'])
@@ -63,8 +93,15 @@ class Account:
 
 
     def signin(self, password=""):
+        """
+        Calls the load_accounts function and checks if the current account is already in the file, if so
+        it handles it and else it writes it to the new file. Can also be given a password to signin as an admin
+        if your account does not yet exist. Also checks if the domain of the email is legit and does exist.
+
+        :param str password: Password to sign in, if given.
+        :return: None
+        """
         self.load_accounts()
-        print(self.account)
 
         if not self.account:
             try:
@@ -99,6 +136,16 @@ class Account:
 
 
     def send_newsletter(self, title="", body="", exclude=True):
+        """
+        Sends a newsletter to the accounts that have it enabled, can
+        exclude current account. Calls load_accounts to check for
+        newsletter accounts.
+
+        :param str title: The title of the newsletter
+        :param str body: The body of the newsletter
+        :param bool exclude: True if you want your own account excluded
+        :return: self.status
+        """
         if title and body:
             self.load_accounts()
             accounts = self.accounts
@@ -132,9 +179,17 @@ class Account:
 
 
     def add_run(self, email=''):
+        """
+        Adds a new run to the current saved account or the email that was given.
+
+        :param str email: Email for where to add a run
+        :return: self.status
+        """
         if email:
             self.email = email
+
         self.load_accounts()
+
         if self.account:
             runs = self.account['runs']
             if runs >= 10:
@@ -152,6 +207,14 @@ class Account:
 
 
     def save_tree(self, tree_name):
+        """
+        Checks if the tree name already exists and links it to the
+        current newick file and writes that into the current account
+        and saves it in account.json.
+
+        :param str tree_name: name for the tree
+        :return: None
+        """
         if os.path.exists(self.newick_path):
             with open(os.path.join(self.newick_path), "r") as tree_file:
                 tree_newick = tree_file.read()
@@ -172,6 +235,12 @@ class Account:
 
 
     def reset_runs(self):
+        """
+        Resets the runs counter to 0 for all accounts.
+        And gets called when the time is different in the file.
+
+        :return: None
+        """
         self.load_accounts()
 
         for user in self.accounts:
