@@ -13,29 +13,26 @@ It will use this to build a phylogenetic tree, which can be modified to show thi
 In order to run the website the following tools are needed: Biopython version 1.86, Mega cc version 12.1.2 and ETE4 version 4.4.0
 ## Installation of tools:
 
-## Miniconda3 and conda environment
-As of right now conda and miniconda are version: 25.3.1
-But you download the latest. If those do not work download the versions above.
-- Either use an IDE like pycharm or run this in the commandline.
-- If it is not installed, first install miniconda. Check by using either: conda list or conda --version. 
-- Follow the steps correctly. If these do not work rework your steps or seek help online yourself or use this link: https://www.anaconda.com/docs/getting-started/miniconda/install#linux
-- Put these after one another in the command line: 
+### Miniconda3 25.3.1
+##### Description:
+First up we are going to star by making sure conda is installed. You can do this by simply typing ```conda --version``` or ```conda list ``` into you console.
+If it says something along the lines of *conda not recognized*, that means conda is not installed yet. If it is installed, tou can continue to the creating a conda envirnoment.
+##### Installation steps:
+- First up you want to open your console
+- Then put these after one another in the command line: 
 - Make a directory: ```mkdir -p ~/miniconda3```
 - Get latest version: ``wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh``
 - ```bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3```
 - ``rm ~/miniconda3/miniconda.sh``
 - Check installation with steps above.
-- Create a python 3+ environment. The easy way is to do this through a conda environment. 
-- Put these in the commandline: ``conda create -n PLACENAME`` and then ``conda activate PLACENAME``
+- If u followed the steps correctly, conda should be installed. If these do not work rework your steps or seek help online yourself or use this link: https://www.anaconda.com/docs/getting-started/miniconda/install#linux
 
+### Creating a conda environment
+Now that u have succesfully installed conda, its time to create a conda envirnoment
 
-### BioPython 1.86
-##### Description:
-Tool for getting species information like the taxonomy and fasta files through NCBI's database
-##### Installation steps:
-
-- Install biopython with the following command:
-  ``conda install -c conda-forge biopython``
+- First up make sure that your console is still opened.
+- Then you will start off by creating the envirnoment using the following command: ``conda env create --file path/requirements.yml``. Make sure to replace the path with the location of the yml file included in the site download under the folder installation.
+- Then all you have to do is activate the environment using:``conda activate toolbox_tree``
 
 
 ### MEGA cc 12.1.2
@@ -47,7 +44,7 @@ Install the download file using the following link: https://www.megasoftware.net
 
 - Here u select Ubuntu/Debian, Command Line (CC), Mega 12.1 (64-bit) and press the download button
 - This brings you to a page where you need to fill in a bit of information, fill this in and press download once more.
-- Download the file that is one page by clicking the link, that is the actual file you need.
+- Now a download has started, but this is not the one you need. On the page should also be the text which says something about the standalone m,egacc binary executable. Press the download link next to it.
 - This should start a download of a tar.gz file, if not make sure you are actually on an Ubuntu/Debian system and try the previous steps again.
 - Once downloaded move the file to the directory where the website is also stored.
 - Once placed there, run the following command in the terminal: `tar -xvzf megacc-12.1.2-linux.tar.gz` or replace the last bit with the name of ur file.
@@ -58,17 +55,6 @@ Install the download file using the following link: https://www.megasoftware.net
 - If the download was successful it should show a list of possible applications of mega cc and its commands
 
 
-### ETE4 4.4.0
-##### Description:
-ETE4 in our case is used for outputting and styling a phylogenetic tree with a newick file as an input.
-##### Requirements:
-- A linux system is required to run ETE4.
-- Miniconda (see installation below)
-##### Installation steps:
-- Install ETE4's dependencies like cython and the python dependencies. Do this through conda-forge
-- To install cython and cheroot: ``conda install -c conda-forge cython cheroot``. Then to install the python dependencies: ``conda install -c conda-forge flask flask-cors flask-httpauth flask-restful flask-compress sqlalchemy numpy pyqt6`` 
-- Install ETE4 : ``conda install -c conda-forge ete4``
-- In some cases in linux the gcc library must be installed do this by running: ``conda install -c conda-forge gcc_linux-64``
 
 
 ## Citation for use of tools
