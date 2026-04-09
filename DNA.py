@@ -1,15 +1,32 @@
 class DNA:
+    """
+    Translates the DNA-sequence of a fasta file to RNA and amnio acids
+    """
     def __init__(self, sequentie, ):
-
+        """
+        Reads the DNA-sequence of a fasta file
+        :param: DNA_sequence: string
+        """
         self.sequentie = sequentie
 
 
     def __str__(self):
+        """
+        Returns the RNA-sequence and the amino acids
+        :param: DNA_sequence: string
+        :return: RNA_sequentie: string
+        :return: amino_acids: string
+        """
 
         return f'RNA-sequence {self.vertalen_naar_RNA()} proteins {self.vertalen_naar_eiwitten()}'
 
 
     def vertalen_naar_RNA(self):
+        """
+        translates the DNA-sequence to an RNA-sequence
+        :param: DNA_sequence: string
+        :return: RNA_sequentie: string
+        """
         RNA_dict = {'T' : 'U', 'G' : 'G', 'A' : 'A', 'C' : 'C'}
         RNA_list = []
 
@@ -24,6 +41,11 @@ class DNA:
 
 
     def vertalen_naar_eiwitten(self):
+        """
+        Translates the DNA-sequence to amino acids
+        :param: DNA_sequence: string
+        :return: protein_sequence: string
+        """
         codon_table = {
             'AAA': 'K', 'AAC': 'N', 'AAG': 'K', 'AAT': 'N',
             'ACA': 'T', 'ACC': 'T', 'ACG': 'T', 'ACT': 'T',
