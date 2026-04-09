@@ -347,13 +347,15 @@ class Run:
         tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1200, units='px', dpi=100)
 
 def compare_trees(tree1, tree2):
-   t1 = Tree(f"{tree1}")
-   t2 = Tree(f"{tree2}")
+    t1 = Tree(f"{tree1}")
+    t2 = Tree(f"{tree2}")
 
-   rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.robinson_foulds(t2, unrooted_trees=True)
-   difference = (rf/max_rf)*100
-
-   return {"rf" : rf, "max_rf" : max_rf, "difference" : f"{difference}%", "eff_size" : eff_size, "f1" : f1, "f2" : f2, "common_nodes" : common_nodes, "subtrees" : subtrees}
+    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.robinson_foulds(t2, unrooted_trees=True)
+    if not max_rf == 0:
+        difference = (rf/max_rf)*100
+    else:
+        difference = "Not determinable"
+    return {"rf" : rf, "max_rf" : max_rf, "difference" : f"{difference}%", "eff_size" : eff_size, "f1" : f1, "f2" : f2}
 
 
 def main():
