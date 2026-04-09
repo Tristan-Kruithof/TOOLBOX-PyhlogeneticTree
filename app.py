@@ -13,8 +13,8 @@ import os.path as path
 import cProfile
 import pstats
 from werkzeug.utils import secure_filename
-import DNA
-import jinja2
+from python.DNA import DNA
+
 app = Flask(__name__)
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
 app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
@@ -135,8 +135,20 @@ def create_route():
                 if len(organisms) >= 4:
                     status, message = acc.add_run()
                     if status:
-                        thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
-                        thread.start()
+                        # thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                        # thread.start()
+
+                        profiler = cProfile.Profile()
+                        profiler.enable()
+
+                        threaded_pipeline(**thread_kwargs)
+                        profiler.disable()
+
+                        profiler.dump_stats("profile.prof")
+                        stats = pstats.Stats(profiler)
+                        stats.sort_stats('cumulative').print_stats(20)
+
+
                         active = True
                 else:
                     message = "Not enough species to make a tree!"
@@ -204,7 +216,6 @@ def compare_route():
         tree1 = request.form.get('tree1')
         tree2 = request.form.get('tree2')
         compare = PipeLine.compare_trees(tree1=tree1, tree2=tree2)
-
 
     return render_template('compare.html',user=user, title="Compare",trees=trees ,compare=compare)
 
@@ -348,6 +359,7 @@ def DNA_route():
         return redirect(url_for('DNA_route'))
 
     return render_template('DNA.html', user=user)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

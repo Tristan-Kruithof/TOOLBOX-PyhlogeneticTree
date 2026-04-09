@@ -76,4 +76,5 @@ class DNA:
 
             protein_sequence = ''.join(vertaling)
 
+        print(protein_sequence)
         return protein_sequence
