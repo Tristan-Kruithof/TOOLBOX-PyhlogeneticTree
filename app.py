@@ -34,6 +34,9 @@ threading_active = manager.dict()
 
 
 def threaded_newsletter(acc, title, body, exclude):
+    """
+
+    """
     global threading_active
     threading_active[acc.email] = {'active': True, 'info_packet': None}
     acc.send_newsletter(title, body, exclude)
@@ -41,6 +44,9 @@ def threaded_newsletter(acc, title, body, exclude):
 
 
 def threaded_signin(acc, admin_password):
+    """
+
+    """
     global threading_active
     threading_active[acc.email] = {'active': True, 'info_packet': None}
     acc.signin(admin_password)
@@ -48,6 +54,9 @@ def threaded_signin(acc, admin_password):
 
 
 def threaded_pipeline(tree_instance, organisms, option, email):
+    """
+    
+    """
     global threading_active
     threading_active[email] = {'active': True, 'info_packet': None}
     try:
@@ -61,6 +70,11 @@ def threaded_pipeline(tree_instance, organisms, option, email):
 
 @app.route('/')
 def root():
+    """
+    Route to home page
+
+    :return: home page
+    """
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
 
     return render_template('home.html',user=user, title="Phylogenetic Tree")
@@ -68,18 +82,36 @@ def root():
 
 @app.route('/home')
 def home_route():
+    """
+    Route to home page
+
+    :return: home page
+    """
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     return render_template('home.html',user=user, title="Home")
 
 
 @app.route('/home/tools')
 def tools_route():
+    """
+    Route to tools page
+
+    :return: tools page
+    """
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     return render_template('tools.html',user=user , title="Tools")
 
 
 @app.route('/home/create', methods=['POST', 'GET'])
 def create_route():
+    """
+    Route to create page
+    Also handles incoming data, incorporating them into the pipeline and return the correct output
+
+    :param methods: types of methods that can be received
+
+    :return: create page
+    """
     global threading_active
 
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
@@ -197,6 +229,14 @@ def create_route():
 
 @app.route('/home/compare', methods=['POST', 'GET'])
 def compare_route():
+    """
+    Route to compare page
+    Also handles incoming and outcoming data for comparing trees
+
+    :param methods: types of methods that can be received
+
+    :return: compare page
+    """
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
 
     acc = Account(**user)
@@ -214,24 +254,47 @@ def compare_route():
 
 @app.route('/home/help/contact')
 def contact_route():
+    """
+    Route to contact page
+
+    :return: contact page
+    """
     user = session.get('account', {"email": "", "admin": False, "active": False, "newsletter" : False})
     return render_template('contact.html',user=user ,title="Contact")
 
   
 @app.route('/home/help/installation')
 def installation_route():
+    """
+    Route to installation page
+
+    :return: installation page
+    """
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     return render_template('installation.html',user=user,title="Installation")
 
   
 @app.route('/home/help/about')
 def about_route():
+    """
+    Route to about page
+
+    :return: about page
+    """
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     return render_template('about.html', user=user, title="About")
 
 
 @app.route('/home/signup', methods=['POST', 'GET'])
 def signup_route():
+    """
+    Route to signup page
+    Also handles incoming and outcoming data for signups
+
+    :param methods: types of methods that can be received
+
+    :return: signup page
+    """
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     global threading_active
 
@@ -280,6 +343,14 @@ def signup_route():
 
 @app.route('/home/newsletter', methods=['POST', 'GET'])
 def newsletter_route():
+    """
+    Route to newsletter page
+    Also handles incoming and outcoming data for newsletters
+
+    :param methods: types of methods that can be received
+
+    :return: newsletter page
+    """
     global threading_active
     user = session.get('account', {"email" : "", "admin" : False, "active" : False, "newsletter" : False})
     threaded_state = threading_active.get(user['email'], {})
@@ -312,6 +383,14 @@ def newsletter_route():
 
 @app.route('/home/DNA', methods=['GET', 'POST'])
 def DNA_route():
+    """
+    Route to DNA page
+    Also handels incoming and outcoming data for DNA
+
+    :param methods: types of methods that can be received
+
+    :return: create page
+    """
     user = session.get('account', {"email": "", "admin": False, "active": False, "newsletter": False})
     file_lines = []
 
