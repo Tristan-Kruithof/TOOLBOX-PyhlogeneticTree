@@ -1,45 +1,13 @@
 [
   {
-    "email": "detristank@gmail.com",
+    "email": "example@gmail.com",
     "newsletter": false,
-    "runs": 6,
+    "runs": 2,
     "admin": true,
     "trees": {
-      "Big ass tree": "(('PQ898395.1 Panthera leo persica isolate AIWC AAZP 22 656 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0576046447312095,'PV053120.1 Panthera tigris tigris isolate AIWC RES 19 004 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0445069875979176):0.0662884996459222,(('PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0727921105658322,'OM638834.1 Giraffa camelopardalis camelopardalis isolate Alipore zoo cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0941786416477563):0.0429976671019204,(('MZ099451.1 Equus asinus isolate Yunnan donkey8-B-CHM4-2.seq cytochrome c oxidase subunit I (COI) gene partial sequence nuclear copy of mitochondrial gene':0.164698063901494,'OR539506.1 Equus caballus voucher MGL-608 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0947385269761897):0.0475435153644645,((OZ347559.1_Cercopithecus_sp._mitochondrial_partial_COI_gene_for_cytochrome_oxidase_subunit_1:0.0929362782602392,OZ347562.1_Pan_troglodytes_schweinfurthii_mitochondrial_partial_COI_gene_for_cytochrome_oxidase_subunit_1:0.128591466340609):0.0693575143803604,'OL310913.1 Loxodonta cyclotis isolate 112CO1 seq cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.147356271973502):0.0370423303081202):0.0454676552556329):0.0311916103617498,'PV639009.1 Homo sapiens voucher LV-PHH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':1.12125483838845);\n",
-      "Tree1": "('PV636066.1 Gallus gallus voucher PQ284536.1 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.11311191023801,('PX864072.1 Rattus norvegicus voucher PLAL-09 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.102456561202925,'PV639632.1 Capra hircus isolate CH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0732016366447326)0.5600:0.0187453165612936,('PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0940504985083449,(('PZ072333.1 Sus scrofa isolate P7 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.100960539572728,'PZ092955.1 Ziphius cavirostris voucher AIWC RES 24 447 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0974739090690204)0.3600:0.0350407172107256,'OR539506.1 Equus caballus voucher MGL-608 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.133222480796988)0.2800:0.0209158419289982)0.4800:0.0398563876860563);\n",
-      "lion": "('PQ898395.1 Panthera leo persica isolate AIWC AAZP 22 656 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.124380556819693,'PX864072.1 Rattus norvegicus voucher PLAL-09 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0834002065681019,(((('PV639622.1 Bos taurus isolate BT001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0912713816092214,('OR539506.1 Equus caballus voucher MGL-608 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.131444925374752,'PZ092955.1 Ziphius cavirostris voucher AIWC RES 24 447 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0900140727751625)0.4815:0.0364772368828389)0.2222:0.0197040498217789,('PZ072333.1 Sus scrofa isolate P7 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.0985196144552228,'PV639633.1 Canis lupus familiaris isolate CL001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.124141813671738)0.2963:0.0346259822291275)0.4074:0.0343115260654123,'PV636066.1 Gallus gallus voucher PQ284536.1 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.114027647651307)0.3333:0.0241102789700982,'PV639632.1 Capra hircus isolate CH001 cytochrome c oxidase subunit I (COX1) gene partial cds mitochondrial':0.059521029802875)0.3704:0.0258373433691179);\n",
-      "Cow tree": "(elephant:0.0345516574462038,(horse:0.0164010204808808,(lion:0.00726550829922205,tiger:0.0117770488985834)0.5769:0.00777284124996371)0.5000:0.0353669860004193,cow:2.27818431494126);\n",
-      "human": "(dog:0.0106625972517349,cat:0.0100778958099637,((chimpanzee:0.010450061877482,human:0.00195199380581643)1.0000:0.0660610517720813,whale:0.0362817218323563)1.0000:0.0137391192550522);\n",
-      "cow human tree": "(whale:0.0362156689450494,(dog:0.010801622993627,cat:0.00997362552321444)0.8077:0.0139289275503965,((chimpanzee:0.0103917846875624,human:0.00203435873090364)0.6538:0.0101064110877815,cow:2.24817209381214)1.0000:0.0559358291810934);\n",
       "Chimps": "(horse_XP_014595447:0.0920209362071782,((human_NP_009225:0.0110883436492168,(chimpanzee_NP_001038958:0.00206271385308138,pygmy_chimpanzee_NP_001288687:0.00372538584353379)1.0000:0.00396793185593293)1.0000:0.0208676918451472,olive_baboon_NP_001289032:0.0350661171936363)1.0000:0.130961977877819,(killer_whale_XP_033266848:0.106659610015396,(cat_XP_019673492:0.0138898829431749,tiger_XP_042823513:0.00662158110777373)1.0000:0.107262617098492)0.6538:0.00542889298746433);\n",
       "chimps 2": "(killer_whale:0.0489567877299327,((cat:0.00186137024398758,tiger:0.0144922234049778)1.0000:0.0136971170452937,horse:0.00880100668763214)1.0000:0.00572924439097068,(((pygmy_chimpanzee:0.0020078479703288,chimpanzee:0.00199373609534466)1.0000:0.00820562894709626,human:0.00239857354204512)1.0000:0.0387619817357509,olive_baboon:0.068686815356878)1.0000:0.0383462231960316);\n",
       "chimps 3": "(horse:0.0922869440032419,(((pygmy_chimpanzee:0.00372538584353379,chimpanzee:0.0)1.0000:0.00396698956502633,human:0.0110858346510241)1.0000:0.0208720607569833,olive_baboon:0.0350626521983676)1.0000:0.130963135522449,((cat:0.0140805093868459,tiger:0.00712820257397928)1.0000:0.107163351543533,killer_whale:0.106730946937222)0.8000:0.00542555396022053);\n"
     }
-  },
-  {
-    "email": "tristankruithof19@gmail.com",
-    "newsletter": false,
-    "runs": 0,
-    "admin": true
-  },
-  {
-    "email": "kindsfabian@ziggo.nl",
-    "newsletter": false,
-    "runs": 0,
-    "admin": false
-  },
-  {
-    "email": "superherofabs08@gmail.com",
-    "newsletter": false,
-    "runs": 0,
-    "admin": true,
-    "trees": {}
-  },
-  {
-    "email": "fabserdabser@gmail.com",
-    "newsletter": false,
-    "runs": 2,
-    "admin": false,
-    "trees": {}
   }
 ]
