@@ -250,7 +250,7 @@ def make_tree(shape, newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
         t = Tree(newick)
         style = TreeStyle()
         style.mode = shape
-        style.scale = 80
+        style.scale = 150
         return t, style
 
 
