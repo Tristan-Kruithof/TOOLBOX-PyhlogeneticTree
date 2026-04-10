@@ -50,7 +50,7 @@ Install the download file using the following link: https://www.megasoftware.net
 
 - Here u select Ubuntu/Debian, Command Line (CC), Mega 12.1 (64-bit) and press the download button
 - This brings you to a page where you need to fill in a bit of information, fill this in and press download once more.
-- Now a download has started, but this is not the one you need. On the page should also be the text which says something about the standalone m,egacc binary executable. Press the download link next to it.
+- Now a download has started, but this is not the one you need. On the page should also be the text which says something about the standalone megacc binary executable. Press the download link next to it.
 - This should start a download of a tar.gz file, if not make sure you are actually on an Ubuntu/Debian system and try the previous steps again.
 - Once downloaded move the file to the MEGACC directory, located under Tools in the website directory.
 - Once placed there, run the following command in the terminal: `tar -xvzf megacc-12.1.2-linux.tar.gz` or replace the last bit with the name of ur file.

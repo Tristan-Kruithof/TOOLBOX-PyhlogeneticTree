@@ -10,12 +10,12 @@ Version: 1.0
 PEP-8:
 """
 
-import os.path as path
 import os
-from Bio import Entrez
 import subprocess
 import time
 import re
+from os import path
+from Bio import Entrez
 from ete4 import Tree
 from ete4.treeview import TreeStyle
 
@@ -68,8 +68,8 @@ class Organisms:
         """
         if self.common_name:
             return 'Your Animals: {}, Your email: {}'.format(self.common_name, self.email)
-        else:
-            return "{}".format(self.email)
+
+        return "{}".format(self.email)
 
 
     def find_scientific_names(self):
@@ -114,7 +114,9 @@ class Organisms:
                             else:
                                 science_name = item["ScientificName"]
 
-                #If scientifi name wasnt already saved, it will be saved. Otherwise it will be dumped in a duplicate variable and name will be popped form organisms
+                #If scientifi name wasnt already saved, it will be saved.
+                #Otherwise it will be dumped in a duplicate variable and
+                # name will be popped form organisms
                 if science_name not in self.scientific_names:
                     self.scientific_names.append(science_name)
                 else:
@@ -136,8 +138,10 @@ class Organisms:
         self.not_found_fastas = []
         pattern = re.compile("(.+?)\n(.+)", re.DOTALL)
 
-
+        # Runs thorugh all organisms
         for i,name in enumerate(self.scientific_names):
+
+            # Checks datatype of organism
             if isinstance(name, str):
                 print(name)
                 name = name.strip()
@@ -149,7 +153,8 @@ class Organisms:
 
                 if record["IdList"]:
                     seq_id = record["IdList"][0]
-                    stream2 = Entrez.efetch(db=self.form, id=seq_id, rettype="fasta", retmode="text")
+                    stream2 = Entrez.efetch(db=self.form, id=seq_id,
+                                            rettype="fasta", retmode="text")
                     fasta = stream2.read()
                     stream2.close()
                     fa = re.search(pattern, fasta)
@@ -159,6 +164,7 @@ class Organisms:
                 else:
                     self.not_found_fastas.append(name)
 
+            # If not a string, will go through each item until one gets a result
             else:
                 for item in name:
                     print(item)
@@ -171,7 +177,8 @@ class Organisms:
 
                     if record["IdList"]:
                         seq_id = record["IdList"][0]
-                        stream2 = Entrez.efetch(db=self.form, id=seq_id, rettype="fasta", retmode="text")
+                        stream2 = Entrez.efetch(db=self.form, id=seq_id,
+                                                rettype="fasta", retmode="text")
                         fasta = stream2.read()
                         stream2.close()
                         fa = re.search(pattern, fasta)
@@ -179,14 +186,14 @@ class Organisms:
                         self.fastas.append(new)
                         break
 
-                    else:
-                        self.not_found_fastas.append(item)
+                    self.not_found_fastas.append(item)
 
 
     def make_multi_fasta(self):
         """
         Combines the DNA or Protein sequences into one multi-fasta file
         """
+        # Writes all sequences stored in self.fastas into a multi-fasta
         with open("Tools/mafft_input/sequences.fasta", "w") as f:
             for fasta in self.fastas:
                 f.write(fasta)
@@ -223,11 +230,13 @@ class CC_Tools:
         """
         Runs the selected tool
         """
+        # Checks whether MEGA or MAFFT is called
         if self.settings:
             if path.exists(self.output):
                 os.remove(self.output)
 
-            subprocess.run([path.abspath("Tools/MEGACC/megacc"), "-a", self.settings, "-d", self.data, "-o", self.output], cwd=self.location, check=True, text=True, capture_output=True)
+            subprocess.run([path.abspath("Tools/MEGACC/megacc"), "-a", self.settings, "-d", self.data, "-o", self.output],
+                           cwd=self.location, check=True, text=True, capture_output=True)
 
         else:
             with open(self.output, "w") as f:
@@ -247,7 +256,9 @@ def make_tree(shape, newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
     """
     with open(newick_file) as f:
         newick = f.read()
+        # Makes tree object
         t = Tree(newick)
+        # Creates styling
         style = TreeStyle()
         style.mode = shape
         style.scale = 150
@@ -262,7 +273,9 @@ def dna_or_protein(gene):
 
     ;return: returns either protein or nucleotide
     """
-    protein = ["(COI[GENE] OR COX1[GENE] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[SLEN]", "BRCA1[GENE] AND 1700:2000[SLEN]", "rbcL[GENE] AND 400:600[SLEN]", "matK[GENE] AND 400:600[SLEN]"]
+    protein = ["(COI[GENE] OR COX1[GENE] OR cytochrome c oxidase subunit 1[Gene Name]) AND 400:800[SLEN]",
+               "BRCA1[GENE] AND 1700:2000[SLEN]", "rbcL[GENE] AND 400:600[SLEN]",
+               "matK[GENE] AND 400:600[SLEN]"]
 
     if gene in protein:
         return "protein"
@@ -276,8 +289,10 @@ class Run:
     """
     def __init__(self, email, gene, shape, sequence, method=1, organisms=None,
                  location=path.abspath("Tools"), input_mafft=path.abspath("Tools/mafft_input/sequences.fasta"),
-                 output_mafft=path.abspath("Tools/mega_input/aligned_sequences.fasta"),input_mega=path.abspath("Tools/mega_input/aligned_sequences.fasta"),
-                 output_mega=path.abspath("Tools/ete4_input/newick.nwk"), settings=path.abspath("Tools/infer_ML_amino_acid.mao")):
+                 output_mafft=path.abspath("Tools/mega_input/aligned_sequences.fasta"),
+                 input_mega=path.abspath("Tools/mega_input/aligned_sequences.fasta"),
+                 output_mega=path.abspath("Tools/ete4_input/newick.nwk"),
+                 settings=path.abspath("Tools/infer_ML_amino_acid.mao")):
         """
         Sets up all the information needed to run the pipeline
 
@@ -323,6 +338,12 @@ class Run:
 
 
     def standard(self, method=None, organisms=None):
+        """
+        Runs the pipeline using common names. Going through every step to make a phylogenetic tree
+
+        :param method: method to determine what kind of organisms are given
+        :param organisms: organisms to use
+        """
         method = method or self.method
         organisms = organisms or self.organisms
 
@@ -338,11 +359,15 @@ class Run:
         megurt.run()
 
         tree, style = make_tree(self.shape)
-        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1200, units='px', dpi=100)
+        tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style,
+                    w=1200, units='px', dpi=100)
 
 
 
     def fasta_run(self):
+        """
+        Runs the pipeline using a given multi-fasta file, so it skips the connection with NCBI
+        """
         if self.sequence == "protein":
             self.settings = path.abspath("Tools/infer_ML_amino_acid.mao")
         else:
@@ -359,18 +384,28 @@ class Run:
 
 
 def compare_trees(tree1, tree2):
+    """
+    Function to compare two phylogenetic trees
+
+    :param tree1: Phylogenetic tree in nwk format
+    :param tree2: Phylogenetic tree in nwk format
+    """
     t1 = Tree(f"{tree1}")
     t2 = Tree(f"{tree2}")
 
-    rf, max_rf, eff_size, f1, f2, common_nodes, subtrees = t1.robinson_foulds(t2, unrooted_trees=True)
+    rf, max_rf, eff_size, f1, f2, *_ = t1.robinson_foulds(t2, unrooted_trees=True)
     if not max_rf == 0:
         difference = (rf/max_rf)*100
     else:
         difference = "Not determinable"
-    return {"rf" : rf, "max_rf" : max_rf, "difference" : f"{difference}%", "eff_size" : eff_size, "f1" : f1, "f2" : f2}
+    return {"rf" : rf, "max_rf" : max_rf, "difference" : f"{difference}%",
+            "eff_size" : eff_size, "f1" : f1, "f2" : f2}
 
 
 def main():
+    """
+    Runs whole pipeline
+    """
     tree = Run("superherofabs08@gmail.com", "BRCA1[GENE] AND 1700:2000[SLEN]", "r")
     tree.standard()
 
