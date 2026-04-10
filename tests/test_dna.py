@@ -1,3 +1,14 @@
+"""
+test_dna.py
+
+pytests the python file and the class within of DNA.py
+
+Auth: Tristan Kruithof
+Date: 10/04/2026
+Version: 1.0
+PEP-8:
+"""
+
 import sys
 sys.path.append('..')
 from python.DNA import DNA

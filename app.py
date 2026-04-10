@@ -1,17 +1,28 @@
+"""
+app.py
+
+Has the routes and logic behind the website. Uses threading or in this case
+a process for the heavier tasks.
+
+Auth: Tristan Kruithof, Fabian Kinds, Dennis Kuiper
+Date: 10/04/2026
+Version: 1.0
+PEP-8:
+"""
+
 import os
-os.environ["DISPLAY"] = ":0"
-os.environ["WAYLAND_DISPLAY"] = "wayland-0"
-os.environ["QT_QPA_PLATFORM"] = "offscreen"
+# Only used when using wsl
+# os.environ["DISPLAY"] = ":0"
+# os.environ["WAYLAND_DISPLAY"] = "wayland-0"
+# os.environ["QT_QPA_PLATFORM"] = "offscreen"
 
 from multiprocessing import Process, Manager
-
 #import threading
+
 from flask import Flask, render_template, request, session, redirect, url_for
 from python.login import Account
 import PipeLine
 import os.path as path
-import cProfile
-import pstats
 from werkzeug.utils import secure_filename
 from python.DNA import DNA
 
@@ -19,7 +30,7 @@ app = Flask(__name__)
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
 app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
 
-# THIS GLOBAL MUST BE USED IN ORDER TO USE THREADING
+# THIS GLOBAL MUST BE USED IN ORDER TO USE THREADING OR PROCESSES
 manager = Manager()
 threading_active = manager.dict()
 
@@ -117,7 +128,8 @@ def create_route():
             organisms = []
 
         elif "delete_org" in form:
-            organisms.pop()
+            if organisms:
+                organisms.pop()
 
         elif "save" in form:
             acc = Account(**user)
@@ -135,20 +147,8 @@ def create_route():
                 if len(organisms) >= 4:
                     status, message = acc.add_run()
                     if status:
-                        # thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
-                        # thread.start()
-
-                        profiler = cProfile.Profile()
-                        profiler.enable()
-
-                        threaded_pipeline(**thread_kwargs)
-                        profiler.disable()
-
-                        profiler.dump_stats("profile.prof")
-                        stats = pstats.Stats(profiler)
-                        stats.sort_stats('cumulative').print_stats(20)
-
-
+                        thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                        thread.start()
                         active = True
                 else:
                     message = "Not enough species to make a tree!"
@@ -182,19 +182,9 @@ def create_route():
                             fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
                             thread_kwargs["option"] = "fasta"
 
-                            # thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
-                            # thread.start()
-                            # active = True
-
-                            profiler = cProfile.Profile()
-                            profiler.enable()
-
-                            threaded_pipeline(**thread_kwargs)
-                            profiler.disable()
-
-                            profiler.dump_stats("profile.prof")
-                            stats = pstats.Stats(profiler)
-                            stats.sort_stats('cumulative').print_stats(20)
+                            thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                            thread.start()
+                            active = True
                 else:
                     message = "Not a fasta file!"
 
@@ -316,6 +306,7 @@ def newsletter_route():
 
     return render_template('newsletter.html', user=user, message=message, status=status, title="Newsletter",
                            threaded_state=active)
+
 
 @app.route('/home/DNA', methods=['GET', 'POST'])
 def DNA_route():

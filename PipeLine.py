@@ -1,3 +1,15 @@
+"""
+pipeline.py
+
+Calls the tools: biopython, mafft, mega cc and ete4
+the makeup our tool pipeline.
+
+Auth: Fabian Kinds, Tristan Kruithof
+Date: 10/04/2026
+Version: 1.0
+PEP-8:
+"""
+
 import os.path as path
 import os
 from Bio import Entrez

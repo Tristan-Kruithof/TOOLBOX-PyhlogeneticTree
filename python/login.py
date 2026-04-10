@@ -1,3 +1,15 @@
+"""
+login.py
+
+Has a class for initializing an account and handles all
+the things an account could be used for in our website.
+
+Auth: Tristan Kruithof
+Date: 10/04/2026
+Version: 1.0
+PEP-8:
+"""
+
 import json
 import os
 import datetime
