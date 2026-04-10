@@ -12,13 +12,11 @@ PEP-8:
 
 import os
 # Only used when using wsl
-# os.environ["DISPLAY"] = ":0"
-# os.environ["WAYLAND_DISPLAY"] = "wayland-0"
-# os.environ["QT_QPA_PLATFORM"] = "offscreen"
+os.environ["DISPLAY"] = ":0"
+os.environ["WAYLAND_DISPLAY"] = "wayland-0"
+os.environ["QT_QPA_PLATFORM"] = "offscreen"
 
 from multiprocessing import Process, Manager
-#import threading
-
 from flask import Flask, render_template, request, session, redirect, url_for
 from python.login import Account
 import PipeLine
@@ -59,6 +57,7 @@ def threaded_pipeline(tree_instance, organisms, option, email):
             tree_instance.fasta_run()
     finally:
         threading_active[email] = {'active': False, 'info_packet': {'new_image' : True}}
+
 
 @app.route('/')
 def root():

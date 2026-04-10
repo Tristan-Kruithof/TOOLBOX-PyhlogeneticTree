@@ -20,8 +20,6 @@ from ete4 import Tree
 from ete4.treeview import TreeStyle
 
 
-
-
 class Organisms:
     """
     Contains names of organisms and is used to create a multi-fasta
@@ -62,6 +60,7 @@ class Organisms:
         self.email = email
         self.gene = gene
         self.form = form
+
 
     def __str__(self):
         """
@@ -251,7 +250,7 @@ def make_tree(shape, newick_file=path.abspath("Tools/ete4_input/newick.nwk")):
         t = Tree(newick)
         style = TreeStyle()
         style.mode = shape
-        style.scale = 500
+        style.scale = 150
         return t, style
 
 
@@ -358,6 +357,7 @@ class Run:
         tree, style = make_tree(self.shape)
         tree.render(f"static/pipeline_output/{self.email}_tree.png", tree_style=style, w=1200, units='px', dpi=100)
 
+
 def compare_trees(tree1, tree2):
     t1 = Tree(f"{tree1}")
     t2 = Tree(f"{tree2}")
@@ -373,7 +373,6 @@ def compare_trees(tree1, tree2):
 def main():
     tree = Run("superherofabs08@gmail.com", "BRCA1[GENE] AND 1700:2000[SLEN]", "r")
     tree.standard()
-
 
 
 if __name__ == "__main__":
