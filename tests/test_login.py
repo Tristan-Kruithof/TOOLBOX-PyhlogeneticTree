@@ -35,7 +35,6 @@ def test_fake_load_over_limit():
 
     assert acc.status[0] is False
 
-
 # Testing login in as admin but with too many runs
 def test_signin_admin_bypass():
     acc = Account("test@example.com")
@@ -48,7 +47,6 @@ def test_signin_admin_bypass():
         acc.signin()
 
     assert acc.status[0] is True
-
 
 # Testing add_run
 def test_add_run_increments():
