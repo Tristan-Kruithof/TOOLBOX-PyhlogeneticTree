@@ -1,3 +1,14 @@
+"""
+test_login.py
+
+pytests the python file and the class within of login.py
+
+Auth: Tristan Kruithof
+Date: 10/04/2026
+Version: 1.0
+PEP-8:
+"""
+
 import sys
 sys.path.append('..')
 from python.login import Account
@@ -6,6 +17,11 @@ import pytest
 
 
 # Tests for login.py
+# These all test it, using a 'fake' account. meaning it gives an account,
+# And doesn't actually for example load_accounts and gets accounts out of the
+# Database.
+
+
 # Tests if it returns false when it goes over 10 runs
 def test_fake_load_over_limit():
     acc = Account("test@example.com")
