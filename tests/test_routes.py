@@ -24,6 +24,17 @@ def client():
             session['user'] = {"email" : "detristank@gmail.com", "admin" : True, "active" : True, "newsletter" : True}  # fake user
         yield client
 
+# Create route
+def test_add_duplicate_organism(client):
+    with client.session_transaction() as sess:
+        sess["organisms"] = ["lion"]
+
+    client.post("/home/create",
+                data={"add": "1", "species": "Lion", "gene": "COI", "Graph": "r", "input_method": "common"})
+
+    with client.session_transaction() as sess:
+        assert sess["organisms"].count("lion") == 1
+
 
 def test_add_organism_to_session(client):
     client.post("/home/create", data={"add": "1", "species": "Lion", "gene": "COI", "Graph": "r", "input_method": "common"})
@@ -52,10 +63,15 @@ def test_del_organisms_to_session(client):
 
 
 def test_too_few_organisms_shows_error(client):
+    with client.session_transaction() as sess:
+        sess["organisms"] = ["lion", "tiger"]
+
     response = client.post("/home/create", data={"run": "1", "gene": "COI", "Graph": "r", "input_method": "common"})
     assert b"Not enough species" in response.data
 
 
+
+# DNA route
 def test_dna_post_no_file_redirects(client):
     response = client.post("/home/DNA", data={})
     assert response.status_code in (200, 302)
