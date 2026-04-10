@@ -11,31 +11,35 @@ PEP-8:
 """
 
 import os
-# Only used when using wsl
-os.environ["DISPLAY"] = ":0"
-os.environ["WAYLAND_DISPLAY"] = "wayland-0"
-os.environ["QT_QPA_PLATFORM"] = "offscreen"
+import os.path as path
+
+# Enable only when using wsl
+# os.environ["DISPLAY"] = ":0"
+# os.environ["WAYLAND_DISPLAY"] = "wayland-0"
+# os.environ["QT_QPA_PLATFORM"] = "offscreen"
 
 from multiprocessing import Process, Manager
 from flask import Flask, render_template, request, session, redirect, url_for
-from python.login import Account
-import PipeLine
-import os.path as path
 from werkzeug.utils import secure_filename
-from python.DNA import DNA
 
+import PipeLine
+from python.login import Account
+from python.DNA import DNA
 app = Flask(__name__)
+# Secret key for using sessions
 app.secret_key = 'dsfklasdjfklj*(&D*(@Q#$342hjioasDjkl'
 app.config['UPLOAD_FOLDER'] = path.join(os.getcwd(), 'Tools', 'mafft_input', 'user_uploads')
 
-# THIS GLOBAL MUST BE USED IN ORDER TO USE THREADING OR PROCESSES
+# THIS GLOBAL MUST BE USED IN ORDER TO USE MULTIPROCESSING
 manager = Manager()
 threading_active = manager.dict()
 
 
 def threaded_newsletter(acc, title, body, exclude):
     """
-
+    args: acc (obj), title (str), body (str), exclude (bool)
+    Wrapper function that updates the global threading_active dict for the newsletter
+    and calls the newsletter function.
     """
     global threading_active
     threading_active[acc.email] = {'active': True, 'info_packet': None}
@@ -45,7 +49,9 @@ def threaded_newsletter(acc, title, body, exclude):
 
 def threaded_signin(acc, admin_password):
     """
-
+    args: acc (obj), admin_password (str)
+    Wrapper function that updates the global threading_active dict for the account
+    and calls the signin function.
     """
     global threading_active
     threading_active[acc.email] = {'active': True, 'info_packet': None}
@@ -55,7 +61,9 @@ def threaded_signin(acc, admin_password):
 
 def threaded_pipeline(tree_instance, organisms, option, email):
     """
-    
+    args: tree_instance (obj), organisms (list), option (str), email (str)
+    Wrapper function that updates the global threading_active dict for the pipeline
+    and calls the pipeline function.
     """
     global threading_active
     threading_active[email] = {'active': True, 'info_packet': None}
@@ -179,6 +187,7 @@ def create_route():
                 if len(organisms) >= 4:
                     status, message = acc.add_run()
                     if status:
+                        # Threaded wrapper is called that has the logic inside
                         thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
                         thread.start()
                         active = True
@@ -188,39 +197,41 @@ def create_route():
                 file_types = ["fasta", "fna", "fa", "faa"]
                 fasta_file = request.files.get('multi_fasta_file')
 
-                if fasta_file and fasta_file.filename:
+
+                if fasta_file and fasta_file.file_name:
                     file_name = fasta_file.filename
                     fasta_file.save(os.path.join(app.config['UPLOAD_FOLDER'], "sequences.fasta"))
 
-                fasta_file.seek(0)
-                organisms_set = set()
+                    fasta_file.seek(0)
+                    organisms_set = set()
 
-                if file_name.split('.')[1] in file_types:
-                    for line in fasta_file:
-                        decoded_line = line.decode('utf-8')
+                    if file_name.split('.')[1] in file_types:
+                        for line in fasta_file:
+                            decoded_line = line.decode('utf-8')
 
-                        if decoded_line.startswith('>'):
-                            organism = decoded_line.split(' ')[0]
-                            if organism not in organisms_set:
-                                organisms_set.add(organism)
-                            else:
-                                message = "Duplicate animals!"
-                                break
+                            if decoded_line.startswith('>'):
+                                organism = decoded_line.split(' ')[0]
+                                if organism not in organisms_set:
+                                    organisms_set.add(organism)
+                                else:
+                                    message = "Duplicate animals!"
+                                    break
 
-                    if len(organisms_set) < 4 and not message:
-                        message = "Not enough species to make a tree!"
+                        if len(organisms_set) < 4 and not message:
+                            message = "Not enough species to make a tree!"
 
+                        else:
+                            status, message = acc.add_run()
+
+                            if status:
+                                thread_kwargs["option"] = "fasta"
+
+                                # Threaded wrapper is called that has the logic inside
+                                thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
+                                thread.start()
+                                active = True
                     else:
-                        status, message = acc.add_run()
-
-                        if status:
-                            thread_kwargs["option"] = "fasta"
-
-                            thread = Process(target=threaded_pipeline, kwargs=thread_kwargs)
-                            thread.start()
-                            active = True
-                else:
-                    message = "Not a fasta file!"
+                        message = "Not a fasta file!"
 
         session["organisms"] = organisms
 
@@ -380,7 +391,6 @@ def newsletter_route():
     return render_template('newsletter.html', user=user, message=message, status=status, title="Newsletter",
                            threaded_state=active)
 
-
 @app.route('/home/DNA', methods=['GET', 'POST'])
 def DNA_route():
     """
@@ -401,14 +411,14 @@ def DNA_route():
             save_file = fasta_file.save(secure_filename(fasta_file.filename))
             valid_filename = secure_filename(fasta_file.filename)
 
-            with open(valid_filename, 'r') as file:
+            with open(valid_filename, 'r', encoding='utf-8') as file:
                 for line in file:
                     if line[0] != '>':
                         file_lines.append(line.replace('\n', ''))
 
-            DNA_sequence = ''.join(file_lines)
-            translation = DNA.DNA(DNA_sequence)
-            translated_RNA = translation.vertalen_naar_RNA()
+            dna_sequence = ''.join(file_lines)
+            translation = DNA(dna_sequence)
+            translated_rna = translation.vertalen_naar_RNA()
             translated_proteins = translation.vertalen_naar_eiwitten()
 
             RNA_dict = {'translated-sequence': translation}
@@ -417,14 +427,14 @@ def DNA_route():
 
                 with open(f'translated_sequence.txt', 'w') as file:
                     file.write('RNA-sequence\n')
-                    for i in range(0, len(translated_RNA), 70):
-                        juiste_lengte = translated_RNA[i:i + 70]
-                        file.write(f'{juiste_lengte}{'\n'}')
+                    for i in range(0, len(translated_rna), 70):
+                        right_length = translated_rna[i:i + 70]
+                        file.write(f'{right_length}{'\n'}')
 
                     file.write('\nproteins\n')
                     for i in range(0, len(translated_proteins), 70):
-                        juiste_lengte = translated_proteins[i:i + 70]
-                        file.write(f'{juiste_lengte}{'\n'}')
+                        right_length = translated_proteins[i:i + 70]
+                        file.write(f'{right_length}{'\n'}')
 
                 return render_template('DNA.html', translated_sequence=translated_sequence, user=user)
 

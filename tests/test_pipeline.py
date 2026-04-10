@@ -13,7 +13,6 @@ import sys
 sys.path.append('..')
 from PipeLine import dna_or_protein, Run
 
-
 # Tests that we can do on our pipeline without testing the tool code
 
 # Checks if it returns
@@ -26,10 +25,10 @@ def test_unknown_gene():
 
 # Tests if amino_acid is in settings when these params are given
 def test_sets_correct_settings():
-    run = Run("test@example.com", "BRCA1[GENE] AND 1700:2000[SLEN]", "r")
+    run = Run("test@example.com", "BRCA1[GENE] AND 1700:2000[SLEN]", "r", "")
     assert "amino_acid" in run.settings
 
 # Tests if nucleotide is in settings if these params are given
 def test_sets_correct_settings_unknown_gene():
-    run = Run("test@example.com", "UNKNOWN_GENE", "r")
+    run = Run("test@example.com", "UNKNOWN_GENE", "r", "")
     assert "nucleotide" in run.settings
